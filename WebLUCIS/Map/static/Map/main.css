@@ -1,0 +1,63 @@
+/*body {*/
+/*    background: #00b1a5;*/
+/*    color: #333333;*/
+/*    margin-top: 5rem;*/
+/*}*/
+
+#map {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    width: 75%;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.deck-tooltip {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    position: absolute;
+    padding: 4px;
+    margin: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    max-width: 300px;
+    font-size: 10px;
+}
+
+/* Custom CSS for the floating sidebar */
+#sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    /*left: 10px; !* Adjust the initial left position as needed *!*/
+    height: 90vh;
+    width: 250px; /* Adjust the width as needed */
+    /*overflow-y: auto;*/
+    margin: 2rem 1rem;
+    z-index: 100; /* Ensure the offcanvas is above other elements */
+    background: #4b4b4b;
+}
+
+/* Style the toggle button */
+#sidebar-toggler {
+    position: fixed;
+    top: 10px;
+    left: 300px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 2rem 0;
+    background: beige;
+    z-index: 101; /* Ensure the button is above the sidebar */
+    transition: 300ms linear;
+}
+
+.no-sidebar {
+    left: 20px !important;
+}

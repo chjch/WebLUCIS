@@ -1,0 +1,15 @@
+{% load widget_tweaks %}
+
+<form>
+  {% csrf_token %}
+  <label for="{{ form.region.id_for_label }}">{{ form.region.label }}</label>
+  {% render_field form.region class="form-control" hx-get="/load_districts/" hx-target="#id_district" %}
+
+  <label for="{{ form.district.id_for_label }}">{{ form.district.label }}</label>
+  {% render_field form.district class="form-control mb-3" %}
+
+  <div class="align-self-end">
+    <button id="show-mmda-btn" class="btn btn-primary" type="button">Submit
+    </button>
+  </div>
+</form>

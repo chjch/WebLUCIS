@@ -1,0 +1,10 @@
+{% extends "Map/base.html" %}
+{% block content %}
+  <h1>Welcome to WebLUCIS</h1>
+  <br>
+{% for district in districts %}
+  <h3>{{ district.name }}</h3>
+  <p>Area: {{ district.area }}, Region: {{ district.region }}</p>
+  <p>The population is <strong>{{ district.people }}</strong></p>
+{% endfor %}
+{% endblock content %}
