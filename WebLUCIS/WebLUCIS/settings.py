@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-q!$7x@id^s42bdpd2e8fsxa%2n)@u99ce43%5%icm!aq6b22)c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0"]
 
 
 # Application definition
@@ -85,7 +85,8 @@ DATABASES = {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": "template_postgis",
         "USER": "postgres",
-        "PASSWORD": "151010"
+        "PASSWORD": "151010",
+        "HOST": "db",
     }
 }
 
