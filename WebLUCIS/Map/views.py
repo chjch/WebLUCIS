@@ -3,14 +3,20 @@ from django.http import JsonResponse, HttpResponse
 
 # from django.http import JsonResponse
 from .models import GhanaMmda
-from .forms import MmdaForm
+from .forms import MmdaForm, BufferForm
 from .filters import GhanaMmdaFilter
 
 
 def home(request):
     form = MmdaForm()
-    context = {"title": "Map", "is_map": True, "form": form}
+    form_buffer = BufferForm()
+    context = {"title": "Map", "is_map": True, "form": form, "form_buffer": form_buffer}
     return render(request, "home.html", context)
+
+
+# def buffer(request):
+#     form_buffer = BufferForm()
+#     return render(request, "partials/buffer_form.html", {"form_buffer": form_buffer})
 
 
 # def mmdas(request):

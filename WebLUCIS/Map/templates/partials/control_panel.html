@@ -1,15 +1,86 @@
 {% load widget_tweaks %}
 
-<form>
-  {% csrf_token %}
-  <label for="{{ form.region.id_for_label }}">{{ form.region.label }}</label>
-  {% render_field form.region class="form-control" hx-get="/load_districts/" hx-target="#id_district" %}
-
-  <label for="{{ form.district.id_for_label }}">{{ form.district.label }}</label>
-  {% render_field form.district class="form-control mb-3" %}
-
-  <div class="align-self-end">
-    <button id="show-mmda-btn" class="btn btn-primary" type="button">Submit
-    </button>
+<div class="container-bar">
+  <div class="side-panel">
+    <div class="side-panel-logo">
+      <div class="logo-title">
+        <p>Ghana WebLUCIS</p>
+      </div>
+      <div class="info">
+        <i class="bi bi-info-circle-fill"></i>
+        <i class="bi bi-share-fill"></i>
+      </div>
+    </div>
   </div>
-</form>
+
+  <div class="tab">
+    <button class="tablinks" onclick="clickHandle(event, 'Region')" id="defaultOpen"><i class="bi bi-globe-europe-africa"></i></i>
+      <span class="hover-text">Region</span></button>
+    <button class="tablinks" onclick="clickHandle(event, 'Buffer')"><i class="bi bi-stack"></i>
+      <span class="hover-text">Buffer</span></button>
+    <button class="tablinks" onclick="clickHandle(event, 'Basemap')"><i class="bi bi-sliders"></i>
+      <span class="hover-text">Settings</span></button>
+  </div>
+
+  <div id="Region" class="tabcontent">
+    <form>
+      {% csrf_token %}
+      <label for="{{ form.region.id_for_label }}">{{ form.region.label }}</label>
+      {% render_field form.region class="form-control mb-2" hx-get="/load_districts/" hx-target="#id_district" %}
+
+      <label for="{{ form.district.id_for_label }}">{{ form.district.label }}</label>
+      {% render_field form.district class="form-control mb-3" %}
+
+      <div class="align-self-end">
+        <button id="show-mmda-btn" class="btn btn-primary" type="button">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="Buffer" class="tabcontent">
+    <form>
+      {% csrf_token %}
+      <label for="{{ form_buffer.distance.id_for_label }}">{{ form_buffer.distance.label }}</label>
+      {% render_field form_buffer.distance class="form-control mb-2" %}
+
+      <label for="{{ form_buffer.unit.id_for_label }}">{{ form_buffer.unit.label }}</label>
+      {% render_field form_buffer.unit class="form-control mb-3" %}
+
+      <div class="align-self-end">
+        <button id="show-buffer-btn" class="btn btn-primary" type="button">Run</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="Basemap" class="tabcontent">
+    <p>add more</p>
+  </div>
+
+
+</div>
+
+<script>
+function clickHandle(evt, tabName) {
+  let i, tabcontent, tablinks;
+
+  // This is to clear the previous clicked content.
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Set the tab to be "active".
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Display the clicked tab and set it to active.
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+</script>

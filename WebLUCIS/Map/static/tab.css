@@ -1,0 +1,99 @@
+.container-bar {
+  background-color: #e7e7e7;
+  padding: 0;
+}
+
+/* Style the tab */
+.tab {
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background-color: #b7b7b7;
+  flex-grow: 1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  position: relative;
+  margin-left: 12px;
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 8px;
+  transition: 0.3s;
+  font-size: 16px;
+  border-bottom: 2px solid transparent;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #acc5d7;
+}
+
+.hover-text {
+  font-size: 10px;
+  position: absolute;
+  display: block;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #eaeaea;
+  border: 1px solid #ccc;
+  padding: 4px;
+  border-radius: 5px;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+}
+
+.tab button:hover .hover-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  border-color: #313131;
+  border-bottom-width: 3px;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 20px 12px;
+  background-color: #e7e7e7;
+  border-top: none;
+}
+
+.bi {
+    color: #1e2326; /* Change this to the desired color */
+}
+
+.side-panel {
+  height: 40px;
+  background-color: #b7b7b7;
+  padding: 12px 12px 0;
+  margin: 0;
+}
+
+.side-panel-logo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.info .bi {
+  margin-right: 8px;
+}
+
+#buffer {
+  margin-bottom: 16px;
+}

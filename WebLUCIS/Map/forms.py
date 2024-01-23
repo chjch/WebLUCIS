@@ -20,3 +20,15 @@ class MmdaForm(forms.Form):
         queryset=GhanaMmda.objects.none(),
         label="District",
     )
+
+
+class BufferForm(forms.Form):
+    distance = forms.DecimalField(
+        widget=forms.NumberInput(attrs={"placeholder": "Enter the Distance"}),
+        label="Distance",
+    )
+    unit = forms.ChoiceField(
+        widget=forms.Select,
+        choices=[("1", ""), ("2", "Miles"), ("3", "Kilometers")],
+        label="Unit",
+    )
