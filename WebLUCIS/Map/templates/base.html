@@ -18,12 +18,14 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-OKqUSGxH1+Os0p0JljhI0eGEzxmowMFGS+MFnssMFeLd9pEB+ig2C89L1pI2azGxu8qA/f0jvNT2i3x7G5O5Pw==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script src="{% static 'Map/tab_click.js' %}" defer></script>
   <!-- Custom CSS -->
   <link rel="stylesheet" type="text/css" href="{% static 'Map/main.css' %}">
   {% if is_map %}
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+    <script src="{% static 'Map/AJAX_multiple.js' %}" defer></script>
   {% endif %}
   {% if title %}
   <title>WebLUCIS - {{ title }}</title>

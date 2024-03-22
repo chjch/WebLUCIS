@@ -8,6 +8,7 @@
 // });
 const {DeckGL, GeoJsonLayer} = deck;
 const showMmdaBtn = document.getElementById("show-mmda-btn");
+const showBuffer = document.getElementById("show-buffer-btn");
 
 let deckgl = new DeckGL({
     mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
@@ -41,6 +42,22 @@ showMmdaBtn.addEventListener("click", () => {
     deckgl.setProps({ layers: [geojsonLayer] });
 });
 
+showBuffer.addEventListener("click", () => {
+    let apiUrl = `/api/buffer/`;
+    const geojsonLayer = new GeoJsonLayer({
+        data: apiUrl,
+        opacity: 0.5,
+        stroked: false,
+        filled: true,
+        extruded: false,
+        wireframe: true,
+        fp64: true,
+        getLineColor: f => [255, 255, 255],
+        getFillColor: [0, 255, 0], // Set fill color to green
+        pickable: true
+    });
+    deckgl.setProps({ layers: [geojsonLayer] });
+});
 
 // const COLOR_SCALE = [
 //     // negative

@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('submit_form/', views.submit_form, name='submit_form'),
     # path('map/about/', views.about, name='map-about'),
     # path('mmdas/', views.mmdas, name='mmdas'),
     # path('api/', views.MmdaListAPIView.as_view(), name='mmdas-api'),
