@@ -25,3 +25,13 @@ class VectorTest(models.Model):
         return self.district
     # created_at = models.DateTimeField(auto_now_add=True)
     # expiry_date = models.DateTimeField(default=timezone.now() + timedelta(days=2))
+
+
+class SuitabilityTest(models.Model):
+    road = models.FloatField()
+    road_suit = models.FloatField()
+    pop = models.FloatField()
+    pop_suit = models.FloatField()
+    urb = models.FloatField()
+    urb_suit = models.FloatField()
+    geom = models.MultiPolygonField()
