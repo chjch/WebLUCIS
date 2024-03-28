@@ -34,4 +34,4 @@ class SuitabilityTest(models.Model):
     pop_suit = models.FloatField()
     urb = models.FloatField()
     urb_suit = models.FloatField()
-    geom = models.MultiPolygonField()
+    geom = models.MultiPolygonField(srid=4326)

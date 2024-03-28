@@ -1,6 +1,7 @@
 from pathlib import Path
 from django.contrib.gis.utils import LayerMapping
 from .models import GhanaMmda, SuitabilityTest
+from django.db import connection
 
 ghanammda_mapping = {
     "region": "REGION",
@@ -31,12 +32,21 @@ def run(verbose=True):
     lm.save(strict=True, verbose=verbose)
 
 
+def reset_primary_key_sequence(model):
+    table_name = model._meta.db_table
+    reset_sql = f'ALTER SEQUENCE "{table_name}_id_seq" RESTART WITH 1;'
+    with connection.cursor() as cursor:
+        cursor.execute(reset_sql)
+
+
 def run_suitability_test(verbose=True):
+    SuitabilityTest.objects.all().delete()
+    reset_primary_key_sequence(SuitabilityTest)
     suitabilitytest_shp = (
         Path(__file__).resolve().parent.parent / "data" / "Urban_Suitability_Final.shp"
     )
     lm = LayerMapping(
-        SuitabilityTest, suitabilitytest_shp, suitabilitytest_mapping, transform=False
+        SuitabilityTest, suitabilitytest_shp, suitabilitytest_mapping, transform=True
     )
     lm.save(strict=True, verbose=verbose)
 
