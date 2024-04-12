@@ -1,6 +1,8 @@
 var geojsonData;
 const { DeckGL, GeoJsonLayer } = deck;
-var suitabilityvalue;
+var suitabilityvalue = "";
+var words;
+var selectedWord;
 var deckgl = new DeckGL({
     mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
     initialViewState: {
@@ -15,6 +17,14 @@ var deckgl = new DeckGL({
     layers: []
 });
 
+var initialColors = [
+    "rgb(36, 86, 104)",
+    "rgb(15, 114, 121)",
+    "rgb(13, 143, 129)",
+    "rgb(57, 171, 126)",
+    "rgb(110, 197, 116)",
+    "rgb(169, 220, 103)"
+];
 
 
 // Function to handle form submission
@@ -33,61 +43,10 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// function populateColorScaleOptions(colorScales) {
-//     const selectElement = document.getElementById('colorScaleSelect'); // Assuming you have a <select> element with this ID
-//     Object.keys(colorScales).forEach(scaleName => {
-//         const option = document.createElement('option');
-//         option.value = scaleName;
-//         option.textContent = scaleName;
-//         selectElement.appendChild(option);
-//     });
+$("#selectedcolorpalette").on("click", function () {
+    $(".colorpalettediv").toggle();
+});
 
-//     // Add event listener to update the visualization when the color scale is changed
-//     selectElement.addEventListener('change', function () {
-//         const selectedScale = colorScales[this.value];
-//         updateVisualizationWithColorScale(selectedScale); // Implement this function based on your visualization tool
-//     });
-// }
-
-// function generateColorPalettes(colorScales) {
-//     var colorType = document.getElementById('color-type-select').value;
-//     var container = document.getElementById('color-palette-container');
-//     container.innerHTML = '';
-
-//     // Function to create a color div
-//     function createColorDiv(color) {
-//         var colorDiv = document.createElement('div');
-//         colorDiv.className = 'color';
-//         colorDiv.style.backgroundColor = color;
-//         return colorDiv;
-//     }
-
-//     // Function to generate a row for each color scale
-//     function generatePaletteRow(scaleName) {
-//         var rowDiv = document.createElement('div');
-//         rowDiv.className = 'palette-row';
-//         var colors = colorScales[scaleName];
-
-//         colors.forEach(([position, color]) => {
-//             rowDiv.appendChild(createColorDiv(color));
-//         });
-
-//         rowDiv.addEventListener('click', function () {
-//             // Here, implement what happens when a row is clicked
-//             // For example, you might want to update a map or chart with the selected color scale
-//             console.log(`Color scale ${scaleName} selected`);
-//         });
-
-//         return rowDiv;
-//     }
-
-//     // Add rows for the selected color scale type
-//     Object.keys(colorScales).forEach(scaleName => {
-//         if (colorType === 'all' || scaleName.includes(colorType)) {
-//             container.appendChild(generatePaletteRow(scaleName));
-//         }
-//     });
-// }
 function generateColorPalettes() {
     // Fetch the categorized color scales from your JSON file
     fetch('/static/Map/plotly_color_scales.json')
@@ -114,8 +73,10 @@ function generateColorPalettes() {
                 return colorDiv;
             }
 
+
             // Function to generate a row for each color scale
             function generatePaletteRow(scaleName, colors) {
+
                 var rowDiv = document.createElement('div');
                 rowDiv.className = 'palette-row';
 
@@ -129,19 +90,139 @@ function generateColorPalettes() {
 
                 rowDiv.addEventListener('click', function () {
                     console.log(`Color scale ${scaleName} selected`);
+                    $(".palette-row").removeClass("selected");
+                    $(this).addClass("selected");
+                    $("#selectedcolorpalette").empty();
+                    displayedColors.forEach(([position, color]) => {
+                        // Create a color div for each color
+                        let colorDiv = createColorDiv(color);
+                        // Append the color div to the selectedcolorpalette element
+                        $("#selectedcolorpalette").append(colorDiv);
+                    });
+
                     let intervals = calculateIntervals(geojsonData, this.displayedColors.length);
                     updateMapColors(intervals, this.displayedColors.map(colorInfo => colorInfo[1]));
                 });
                 return rowDiv;
             }
+            const diverging = [
+                'armyrose',
+                'brbg',
+                'earth',
+                'fall',
+                'geyser',
+                'prgn',
+                'piyg',
+                'picnic',
+                'portland',
+                'puor',
+                'rdgy',
+                'rdylbu',
+                'rdylgn',
+                'spectral',
+                'tealrose',
+                'temps',
+                'tropic',
+                'balance',
+                'curl',
+                'delta',
+                'oxy',
+                'edge',
+                'hsv',
+                'icefire',
+                'phase',
+                'twilight',
+                'mrybm',
+                'mygbm'
+            ];
+            const singlehue = [
+                'blues',
+                'greens',
+                'greys',
+                'oranges',
+                'purples',
+                'reds',
+            ];
+            const sequential = [
+                'aggrnyl',
+                'agsunset',
+                'blackbody',
+                'bluered',
+                'blugrn',
+                'bluyl',
+                'brwnyl',
+                'bugn',
+                'bupu',
+                'burg',
+                'burgyl',
+                'cividis',
+                'darkmint',
+                'electric',
+                'emrld',
+                'gnbu',
+                'hot',
+                'inferno',
+                'jet',
+                'magma',
+                'mint',
+                'orrd',
+                'oryel',
+                'peach',
+                'pinkyl',
+                'plasma',
+                'pubu',
+                'pubugn',
+                'purd',
+                'purp',
+                'purpor',
+                'rainbow',
+                'sunset',
+                'sunsetdark',
+                'tealgrn',
+                'turbo',
+                'viridis',
+                'ylgn',
+                'ylgnbu',
+                'ylorbr',
+                'ylorrd',
+                'deep',
+                'dense',
+                'haline',
+                'matter',
+                'solar',
+                'speed',
+                'tempo',
+                'thermal',
+                'turbid',
+                'magenta',
+                'teal',
+                'algae',
+                'gray',
+                'ice'
+            ];
 
             // Filter scales based on the selected type and generate rows
             Object.keys(fetchedColorScales).forEach(scaleName => {
-                // This assumes you have a way to determine if a scaleName belongs to a type
-                if (colorType === 'all') {
-                    let colors = fetchedColorScales[scaleName];
-                    container.appendChild(generatePaletteRow(scaleName, colors));
+                let colors = fetchedColorScales[scaleName];
+                if (colors.length < steps) {
                 }
+                else {
+                    // This assumes you have a way to determine if a scaleName belongs to a type
+                    if (colorType === 'all') {
+                        container.appendChild(generatePaletteRow(scaleName, colors));
+                    }
+                    else if (colorType === 'diverging' && diverging.includes(scaleName)) {
+                        container.appendChild(generatePaletteRow(scaleName, colors));
+                    }
+                    else if (colorType === 'sequential' && sequential.includes(scaleName)) {
+                        container.appendChild(generatePaletteRow(scaleName, colors));
+                    }
+                    else if (colorType === 'singlehue' && singlehue.includes(scaleName)) {
+                        container.appendChild(generatePaletteRow(scaleName, colors));
+                    }
+                }
+
+
             });
         })
         .catch(error => console.error("Failed to load color scales", error));
@@ -167,7 +248,9 @@ function addRow() {
 }
 
 function calculateIntervals(data, steps) {
-    let values = data.features.map(f => f.properties.pop);
+
+
+    let values = data.features.map(f => f.properties[selectedWord.toLowerCase()]);
     let max = values[0];
     let min = values[0];
 
@@ -190,8 +273,6 @@ function calculateIntervals(data, steps) {
 }
 function updateMapColors(intervals, colors) {
     // Assign a color to each interval
-    debugger
-
     let intervalColors = intervals.map((interval, index) => ({
         ...interval,
         color: colors[index % colors.length] // Cycle through colors if not enough
@@ -199,7 +280,7 @@ function updateMapColors(intervals, colors) {
 
     // Add a color property to each feature based on its interval
     geojsonData.features.forEach(feature => {
-        let value = feature.properties.pop;
+        let value = feature.properties[selectedWord.toLowerCase()];
         let intervalColor = intervalColors.find(ic => value >= ic[0] && value < ic[1]);
         if (intervalColor) {
             // Convert HSL to RGB if necessary, or directly use the color
@@ -254,55 +335,44 @@ function updateMapColors(intervals, colors) {
     deckgl.setProps({ layers: [geojsonLayer] });
 }
 
-function hslToRgb(h, s, l) {
-    s /= 100;
-    l /= 100;
+// function hslToRgb(h, s, l) {
+//     s /= 100;
+//     l /= 100;
 
-    let c = (1 - Math.abs(2 * l - 1)) * s;
-    let x = c * (1 - Math.abs((h / 60) % 2 - 1));
-    let m = l - c / 2;
-    let r = 0;
-    let g = 0;
-    let b = 0;
+//     let c = (1 - Math.abs(2 * l - 1)) * s;
+//     let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+//     let m = l - c / 2;
+//     let r = 0;
+//     let g = 0;
+//     let b = 0;
 
-    if (0 <= h && h < 60) {
-        r = c; g = x; b = 0;
-    } else if (60 <= h && h < 120) {
-        r = x; g = c; b = 0;
-    } else if (120 <= h && h < 180) {
-        r = 0; g = c; b = x;
-    } else if (180 <= h && h < 240) {
-        r = 0; g = x; b = c;
-    } else if (240 <= h && h < 300) {
-        r = x; g = 0; b = c;
-    } else if (300 <= h && h < 360) {
-        r = c; g = 0; b = x;
-    }
-    r = Math.round((r + m) * 255);
-    g = Math.round((g + m) * 255);
-    b = Math.round((b + m) * 255);
+//     if (0 <= h && h < 60) {
+//         r = c; g = x; b = 0;
+//     } else if (60 <= h && h < 120) {
+//         r = x; g = c; b = 0;
+//     } else if (120 <= h && h < 180) {
+//         r = 0; g = c; b = x;
+//     } else if (180 <= h && h < 240) {
+//         r = 0; g = x; b = c;
+//     } else if (240 <= h && h < 300) {
+//         r = x; g = 0; b = c;
+//     } else if (300 <= h && h < 360) {
+//         r = c; g = 0; b = x;
+//     }
+//     r = Math.round((r + m) * 255);
+//     g = Math.round((g + m) * 255);
+//     b = Math.round((b + m) * 255);
 
-    return [r, g, b];
-}
+//     return [r, g, b];
+// }
 
 function updatemap(response) {
     $("#mapcontroldiv").css("display", "block");
     geojsonData = JSON.parse(response.result);
     generateColorPalettes();
-    const geojsonLayer = new GeoJsonLayer({
-        data: geojsonData,
-        opacity: 0.8,
-        stroked: true,
-        filled: true,
-        extruded: false,
-        wireframe: false,
-        lineWidthMinPixels: 0, // Minimum width of stroke lines
-        getLineColor: [255, 0, 0], // Set stroke color to red
-        getFillColor: [0, 255, 0], // Set fill color to green
-        getLineWidth: 1, // Set stroke width
-        pickable: true
-    });
-    deckgl.setProps({ layers: [geojsonLayer] });
+    let intervals = calculateIntervals(geojsonData, 6);
+
+    updateMapColors(intervals, initialColors);
 }
 
 
@@ -346,6 +416,8 @@ $('#show-suitability-btn').click(function () {
     // Serialize form data
 
     suitabilityvalue = $('#field_select').val();
+    words = suitabilityvalue.trim().split(' ');
+    selectedWord = words.length > 1 ? words[1] : words[0];
 
     var csrftoken = getCookie('csrftoken');
     // Send AJAX request
@@ -359,6 +431,7 @@ $('#show-suitability-btn').click(function () {
         },
         success: function (response) {
             updatemap(response);
+
 
         },
         error: function (xhr, status, error) {
