@@ -51,51 +51,54 @@
         {% endfor %}
       </select>
       <div id="mapcontroldiv" style="display:none;">
+        <div>Fill Color</div>
         <div id="selectedcolorpalette" class="palette-container">
-          <div class="color-box" style="background-color: #FFD700;"></div>
-          <div class="color-box" style="background-color: #FFA500;"></div>
-          <div class="color-box" style="background-color: #FF6347;"></div>
-          <div class="color-box" style="background-color: #CD5C5C;"></div>
-          <div class="color-box" style="background-color: #8B0000;"></div>
-          <div class="color-box" style="background-color: #800000;"></div>
+          <div class="color" style="background-color: rgb(36, 86, 104);"></div>
+          <div class="color" style="background-color: rgb(15, 114, 121);"></div>
+          <div class="color" style="background-color: rgb(13, 143, 129);"></div>
+          <div class="color" style="background-color: rgb(57, 171, 126);"></div>
+          <div class="color" style="background-color: rgb(110, 197, 116);"></div>
+          <div class="color" style="background-color: rgb(169, 220, 103);"></div>
         </div>
-        <div>
-          <label for="step-input">Steps</label>
-          <input class="form-control" type="number" id="step-input" value="6" max="7" placeholder="Step">
-        </div>
-        <div>
-          <label for="color-type-select">Color Type</label>
-          <select class="form-control mb-3" id="color-type-select">
-            <option value="diverging">Diverging</option>
-            <option value="sequential">Sequential</option>
-            <option value="qualitative">Qualitative</option>
-            <option value="singlehue">Single Hue</option>
-            <option value="all" selected>All</option>
-          </select>
-        </div>
-        <div id="color-palette-container" class="palette-container"></div>
-        <div>
-          <label for="rowcount">Number of Rows</label>
-          <input class="form-control" type="number" id="rowcount" placeholder="Number of rows">
-        </div>
+        <div class="colorpalettediv" style="display:none;">
+          <div>
+            <label for="step-input">Steps</label>
+            <input class="form-control" type="number" id="step-input" value="6" max="7" placeholder="Step">
+          </div>
+          <div>
+            <label for="color-type-select">Color Type</label>
+            <select class="form-control mb-3" id="color-type-select">
+              <option value="diverging">Diverging</option>
+              <option value="sequential">Sequential</option>
+              <option value="qualitative">Qualitative</option>
+              <option value="singlehue">Single Hue</option>
+              <option value="all" selected>All</option>
+            </select>
+          </div>
+          <div id="color-palette-container" class="palette-container"></div>
+          <div>
+            <label for="rowcount">Number of Rows</label>
+            <input class="form-control" type="number" id="rowcount" placeholder="Number of rows">
+          </div>
 
-        <table class="table-sm form-control" id="dataTable">
-          <thead>
-            <tr>
-              <th>Start</th>
-              <th>End</th>
-              <th>New</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Empty row for initial display -->
-            <tr>
-              <td><input class="form-control" type="number" name="start[]" /></td>
-              <td><input class="form-control" type="number" name="end[]" /></td>
-              <td><input class="form-control" type="number" name="new[]" /></td>
-            </tr>
-          </tbody>
-        </table>
+          <table class="table-sm form-control" id="dataTable">
+            <thead>
+              <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>New</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Empty row for initial display -->
+              <tr>
+                <td><input class="form-control" type="number" name="start[]" /></td>
+                <td><input class="form-control" type="number" name="end[]" /></td>
+                <td><input class="form-control" type="number" name="new[]" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <br />
       <div class="align-self-end">
