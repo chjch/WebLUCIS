@@ -101,9 +101,18 @@ body {
     /* Changes the cursor to a pointer to indicate clickable elements */
 }
 
+#selectedcolorpalette {
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-color: darkgrey;
+    border-width: 9px;
+    border-style: solid;
+}
+
 .palette-row:hover {
     background-color: #f0f0f0;
-    border: 2px solid #000;
+    border: 2px solid darkslategrey;
 }
 
 .color {
@@ -111,4 +120,15 @@ body {
     flex-grow: 1;
     flex-basis: calc(100% / 8);
     transition: transform 0.2s;
+}
+
+.colorpalettediv {
+    padding: 15px;
+    border-radius: 5px;
+    background-color: lightgrey;
+}
+
+.palette-row.selected {
+    border: 2px solid #000;
+    /* Border for selected color */
 }
