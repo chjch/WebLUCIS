@@ -1,5 +1,5 @@
 from django import forms
-from .models import GhanaMmda
+from .models import GhanaMmda, SuitabilityTest
 
 
 class MmdaForm(forms.Form):
@@ -32,3 +32,8 @@ class BufferForm(forms.Form):
         choices=[("1", ""), ("2", "Miles"), ("3", "Kilometers")],
         label="Unit",
     )
+
+class SuitabilityTestForm(forms.ModelForm):
+    class Meta:
+        model = SuitabilityTest
+        fields = '__all__'

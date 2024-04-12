@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,19 +12,25 @@
   {% bootstrap_javascript %}
   <!-- Load htmx -->
   <script src="https://unpkg.com/htmx.org@1.9.5"
-          integrity="sha384-xcuj3WpfgjlKF+FXhSQFQ0ZNr39ln+hwjN3npfM9VBnUskLolQAcN80McRIVOPuO"
-          crossorigin="anonymous"></script>
+    integrity="sha384-xcuj3WpfgjlKF+FXhSQFQ0ZNr39ln+hwjN3npfM9VBnUskLolQAcN80McRIVOPuO"
+    crossorigin="anonymous"></script>
   <!-- Tab CSS and ICON-->
   <link rel="stylesheet" type="text/css" href="{% static 'tab.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-OKqUSGxH1+Os0p0JljhI0eGEzxmowMFGS+MFnssMFeLd9pEB+ig2C89L1pI2azGxu8qA/f0jvNT2i3x7G5O5Pw==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-OKqUSGxH1+Os0p0JljhI0eGEzxmowMFGS+MFnssMFeLd9pEB+ig2C89L1pI2azGxu8qA/f0jvNT2i3x7G5O5Pw=="
+    crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script src="{% static 'Map/tab_click.js' %}" defer></script>
   <!-- Custom CSS -->
   <link rel="stylesheet" type="text/css" href="{% static 'Map/main.css' %}">
   {% if is_map %}
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-    <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+  <script src="{% static 'Map/AJAX_multiple.js' %}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.1/chroma.min.js"></script>
   {% endif %}
   {% if title %}
   <title>WebLUCIS - {{ title }}</title>
@@ -31,6 +38,7 @@
   <title>WebLUCIS</title>
   {% endif %}
 </head>
+
 <body>
   <!-- sidebar content -->
   <div class="container-fluid">
@@ -41,7 +49,7 @@
     </div>
     <!-- Toggler -->
     <button id="sidebar-toggler" class="btn" data-bs-toggle="collapse" data-bs-target="#sidebar-wrapper"
-            aria-expanded="false" aria-controls="collapseWidthExample" role="button" data-sidebar-toggler>
+      aria-expanded="false" aria-controls="collapseWidthExample" role="button" data-sidebar-toggler>
       <i id="sidebar-toggler-icon" class="bi bi-chevron-left" data-sidebar-icon></i>
     </button>
   </div>
@@ -60,4 +68,5 @@
   {% endif %}
   <script src="{% static 'Map/main.js' %}"></script>
 </body>
+
 </html>

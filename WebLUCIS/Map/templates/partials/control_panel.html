@@ -14,7 +14,8 @@
   </div>
 
   <div class="tab">
-    <button class="tablinks" onclick="clickHandle(event, 'Region')" id="defaultOpen"><i class="bi bi-globe-europe-africa"></i></i>
+    <button class="tablinks" onclick="clickHandle(event, 'Region')" id="defaultOpen"><i
+        class="bi bi-globe-europe-africa"></i>
       <span class="hover-text">Region</span></button>
     <button class="tablinks" onclick="clickHandle(event, 'Buffer')"><i class="bi bi-stack"></i>
       <span class="hover-text">Buffer</span></button>
@@ -23,22 +24,101 @@
   </div>
 
   <div id="Region" class="tabcontent">
-    <form>
+    <form id="choose_form">
+      <label for="choose">Select Ghanammdas/Suitability</label>
+      <select id="choose" class="form-control mb-3">
+        <option value="" selected disabled>Select Ghanammdas/Suitability</option>
+        <option value="district_form">Ghana mmdas</option>
+        <option value="suitability_form">Suitability</option>
+      </select>
+    </form>
+
+    <form id="suitability_form" style="display:none">
+      <!-- {% for field in suitability_form %}
+      {% if field.name != "geom" %} {# Exclude the geom field #}
+      <div>
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% render_field field class="form-control mb-2" %}
+      </div>
+      {% endif %}
+      {% endfor %} -->
+      <select name="field_select" id="field_select" class="form-control mb-2">
+        <option value="">Select Suitability</option>
+        {% for field in suitability_form %}
+        {% if field.name != "geom" %}
+        <option value="{{ field.label }}">{{ field.label }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+      <div id="mapcontroldiv" style="display:none;">
+        <div id="selectedcolorpalette" class="palette-container">
+          <div class="color-box" style="background-color: #FFD700;"></div>
+          <div class="color-box" style="background-color: #FFA500;"></div>
+          <div class="color-box" style="background-color: #FF6347;"></div>
+          <div class="color-box" style="background-color: #CD5C5C;"></div>
+          <div class="color-box" style="background-color: #8B0000;"></div>
+          <div class="color-box" style="background-color: #800000;"></div>
+        </div>
+        <div>
+          <label for="step-input">Steps</label>
+          <input class="form-control" type="number" id="step-input" value="6" max="7" placeholder="Step">
+        </div>
+        <div>
+          <label for="color-type-select">Color Type</label>
+          <select class="form-control mb-3" id="color-type-select">
+            <option value="diverging">Diverging</option>
+            <option value="sequential">Sequential</option>
+            <option value="qualitative">Qualitative</option>
+            <option value="singlehue">Single Hue</option>
+            <option value="all" selected>All</option>
+          </select>
+        </div>
+        <div id="color-palette-container" class="palette-container"></div>
+        <div>
+          <label for="rowcount">Number of Rows</label>
+          <input class="form-control" type="number" id="rowcount" placeholder="Number of rows">
+        </div>
+
+        <table class="table-sm form-control" id="dataTable">
+          <thead>
+            <tr>
+              <th>Start</th>
+              <th>End</th>
+              <th>New</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Empty row for initial display -->
+            <tr>
+              <td><input class="form-control" type="number" name="start[]" /></td>
+              <td><input class="form-control" type="number" name="end[]" /></td>
+              <td><input class="form-control" type="number" name="new[]" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <div class="align-self-end">
+        <button id="show-suitability-btn" class="btn btn-primary" type="button">Submit</button>
+      </div>
+    </form>
+    <form id="district_form" style="display:none">
       {% csrf_token %}
       <label for="{{ form.region.id_for_label }}">{{ form.region.label }}</label>
       {% render_field form.region class="form-control mb-2" hx-get="/load_districts/" hx-target="#id_district" %}
 
       <label for="{{ form.district.id_for_label }}">{{ form.district.label }}</label>
       {% render_field form.district class="form-control mb-3" %}
-
       <div class="align-self-end">
-        <button id="show-mmda-btn" class="btn btn-primary" type="button">Submit</button>
+        <button id="show-mmda-btn" class="btn btn-primary" type="submit">Submit</button>
       </div>
     </form>
+
   </div>
 
+
   <div id="Buffer" class="tabcontent">
-    <form>
+    <form id="buffer_form">
       {% csrf_token %}
       <label for="{{ form_buffer.distance.id_for_label }}">{{ form_buffer.distance.label }}</label>
       {% render_field form_buffer.distance class="form-control mb-2" %}
@@ -47,7 +127,7 @@
       {% render_field form_buffer.unit class="form-control mb-3" %}
 
       <div class="align-self-end">
-        <button id="show-buffer-btn" class="btn btn-primary" type="button">Run</button>
+        <button id="show-buffer-btn" class="btn btn-primary" type="submit">Run</button>
       </div>
     </form>
   </div>
@@ -56,31 +136,4 @@
     <p>add more</p>
   </div>
 
-
 </div>
-
-<script>
-function clickHandle(evt, tabName) {
-  let i, tabcontent, tablinks;
-
-  // This is to clear the previous clicked content.
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Set the tab to be "active".
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Display the clicked tab and set it to active.
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-
-</script>

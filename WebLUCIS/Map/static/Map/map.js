@@ -6,40 +6,40 @@
 //     center: [-74.5, 40], // starting position [lng, lat]
 //     zoom: 9 // starting zoom
 // });
-const {DeckGL, GeoJsonLayer} = deck;
-const showMmdaBtn = document.getElementById("show-mmda-btn");
+// const {DeckGL, GeoJsonLayer} = deck;
+// const showMmdaBtn = document.getElementById("show-mmda-btn");
 
-let deckgl = new DeckGL({
-    mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-    initialViewState: {
-        latitude: 8.020501,
-        longitude: -2.206687,
-        zoom: 5.85,
-        maxZoom: 16,
-        pitch: 0
-    },
-    controller: true,
-    // getTooltip
-    layers: []
-});
+// let deckgl = new DeckGL({
+//     mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+//     initialViewState: {
+//         latitude: 8.020501,
+//         longitude: -2.206687,
+//         zoom: 5.85,
+//         maxZoom: 16,
+//         pitch: 0
+//     },
+//     controller: true,
+//     // getTooltip
+//     layers: []
+// });
 
-showMmdaBtn.addEventListener("click", () => {
-    const selectDistrict = document.getElementById('id_district');
-    const district_id = selectDistrict.options[selectDistrict.selectedIndex].value;
-    let apiUrl = `/api/mmdas/${district_id}`;
-    const geojsonLayer = new GeoJsonLayer({
-        data: apiUrl,
-        opacity: 0.5,
-        stroked: false,
-        filled: true,
-        extruded: false,
-        wireframe: true,
-        fp64: true,
-        getLineColor: f => [255, 255, 255],
-        pickable: true
-    });
-    deckgl.setProps({ layers: [geojsonLayer] });
-});
+// showMmdaBtn.addEventListener("click", () => {
+//     const selectDistrict = document.getElementById('id_district');
+//     const district_id = selectDistrict.options[selectDistrict.selectedIndex].value;
+//     let apiUrl = `/api/mmdas/${district_id}`;
+//     const geojsonLayer = new GeoJsonLayer({
+//         data: apiUrl,
+//         opacity: 0.5,
+//         stroked: false,
+//         filled: true,
+//         extruded: false,
+//         wireframe: true,
+//         fp64: true,
+//         getLineColor: f => [255, 255, 255],
+//         pickable: true
+//     });
+//     deckgl.setProps({ layers: [geojsonLayer] });
+// });
 
 
 // const COLOR_SCALE = [
