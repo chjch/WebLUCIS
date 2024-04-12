@@ -3,8 +3,8 @@ from rest_framework import viewsets
 # from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
-from ..models import GhanaMmda
-from .serializers import GhanaMmdaSerializer
+from ..models import GhanaMmda, VectorTest
+from .serializers import GhanaMmdaSerializer, BufferDistrictSerializer
 from ..filters import GhanaMmdaFilter
 
 
@@ -74,4 +74,20 @@ class MmdaViewSet(viewsets.ViewSet):
         queryset = GhanaMmda.objects.all()  # noqa
         user = get_object_or_404(queryset, pk=pk)
         serializer = GhanaMmdaSerializer(user)
+        return Response(serializer.data)
+
+
+class BufferViewSet(viewsets.ViewSet):
+    filter_class = VectorTest
+
+    def list(self, request):
+        queryset = VectorTest.objects.all()
+        buffer_feature = queryset.first()
+        serializer = BufferDistrictSerializer(buffer_feature)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None, format=None):
+        queryset = VectorTest.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = BufferDistrictSerializer(user)
         return Response(serializer.data)

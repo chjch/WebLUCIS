@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_bootstrap5",
     "widget_tweaks",
     "django_filters",
+    # "django_cleanup.apps.CleanupConfig"
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,6 @@
 Django~=4.2.1
 psycopg2>=2.9.6
+SQLAlchemy>=2.0.25
 Fiona==1.9.4.post1
 rtree==1.0.1
 geopandas==0.13.0
@@ -8,3 +9,5 @@ djangorestframework-gis~=1.0.0
 django-filter~=22.1.0
 django-bootstrap5~=23.3
 django-widget-tweaks~=1.4.8
+django-cleanup==8.1.0
+GeoAlchemy2==0.14.4
