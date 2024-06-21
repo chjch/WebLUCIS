@@ -41,5 +41,14 @@ python /app/WebLUCIS/manage.py makemigrations
 echo "Apply database migrations"
 python /app/WebLUCIS/manage.py migrate
 
+# Run the Python script to load data
+echo "Loading data into the database"
+python /app/WebLUCIS/load.py
+if [ $? -eq 0 ]; then
+    echo "Loading data complete"
+else
+    echo "Failed to load data"
+fi
+
 # pass all arguments to the entrypoint script e.g., postgres from init_db.sh
 exec "$@"

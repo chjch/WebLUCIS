@@ -29,6 +29,7 @@ sql_extensions=$(cat <<-EOSQL
     CREATE EXTENSION IF NOT EXISTS postgis;
     CREATE EXTENSION IF NOT EXISTS postgis_topology;
     CREATE EXTENSION IF NOT EXISTS postgis_raster;
+    ALTER DATABASE template_postgis SET postgis.gdal_enabled_drivers TO 'ENABLE_ALL';
 EOSQL
 )
 
