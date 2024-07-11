@@ -39,3 +39,27 @@ class GhanaPopDensity(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class GhanaRoads(models.Model):
+    road_class = models.CharField(max_length=100)
+    geom = models.MultiLineStringField(srid=3857)
+
+    def __str__(self):
+        return self.road_class
+
+
+class GhanaLandCover(models.Model):
+    raster = models.RasterField()
+    name = models.CharField("Ghana Land Cover 2019 100m", max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class GhanaBuiltSettlement(models.Model):
+    raster = models.RasterField()
+    name = models.CharField("Ghana Built Settlement Distance 2020 100m", max_length=100)
+
+    def __str__(self):
+        return self.name
