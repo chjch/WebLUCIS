@@ -3,9 +3,12 @@ from rest_framework import viewsets
 # from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
-from ..models import GhanaMmda, VectorTest
-from .serializers import GhanaMmdaSerializer, BufferDistrictSerializer
+from django.contrib.gis.db.models.functions import AsGeoJSON
+from ..models import GhanaMmda, VectorTest, SuitabilityTest
+from .serializers import GhanaMmdaSerializer, BufferDistrictSerializer, SuitabilitySerializer
 from ..filters import GhanaMmdaFilter
+from rest_framework.decorators import action
+from django.core.exceptions import FieldError
 
 
 # class ListMmdas(APIView):
@@ -91,3 +94,21 @@ class BufferViewSet(viewsets.ViewSet):
         user = get_object_or_404(queryset, pk=pk)
         serializer = BufferDistrictSerializer(user)
         return Response(serializer.data)
+
+class SuitabilityViewSet(viewsets.ViewSet):
+    filter_class = SuitabilityTest
+
+    @action(detail=False, methods=['get'], url_path=r'(?P<suitabilityvalue>\w+)')
+    def list_by_suitability(self, request, suitabilityvalue=None):
+        if not suitabilityvalue:
+            return Response({"error": "suitabilityvalue parameter is required"}, status=400)
+
+        queryset = SuitabilityTest.objects.all()
+        geojson_data = queryset.annotate(geomm=AsGeoJSON("geom")).values(suitabilityvalue, 'geomm')
+        return Response(geojson_data)
+
+    def retrieve(self, request, pk=None, format=None):
+        queryset = SuitabilityTest.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        geojson_data = queryset.filter(pk=pk).annotate(geomm=AsGeoJSON("geom")).values('suitabilityvalue', 'geomm').first()
+        return Response(geojson_data)

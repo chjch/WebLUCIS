@@ -50,6 +50,10 @@
         {% endif %}
         {% endfor %}
       </select>
+      <select id="intervalMethod" class="form-control mb-2">
+        <option value="quantify">Quantify (Equal Interval)</option>
+        <option value="quantile">Quantile</option>
+      </select>
       <div id="mapcontroldiv" style="display:none;">
         <div>Fill Color</div>
         <div id="selectedcolorpalette" class="palette-container">
@@ -103,6 +107,15 @@
       <br />
       <div class="align-self-end">
         <button id="show-suitability-btn" class="btn btn-primary" type="button">Submit</button>
+        <!-- <div id="loading"
+          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+          <img
+            src="https://3.bp.blogspot.com/-McqgscdbKQQ/Vq3jmL1geRI/AAAAAAAAAZU/uXtD1KfQ6pM/s200/loader%2B%25281%2529.gif">Loading....
+        </div> -->
+        <div class="progress-container"
+          style="width: 100%; background-color: #f3f3f3; border: 1px solid #ccc; margin-top: 20px;">
+          <div id="progress-bar" style="width: 0%; height: 15px; background-color: #4caf50;"></div>
+        </div>
       </div>
     </form>
     <form id="district_form" style="display:none">
@@ -115,6 +128,7 @@
       <div class="align-self-end">
         <button id="show-mmda-btn" class="btn btn-primary" type="submit">Submit</button>
       </div>
+
     </form>
 
   </div>

@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_POST
+from django.contrib.gis.db.models.functions import AsGeoJSON
 from .script import *
 import json
-
 # from django.http import JsonResponse
 from .models import GhanaMmda, SuitabilityTest
 from .forms import MmdaForm, BufferForm, SuitabilityTestForm
 from .filters import GhanaMmdaFilter
-
+from django.core.serializers import serialize
 
 def home(request):
     form = MmdaForm()
@@ -60,7 +60,9 @@ def submit_form(request):
 
 def fetch_suitability(request):
     suitabilityvalue = request.POST.get('suitabilityvalue')
-    filtered_data = fetch_data(suitabilityvalue)
-    print(filtered_data)
-    # Return a response
-    return JsonResponse({'result': filtered_data.to_crs(epsg=4326).to_json()})
+    # # Get the queryset
+    queryset = SuitabilityTest.objects.all()
+    # geojson_data = serialize('geojson', queryset, fields=(suitabilityvalue, 'geom'))
+    geojson_data = queryset.annotate(geomm=AsGeoJSON("geom")).values(suitabilityvalue,'geomm')
+    # Return as JSON response
+    return JsonResponse({'result': list(geojson_data)})
