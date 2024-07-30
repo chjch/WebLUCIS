@@ -21,6 +21,9 @@
       <span class="hover-text">Buffer</span></button>
     <button class="tablinks" onclick="clickHandle(event, 'Basemap')"><i class="bi bi-sliders"></i>
       <span class="hover-text">Settings</span></button>
+    <button id='road_accessibility_form' class="tablinks hidden" onclick="clickHandle(event, 'NextForm')"><i
+        class="bi bi-arrow-bar-right"></i>
+      <span class="hover-text">NextForm</span></button>
   </div>
 
   <div id="Region" class="tabcontent">
@@ -150,7 +153,62 @@
   </div>
 
   <div id="Basemap" class="tabcontent">
-    <p>add more</p>
+    <label for="category">Category:</label>
+    <select id="category" class="form-control mb-3" onchange="updateSubcategory()">
+      <option value="">Select...</option>
+      <option value="Urban">Urban</option>
+      <option value="Agriculture">Agriculture</option>
+      <option value="Conservation">Conservation</option>
+    </select>
+
+    <label for="subcategory" class="hidden">Subcategory:</label>
+    <select id="subcategory" class="form-control mb-3 hidden" onchange="updateObjective()">
+      <option value="">Select...</option>
+    </select>
+
+    <label for="objective" class="hidden">Objective:</label>
+    <select id="objective" class="form-control mb-3 hidden" onchange="updateDetails()">
+      <option value="">Select...</option>
+    </select>
+
+    <label for="details" class="hidden">Details:</label>
+    <select id="details" class="form-control mb-3 hidden" onchange="checkNextButton()">
+      <option value="">Select...</option>
+    </select>
+    <div class="d-flex justify-content-end">
+      <button id="next-button" class="btn btn-primary hidden" onclick="showNextForm(event)">Next</button>
+    </div>
+  </div>
+
+  <div id="NextForm" class="tabcontent">
+    <form id="road_form">
+      <label for="road_class">Road Class:</label>
+      <select id="road_class" class="form-control mb-3">
+        <option value="primary">Primary</option>
+        <option value="secondary">Secondary</option>
+        <option value="primary_secondary">Primary and Secondary</option>
+      </select>
+
+      <label for="cell_size">Rasterize Cell Size:</label>
+      <input type="number" id="cell_size" class="form-control mb-3" value="30" />
+
+      <label for="method">Distance Method:</label>
+      <select id="method" class="form-control mb-3">
+        <option value="euclidean">Euclidean</option>
+        <option value="manhattan">Manhattan</option>
+      </select>
+
+      <label for="rescale_min">Rescale Min:</label>
+      <input type="number" id="rescale_min" class="form-control mb-3" value="1" />
+
+      <label for="rescale_max">Rescale Max:</label>
+      <input type="number" id="rescale_max" class="form-control mb-3" value="9" />
+
+      <div class="d-flex justify-content-between w-100">
+        <button id="back-button" class="btn btn-primary" onclick="showBasemap(event)">Back</button>
+        <button id="submit-form-btn" class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </form>
   </div>
 
 </div>
