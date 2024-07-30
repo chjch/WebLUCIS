@@ -2,6 +2,7 @@ var geojsonData;
 const { DeckGL, GeoJsonLayer } = deck;
 var suitabilityvalue = "";
 var words;
+var selectedcolors;
 var selectedWord;
 var deckgl = new DeckGL({
     mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
@@ -25,6 +26,7 @@ var initialColors = [
     "rgb(110, 197, 116)",
     "rgb(169, 220, 103)"
 ];
+$(".progress-container").css('display', 'none');
 
 
 // Function to handle form submission
@@ -81,7 +83,15 @@ function generateColorPalettes() {
                 rowDiv.className = 'palette-row';
 
                 // If the number of steps is less than the colors length, slice the array
-                var displayedColors = colors.slice(0, steps);
+                var middleIndex = Math.floor(colors.length / 2);
+                var removeCount = colors.length - steps;
+
+                // Determine the start and end indices for slicing out the middle
+                var startIndex = middleIndex - Math.floor(removeCount / 2);
+                var endIndex = startIndex + removeCount;
+
+                // Remove the middle colors
+                var displayedColors = colors.slice(0, startIndex).concat(colors.slice(endIndex));
                 rowDiv.displayedColors = displayedColors;
 
                 displayedColors.forEach(([position, color]) => {
@@ -89,7 +99,6 @@ function generateColorPalettes() {
                 });
 
                 rowDiv.addEventListener('click', function () {
-                    console.log(`Color scale ${scaleName} selected`);
                     $(".palette-row").removeClass("selected");
                     $(this).addClass("selected");
                     $("#selectedcolorpalette").empty();
@@ -99,7 +108,7 @@ function generateColorPalettes() {
                         // Append the color div to the selectedcolorpalette element
                         $("#selectedcolorpalette").append(colorDiv);
                     });
-
+                    selectedcolors = this.displayedColors.map(colorInfo => colorInfo[1]);
                     let intervals = calculateIntervals(geojsonData, this.displayedColors.length);
                     updateMapColors(intervals, this.displayedColors.map(colorInfo => colorInfo[1]));
                 });
@@ -107,21 +116,20 @@ function generateColorPalettes() {
             }
             const diverging = [
                 'armyrose',
-                'brbg',
                 'earth',
                 'fall',
                 'geyser',
-                'prgn',
-                'piyg',
                 'picnic',
                 'portland',
                 'puor',
+                'rainbow',
                 'rdgy',
-                'rdylbu',
-                'rdylgn',
                 'spectral',
                 'tealrose',
                 'temps',
+                'electric',
+                'inferno',
+                'jet',
                 'tropic',
                 'balance',
                 'curl',
@@ -142,7 +150,15 @@ function generateColorPalettes() {
                 'oranges',
                 'purples',
                 'reds',
+                'brbg',
+                'prgn',
+                'piyg',
+                'rdylbu',
+                'rdylgn'
             ];
+            const qualitative = [
+
+            ]
             const sequential = [
                 'aggrnyl',
                 'agsunset',
@@ -157,12 +173,9 @@ function generateColorPalettes() {
                 'burgyl',
                 'cividis',
                 'darkmint',
-                'electric',
                 'emrld',
                 'gnbu',
                 'hot',
-                'inferno',
-                'jet',
                 'magma',
                 'mint',
                 'orrd',
@@ -175,7 +188,6 @@ function generateColorPalettes() {
                 'purd',
                 'purp',
                 'purpor',
-                'rainbow',
                 'sunset',
                 'sunsetdark',
                 'tealgrn',
@@ -228,8 +240,6 @@ function generateColorPalettes() {
         .catch(error => console.error("Failed to load color scales", error));
 }
 
-
-
 $("#step-input").change(function () {
     generateColorPalettes();
 })
@@ -248,9 +258,7 @@ function addRow() {
 }
 
 function calculateIntervals(data, steps) {
-
-
-    let values = data.features.map(f => f.properties[selectedWord.toLowerCase()]);
+    let values = data.map(f => f.properties[selectedWord.toLowerCase()]);
     let max = values[0];
     let min = values[0];
 
@@ -271,6 +279,22 @@ function calculateIntervals(data, steps) {
     }
     return intervals;
 }
+function calculateQuantileIntervals(data, steps) {
+    let values = data.map(f => f.properties[selectedWord.toLowerCase()]);
+
+    // Sort the values
+    values.sort((a, b) => a - b);
+
+    // Calculate quantiles
+    let intervals = [];
+    for (let i = 0; i < steps; i++) {
+        let start = Math.floor(i * values.length / steps);
+        let end = Math.floor((i + 1) * values.length / steps) - 1;
+        intervals.push([values[start], values[end]]);
+    }
+    return intervals;
+}
+
 function updateMapColors(intervals, colors) {
     // Assign a color to each interval
     let intervalColors = intervals.map((interval, index) => ({
@@ -279,7 +303,7 @@ function updateMapColors(intervals, colors) {
     }));
 
     // Add a color property to each feature based on its interval
-    geojsonData.features.forEach(feature => {
+    geojsonData.forEach(feature => {
         let value = feature.properties[selectedWord.toLowerCase()];
         let intervalColor = intervalColors.find(ic => value >= ic[0] && value < ic[1]);
         if (intervalColor) {
@@ -335,47 +359,23 @@ function updateMapColors(intervals, colors) {
     deckgl.setProps({ layers: [geojsonLayer] });
 }
 
-// function hslToRgb(h, s, l) {
-//     s /= 100;
-//     l /= 100;
-
-//     let c = (1 - Math.abs(2 * l - 1)) * s;
-//     let x = c * (1 - Math.abs((h / 60) % 2 - 1));
-//     let m = l - c / 2;
-//     let r = 0;
-//     let g = 0;
-//     let b = 0;
-
-//     if (0 <= h && h < 60) {
-//         r = c; g = x; b = 0;
-//     } else if (60 <= h && h < 120) {
-//         r = x; g = c; b = 0;
-//     } else if (120 <= h && h < 180) {
-//         r = 0; g = c; b = x;
-//     } else if (180 <= h && h < 240) {
-//         r = 0; g = x; b = c;
-//     } else if (240 <= h && h < 300) {
-//         r = x; g = 0; b = c;
-//     } else if (300 <= h && h < 360) {
-//         r = c; g = 0; b = x;
-//     }
-//     r = Math.round((r + m) * 255);
-//     g = Math.round((g + m) * 255);
-//     b = Math.round((b + m) * 255);
-
-//     return [r, g, b];
-// }
 
 function updatemap(response) {
     $("#mapcontroldiv").css("display", "block");
-    geojsonData = JSON.parse(response.result);
+    geojsonData = response;
     generateColorPalettes();
-    let intervals = calculateIntervals(geojsonData, 6);
-
-    updateMapColors(intervals, initialColors);
+    let intervalmethod = $("#intervalMethod").val();
+    let intervals;
+    if (intervalmethod === 'quantify') {
+        intervals = calculateIntervals(geojsonData, 6);
+    } else if (intervalmethod === 'quantile') {
+        intervals = calculateQuantileIntervals(geojsonData, 6);
+    }
+    if (selectedcolors == undefined)
+        updateMapColors(intervals, initialColors);
+    else
+        updateMapColors(intervals, selectedcolors);
 }
-
-
 
 $("#choose").change(function () {
     var formid = $(this).val();
@@ -411,34 +411,110 @@ $(document).on('input', '#dataTable input', function () {
         row.remove();
     }
 });
-
-$('#show-suitability-btn').click(function () {
-    // Serialize form data
-
+function transformToGeoJSON(data) {
+    return data.map((item, index) => ({
+        id: index.toString(),
+        type: "Feature",
+        properties: {
+            [selectedWord.toLowerCase()]: item[selectedWord.toLowerCase()]
+        },
+        geometry: JSON.parse(item.geomm)
+    }));
+}
+$("#show-suitability-btn").click(function () {
     suitabilityvalue = $('#field_select').val();
-    words = suitabilityvalue.trim().split(' ');
-    selectedWord = words.length > 1 ? words[1] : words[0];
+    selectedWord = suitabilityvalue.toLowerCase().replace(/\s+/g, '_');
+    // words = suitabilityvalue.trim().split(' ');
+    // selectedWord = words.length > 1 ? words[1] : words[0];
+
 
     var csrftoken = getCookie('csrftoken');
-    // Send AJAX request
-    $.ajax({
-        type: 'POST',
-        url: '/fetch_suitability/',
-        data: { suitabilityvalue: suitabilityvalue },
-        headers: {
-            'X-CSRFToken': csrftoken,
-            'X-Requested-With': 'XMLHttpRequest'
-        },
-        success: function (response) {
-            updatemap(response);
+    // Display the progress bar
+    var $progressBarContainer = $(".progress-container");
+    var $progressBar = $("#progress-bar");
+    $progressBarContainer.show();
+    var width = 1;
 
-
-        },
-        error: function (xhr, status, error) {
-            // Handle error
-            console.error(error);
+    // Fake progress bar simulation
+    var fakeProgressInterval = setInterval(function () {
+        if (width >= 85) { // Cap the fake progress at 90%
+            clearInterval(fakeProgressInterval);
+        } else {
+            width++;
+            $progressBar.css("width", width + '%');
         }
-    });
+    }, 500); // Update progress every 100ms
+    let apiUrl = `/api/suitability/${selectedWord}`;
+
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json(); // or response.text() if the response is not in JSON format
+        })
+        .then(data => {
+            const new_geojsonData = transformToGeoJSON(data);
+            updatemap(new_geojsonData);
+            // Clear the fake progress interval
+            clearInterval(fakeProgressInterval);
+            // Update the progress bar with the actual data loading progress
+            var actualProgress = 85; // Start from where the fake progress left off
+            var actualProgressInterval = setInterval(function () {
+                if (actualProgress >= 100) {
+                    clearInterval(actualProgressInterval);
+                    // Hide the progress bar container
+                    $progressBarContainer.hide();
+                    // Reset the progress bar
+                    $progressBar.css("width", '0%');
+                } else {
+                    actualProgress++;
+                    $progressBar.css("width", actualProgress + '%');
+                }
+            }, 20);
+
+        })
+        .catch(error => {
+            clearInterval(fakeProgressInterval);
+            $progressBarContainer.hide();
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/fetch_suitability/',
+    //     data: { suitabilityvalue: selectedWord },
+    //     headers: {
+    //         'X-CSRFToken': csrftoken,
+    //         'X-Requested-With': 'XMLHttpRequest'
+    //     },
+    //     success: function (response) {
+    //         console.log(response)
+    //         const new_geojsonData = transformToGeoJSON(response.result);
+    //         updatemap(new_geojsonData);
+    //         // Clear the fake progress interval
+    //         clearInterval(fakeProgressInterval);
+    //         // Update the progress bar with the actual data loading progress
+    //         var actualProgress = 85; // Start from where the fake progress left off
+    //         var actualProgressInterval = setInterval(function () {
+    //             if (actualProgress >= 100) {
+    //                 clearInterval(actualProgressInterval);
+    //                 // Hide the progress bar container
+    //                 $progressBarContainer.hide();
+    //                 // Reset the progress bar
+    //                 $progressBar.css("width", '0%');
+    //             } else {
+    //                 actualProgress++;
+    //                 $progressBar.css("width", actualProgress + '%');
+    //             }
+    //         }, 20); // Update progress every 20ms
+    //     },
+    //     error: function (xhr, status, error) {
+    //         console.error(error);
+    //         // Handle error
+    //         clearInterval(fakeProgressInterval);
+    //         $progressBarContainer.hide();
+    //     }
+    // });
 });
 
 $('#district_form,#buffer_form').submit(function (e) {
@@ -491,3 +567,257 @@ $('#district_form,#buffer_form').submit(function (e) {
         });
 });
 
+const data = {
+    "Urban": {
+        "Objective": {
+            "Physical": [
+                "Existing Land Use",
+                "Development Constraints",
+                "Population Density"
+            ],
+            "Proximity": [
+                "Road Accessibility",
+                "Distance to City/Settlement"
+            ]
+        }
+    },
+    "Agriculture": {
+        "Crop Farming": {
+            "Physical": [
+                "Soil Condition",
+                "Terrain Characteristics",
+                "Existing Land Use",
+                "Development Constraints"
+            ],
+            "Proximity": [
+                "Proximity to Water",
+                "Road Accessibility",
+                "Proximity to Market",
+                "Proximity to Existing Crop Farms"
+            ]
+        },
+        "Livestock": {
+            "Physical": [
+                "Terrain Characteristics",
+                "Existing Land Use",
+                "Development Constraints"
+            ],
+            "Proximity": [
+                "Proximity to Water",
+                "Road Accessibility"
+            ]
+        }
+    },
+    "Conservation": {
+        "Biodiversity": [
+            "Biomass",
+            "Forest Cover"
+        ],
+        "Water Quality": [
+            "Underground Water Quality",
+            "Surface Water"
+        ],
+        "Ecological Processes": [
+            "Wetlands",
+            "Rivers",
+            "Open Waters"
+        ],
+        "Recreation": [
+            "National Parks"
+        ],
+        "Enhancing Existing Conservation Area": {
+            "Resource Reserve": [],
+            "Wildlife Sanctuary": [],
+            "Natural Reserve": {
+                "Strict Nature Reserve": [],
+                "Forest Reserve": []
+            }
+        }
+    }
+};
+
+function updateSubcategory() {
+    const category = document.getElementById("category").value;
+    const subcategory = document.getElementById("subcategory");
+    const objective = document.getElementById("objective");
+    const details = document.getElementById("details");
+    const subcategoryLabel = document.querySelector('label[for="subcategory"]');
+    const objectiveLabel = document.querySelector('label[for="objective"]');
+    const detailsLabel = document.querySelector('label[for="details"]');
+    const nextButton = document.getElementById("next-button");
+
+    subcategory.innerHTML = '<option value="">Select...</option>';
+    objective.innerHTML = '<option value="">Select...</option>';
+    details.innerHTML = '<option value="">Select...</option>';
+
+    if (category) {
+        subcategoryLabel.classList.remove("hidden");
+        subcategory.classList.remove("hidden");
+        objectiveLabel.classList.add("hidden");
+        objective.classList.add("hidden");
+        detailsLabel.classList.add("hidden");
+        details.classList.add("hidden");
+        nextButton.classList.add("hidden");
+
+        const subcategories = Object.keys(data[category]);
+        subcategories.forEach(subcat => {
+            subcategory.innerHTML += `<option value="${subcat}">${subcat}</option>`;
+        });
+    } else {
+        subcategoryLabel.classList.add("hidden");
+        subcategory.classList.add("hidden");
+        objectiveLabel.classList.add("hidden");
+        objective.classList.add("hidden");
+        detailsLabel.classList.add("hidden");
+        details.classList.add("hidden");
+        nextButton.classList.add("hidden");
+    }
+}
+
+function updateObjective() {
+    const category = document.getElementById("category").value;
+    const subcategory = document.getElementById("subcategory").value;
+    const objective = document.getElementById("objective");
+    const details = document.getElementById("details");
+    const objectiveLabel = document.querySelector('label[for="objective"]');
+    const detailsLabel = document.querySelector('label[for="details"]');
+    const nextButton = document.getElementById("next-button");
+
+    objective.innerHTML = '<option value="">Select...</option>';
+    details.innerHTML = '<option value="">Select...</option>';
+
+    if (category && subcategory) {
+        objectiveLabel.classList.remove("hidden");
+        objective.classList.remove("hidden");
+        detailsLabel.classList.add("hidden");
+        details.classList.add("hidden");
+        nextButton.classList.add("hidden");
+
+        const objData = data[category][subcategory];
+        if (Array.isArray(objData)) {
+            objData.forEach(obj => {
+                objective.innerHTML += `<option value="${obj}">${obj}</option>`;
+            });
+        } else if (typeof objData === 'object') {
+            const objectives = Object.keys(objData);
+            objectives.forEach(obj => {
+                objective.innerHTML += `<option value="${obj}">${obj}</option>`;
+            });
+        }
+    } else {
+        objectiveLabel.classList.add("hidden");
+        objective.classList.add("hidden");
+        detailsLabel.classList.add("hidden");
+        details.classList.add("hidden");
+        nextButton.classList.add("hidden");
+    }
+}
+
+function updateDetails() {
+    const category = document.getElementById("category").value;
+    const subcategory = document.getElementById("subcategory").value;
+    const objective = document.getElementById("objective").value;
+    const details = document.getElementById("details");
+    const detailsLabel = document.querySelector('label[for="details"]');
+    const nextButton = document.getElementById("next-button");
+
+    details.innerHTML = '<option value="">Select...</option>';
+
+    if (category && subcategory && objective) {
+        const objData = data[category][subcategory][objective];
+        if (objData !== undefined) {
+            if (objData.length !== 0) {
+                detailsLabel.classList.remove("hidden");
+                details.classList.remove("hidden");
+
+                if (Array.isArray(objData)) {
+                    objData.forEach(detail => {
+                        details.innerHTML += `<option value="${detail}">${detail}</option>`;
+                    });
+                } else if (typeof objData === 'object') {
+                    const nestedDetails = Object.keys(objData);
+                    nestedDetails.forEach(detail => {
+                        details.innerHTML += `<option value="${detail}">${detail}</option>`;
+                    });
+                    nextButton.classList.add("hidden");
+                } else {
+                    detailsLabel.classList.add("hidden");
+                    details.classList.add("hidden");
+                }
+            }
+            else {
+                detailsLabel.classList.add("hidden");
+                details.classList.add("hidden");
+                nextButton.classList.remove("hidden");
+            }
+        }
+        else {
+            detailsLabel.classList.add("hidden");
+            details.classList.add("hidden");
+            nextButton.classList.remove("hidden");
+        }
+
+    } else {
+        detailsLabel.classList.add("hidden");
+        details.classList.add("hidden");
+    }
+}
+function checkNextButton() {
+    const category = document.getElementById("category").value;
+    const subcategory = document.getElementById("subcategory").value;
+    const objective = document.getElementById("objective").value;
+    const details = document.getElementById("details").value;
+    const nextButton = document.getElementById("next-button");
+
+    if (category && subcategory && objective && details) {
+        nextButton.classList.remove("hidden");
+    } else {
+        nextButton.classList.add("hidden");
+    }
+}
+
+document.getElementById("category").addEventListener("change", updateSubcategory);
+document.getElementById("subcategory").addEventListener("change", updateObjective);
+document.getElementById("objective").addEventListener("change", updateDetails);
+
+window.onload = () => {
+    const subcategoryLabel = document.querySelector('label[for="subcategory"]');
+    const objectiveLabel = document.querySelector('label[for="objective"]');
+    const detailsLabel = document.querySelector('label[for="details"]');
+    const nextButton = document.getElementById("next-button");
+    subcategoryLabel.classList.add("hidden");
+    objectiveLabel.classList.add("hidden");
+    detailsLabel.classList.add("hidden");
+    nextButton.classList.add("hidden");
+};
+
+function showNextForm(event) {
+    event.preventDefault();
+    openTab('NextForm');
+    $("#road_accessibility_form").removeClass("hidden");
+}
+
+function showBasemap(event) {
+    event.preventDefault();
+    openTab('Basemap');
+    $("#road_accessibility_form").addClass("hidden");
+}
+
+function openTab(tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    document.querySelector(`button[onclick="clickHandle(event, '${tabName}')"]`).className += " active";
+}
+
+// Initial setup to show the default tab
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("defaultOpen").click();
+});
