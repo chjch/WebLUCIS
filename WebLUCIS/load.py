@@ -12,13 +12,23 @@ if BASE_DIR not in sys.path:
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "WebLUCIS.settings")
 django.setup()
 
-from Map.models import GhanaMmda, GhanaPopDensity, SuitabilityTest
+import Map.models
 
 ghanammda_mapping = {
     "region": "REGION",
     "district": "DISTRICT",
     "district_c": "DISTRICT_C",
     "geom": "MULTIPOLYGON",
+}
+
+ghanamgrs_mapping = {
+    "mgrs": "MGRS",
+    "geom": "POLYGON",
+}
+
+ghanaroads_mapping = {
+    "road_class": "fclass",
+    "geom": "MULTILINESTRING",
 }
 
 suitabilitytest_mapping = {
@@ -39,22 +49,72 @@ ghana_pd_tif = (
     Path(__file__).resolve().parent / "data" / "gha_popden_2020_1km_UNadj.tif"
 )
 
+ghana_roads_shp = (
+    Path(__file__).resolve().parent / "data" / "gis_osm_roads_ghana.shp"
+)
+
+ghana_lc_tif = (
+    Path(__file__).resolve().parent / "data" / "gha_lc_2019_100m.tif"
+)
+
+ghana_bs_tif = (
+    Path(__file__).resolve().parent / "data" / "gha_dist_bsgme_100m_2020.tif"
+)
+
+ghana_mgrs_shp = (
+    Path(__file__).resolve().parent / "data" / "MGRS_Ghana_1km.shp"
+)
+
 
 def load_ghana_districts(verbose=True):
     lm = LayerMapping(
-        GhanaMmda, ghanammda_shp, ghanammda_mapping, transform=False
+        Map.models.GhanaMmda, ghanammda_shp, ghanammda_mapping, transform=True, source_srs=4326
+    )
+    lm.save(strict=True, verbose=verbose)
+
+
+def load_ghana_mgrs(verbose=True):
+    lm = LayerMapping(
+        Map.models.GhanaMGRS, ghana_mgrs_shp, ghanamgrs_mapping, transform=True, source_srs=3857
     )
     lm.save(strict=True, verbose=verbose)
 
 
 def load_ghana_pop_density():
     ghana_popdensity = GDALRaster(str(ghana_pd_tif), write=True)
-    raster_layer = GhanaPopDensity.objects.create(
+    raster_layer = Map.models.GhanaPopDensity.objects.create(
         raster=ghana_popdensity,
         name='Ghana Population Density 2020 1km'
     )
     raster_layer.save()
-    print(f"Successfully loaded raster data with ID {raster_layer.pk}")
+    print(f"Successfully loaded Ghana Population Density raster data")
+
+
+def load_ghana_roads(verbose=True):
+    lm = LayerMapping(
+        Map.models.GhanaRoads, ghana_roads_shp, ghanaroads_mapping, transform=True
+    )
+    lm.save(strict=True, verbose=verbose)
+
+
+def load_ghana_landcover():
+    ghana_lc = GDALRaster(str(ghana_lc_tif), write=True)
+    raster_layer = Map.models.GhanaLandCover.objects.create(
+        raster=ghana_lc,
+        name='Ghana Land Cover 2019 100m'
+    )
+    raster_layer.save()
+    print(f"Successfully loaded Ghana Land Cover raster data")
+
+
+def load_ghana_builtsettlement():
+    ghana_bs = GDALRaster(str(ghana_bs_tif), write=True)
+    raster_layer = Map.models.GhanaBuiltSettlement.objects.create(
+        raster=ghana_bs,
+        name='Ghana Built Settlement Distance 2020 100m'
+    )
+    raster_layer.save()
+    print(f"Successfully loaded Ghana Built Settlement Distance raster data")
 
 
 # def reset_primary_key_sequence(model):
@@ -71,12 +131,16 @@ def run_suitability_test(verbose=True):
         Path(__file__).resolve().parent.parent / "data" / "Urban_Suitability_Final.shp"
     )
     lm = LayerMapping(
-        SuitabilityTest, suitabilitytest_shp, suitabilitytest_mapping, transform=True
+        Map.models.SuitabilityTest, suitabilitytest_shp, suitabilitytest_mapping, transform=True
     )
     lm.save(strict=True, verbose=verbose)
 
 
 if __name__ == "__main__":
     load_ghana_districts()
-    load_ghana_pop_density()
+    load_ghana_mgrs()
+    # load_ghana_pop_density()
+    # load_ghana_roads()
+    # load_ghana_landcover()
+    # load_ghana_builtsettlement()
 

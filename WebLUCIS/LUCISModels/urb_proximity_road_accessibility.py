@@ -8,9 +8,9 @@ db_url = "postgresql://postgres:151010@db:5432/template_postgis"
 def distance_to_road(input_gdf, road_class, cell_size=30, method='euclidean', rescale_min=1, rescale_max=9):
     db_connect = create_engine(db_url)
     if road_class == 'primary and secondary':
-        road_sql = 'SELECT * FROM "Map_ghanaroads"'
+        road_sql = 'SELECT * FROM ghanaroads'
     else:
-        road_sql = f'SELECT * FROM "Map_ghanaroads" WHERE road_class = \'{road_class}\''  # Drop down list
+        road_sql = f"SELECT * FROM ghanaroads WHERE road_class = '{road_class}'"  # Drop down list
     road_gdf = gpd.read_postgis(sql=road_sql, con=db_connect)
 
     try:
