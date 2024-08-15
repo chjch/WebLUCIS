@@ -20,6 +20,6 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 EXPOSE 8000
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/migrations_db.sh"]
 
 CMD ["python", "/app/WebLUCIS/manage.py", "runserver", "0.0.0.0:8000"]

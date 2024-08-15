@@ -4,27 +4,31 @@ from sqlalchemy import create_engine
 db_url = "postgresql://postgres:151010@db:5432/template_postgis"
 
 
-# Select analysis district
-def select_district(district_id):
-    district_sql = f'SELECT * FROM "Map_ghanammda" WHERE id={district_id}'
+# Select study area 1km MGRS
+def select_study_area(region, district_id):
     db_connect = create_engine(db_url)
-    district_gdf = gpd.read_postgis(sql=district_sql, con=db_connect)
-    district_reproject = district_gdf.to_crs(epsg=3857)  # Later move projection setting into models geom(srid=3857)
-    return district_reproject
+    region_sql = f"SELECT * FROM ghanammda WHERE region = '{region}'"
+    region_gdf = gpd.read_postgis(sql=region_sql, con=db_connect)
+    mgrs_sql = 'SELECT * FROM ghanamgrs'
+    mgrs_gdf = gpd.read_postgis(sql=mgrs_sql, con=db_connect)
+    region_mgrs_gdf = gpd.sjoin(mgrs_gdf, region_gdf, how='inner', predicate='intersects', rsuffix='mmda')
+    if district_id == "All Districts":
+        district_mgrs_gdf = region_mgrs_gdf
+    else:
+        district_mgrs_gdf = region_mgrs_gdf.loc[region_mgrs_gdf['gid_mmda'] == int(district_id), :]
+    return district_mgrs_gdf
 
 
 # Buffer test for Ghana selected district
 def data_buffer(gdf, distance, unit):
-    gdf_project = gdf.to_crs(epsg=32630)
-
     if int(unit) == 2:
-        gdf_buffer = gdf_project.buffer(float(distance)*1609.34)
+        gdf_buffer = gdf.buffer(float(distance)*1609.34)
         return gdf_buffer.to_crs(epsg=4326)
     elif int(unit) == 3:
-        gdf_buffer = gdf_project.buffer(float(distance)*1000)
+        gdf_buffer = gdf.buffer(float(distance)*1000)
         return gdf_buffer.to_crs(epsg=4326)
     else:
-        return 'The unit is not define.'
+        raise ValueError('The unit is not defined.')
 
 
 def fetch_data(suitabilityvalue):

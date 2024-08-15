@@ -1,30 +1,7 @@
 #!/bin/bash
 set -e  # stop on error
 
-# Function to ensure PostGIS is installed
-# ensure_postgis() {
-#   # Wait for PostgreSQL to start
-#   until pg_isready -q -h db -U "$POSTGRES_USER"; do
-#     echo "Waiting for PostgreSQL to start..."
-#     echo "I'm in init_db.sh"
-#     sleep 1
-#   done
-
-#   # Connect to the PostgreSQL server and install PostGIS if not already installed
-#   echo "Installing Extensions..."
-#   psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-#       CREATE EXTENSION IF NOT EXISTS postgis;
-#       CREATE EXTENSION IF NOT EXISTS postgis_topology;
-#       CREATE EXTENSION IF NOT EXISTS postgis_raster;
-# EOSQL
-# }
-
-# Call the function ("&" to run in the background)
-# ensure_postgis &
-
-# exec "$@"
-# Execute the original entrypoint script to keep container running
-
+# The sql of create necessary extension for database
 sql_extensions=$(cat <<-EOSQL
     CREATE EXTENSION IF NOT EXISTS postgis;
     CREATE EXTENSION IF NOT EXISTS postgis_topology;
@@ -44,8 +21,26 @@ if [ -f /var/lib/postgresql/data/postmaster.pid ]; then
     fi
 fi
 
-# exec /usr/local/bin/docker-entrypoint.sh "$@"
-# exec docker-entrypoint.sh postgres
-# exec postgres -c max_connections=200
+# Function to load shapefiles using shp2pgsql with SRID projection
+load_shapefiles() {
+  for file in /data/*.shp; do
+    base=$(basename "$file" .shp)
+    echo "Loading shapefile: ${base}.shp"
+    shp2pgsql -s 3857 "/data/${base}.shp" public."${base}" | psql -U $POSTGRES_USER -d $POSTGRES_DB
+  done
+}
 
-# exec gosu postgres postgres -c max_connections=200
+# Function to load rasters using raster2pgsql
+load_rasters() {
+  for file in /data/*.tif; do
+    base=$(basename "$file" .tif)
+    echo "Loading raster: ${base}.tif"
+    raster2pgsql -C -I -M -F "$file" public."${base}" | psql -U $POSTGRES_USER -d $POSTGRES_DB
+  done
+}
+
+# Load shapefiles and rasters
+load_shapefiles
+load_rasters
+
+echo "Database initialization and data loading complete."

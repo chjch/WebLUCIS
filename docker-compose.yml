@@ -1,5 +1,3 @@
-#version: '3.8'
-
 services:
   webapp:
     container_name: weblucis_app_container
@@ -14,27 +12,23 @@ services:
       - db:db
     volumes:
       - .:/app
-    image: weblucis_app  # name the image weblucis_app
 
   db:
     container_name: weblucis_db_container
-    build:
-      context: .
-      dockerfile: Dockerfile.db
+    image: ronnieosx/weblucis_db:beta
     platform: linux/amd64
     restart: always
-    # user: "postgres"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 151010
-      POSTGRES_DB: template_postgis
-    #      POSTGRES_HOST_AUTH_METHOD: trust
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: 151010
+#      POSTGRES_DB: template_postgis
     ports:
       - "5432:5432"
-    volumes:
-      - ./db:/docker-entrypoint-initdb.d/
-      - weblucis_db_volume:/var/lib/postgresql/data/
-    image: weblucis_db  # name the image weblucis_db
+#    volumes:
+#      - ./db:/docker-entrypoint-initdb.d/
+#      - ./data:/data
+#      - weblucis_db_volume:/var/lib/postgresql/data/
 
-volumes:
-  weblucis_db_volume:
+
+#volumes:
+#  weblucis_db_volume:
