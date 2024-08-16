@@ -10,7 +10,7 @@ def distance_to_road(input_gdf, road_class, cell_size=30, method='euclidean', re
     if road_class == 'primary and secondary':
         road_sql = 'SELECT * FROM ghanaroads'
     else:
-        road_sql = f"SELECT * FROM ghanaroads WHERE road_class = '{road_class}'"  # Drop down list
+        road_sql = f"SELECT * FROM ghanaroads WHERE fclass = '{road_class}'"  # Drop down list
     road_gdf = gpd.read_postgis(sql=road_sql, con=db_connect)
 
     try:
