@@ -17,6 +17,7 @@ class GhanaMmda(models.Model):
 
 
 class GhanaMGRS(models.Model):
+    gid = models.AutoField(primary_key=True)
     mgrs = models.CharField(max_length=50)
     geom = models.PolygonField(srid=3857)
 
@@ -49,7 +50,8 @@ class GhanaPopDens(models.Model):
 
 
 class GhanaRoads(models.Model):
-    road_class = models.CharField(max_length=100)
+    gid = models.AutoField(primary_key=True)
+    fclass = models.CharField(max_length=100)
     geom = models.MultiLineStringField(srid=3857)
 
     class Meta:
@@ -57,7 +59,7 @@ class GhanaRoads(models.Model):
         db_table = 'ghanaroads'
 
     def __str__(self):
-        return self.road_class
+        return self.fclass
 
 
 # class GhanaLandCover(models.Model):

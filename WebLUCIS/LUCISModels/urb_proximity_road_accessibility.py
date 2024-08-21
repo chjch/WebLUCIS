@@ -5,7 +5,7 @@ from pylusat import distance, rescale
 db_url = "postgresql://postgres:151010@db:5432/template_postgis"
 
 
-def distance_to_road(input_gdf, road_class, cell_size=30, method='euclidean', rescale_min=1, rescale_max=9):
+def distance_to_road(input_gdf, road_class, cell_size, method, rescale_min, rescale_max):
     db_connect = create_engine(db_url)
     if road_class == 'primary and secondary':
         road_sql = 'SELECT * FROM ghanaroads'
@@ -17,7 +17,7 @@ def distance_to_road(input_gdf, road_class, cell_size=30, method='euclidean', re
         distance_output = distance.to_line(
             input_gdf=input_gdf,  # Selected ghana district or other sub-model result gdf
             line_gdf=road_gdf,
-            cellsize=cell_size,  # Enter by user - Float number box (default 30)
+            cellsize=int(cell_size),  # Enter by user - Float number box (default 30)
             method=method  # Select by user (optional) - Drop down list
         )
         input_gdf['distance_road'] = distance_output
@@ -27,11 +27,12 @@ def distance_to_road(input_gdf, road_class, cell_size=30, method='euclidean', re
             output_col='distance_road_rescale',
             start=distance_output.max(),
             end=distance_output.min(),
-            output_min=rescale_min,  # Enter by user (optional) - Float number box
-            output_max=rescale_max  # Enter by user (optional) - Float number box
+            output_min=int(rescale_min),  # Enter by user (optional) - Float number box
+            output_max=int(rescale_max)  # Enter by user (optional) - Float number box
         )
-        rescale_output['distance_road_rescale'] = rescale_output['distance_road_rescale'].fillna(rescale_min)
-        return rescale_output
+        rescale_output['distance_road_rescale'] = rescale_output['distance_road_rescale'].fillna(int(rescale_min))
+        rescale_output_reproject = rescale_output.to_crs(epsg=4326)
+        return rescale_output_reproject
 
     except Exception as e:
         print(e)

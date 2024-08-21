@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .script import *
+from LUCISModels.urb_proximity_road_accessibility import distance_to_road
 
 # from django.http import JsonResponse
 from .models import GhanaMmda
@@ -42,6 +43,22 @@ def submit_form(request):
     buffer_study_gdf = data_buffer(study_gdf, distance, unit)
     # Return a response
     return JsonResponse({'result': buffer_study_gdf.to_json()})
+
+
+def submit_road_accessibility(request):
+    region = request.POST.get('region')
+    district_id = request.POST.get('district')
+    road_class = request.POST.get('road_class')
+    cell_size = request.POST.get('cell_size')
+    method = request.POST.get('method')
+    rescale_min = request.POST.get('rescale_min')
+    rescale_max = request.POST.get('rescale_max')
+    study_gdf = select_study_area(region, district_id)
+    dist_road = distance_to_road(study_gdf, road_class, cell_size, method, rescale_min, rescale_max)
+    print(dist_road.head())
+    print(dist_road.crs)
+
+    return JsonResponse({'result': dist_road.to_json()})
 
 
 def fetch_suitability(request):
