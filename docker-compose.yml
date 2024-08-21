@@ -10,12 +10,13 @@ services:
       - db
     links:
       - db:db
-    volumes:
-      - .:/app
 
   db:
     container_name: weblucis_db_container
-    image: ronnieosx/weblucis_db:beta
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+#    image: ronnieosx/weblucis_db:beta
     platform: linux/amd64
     restart: always
 #    environment:
