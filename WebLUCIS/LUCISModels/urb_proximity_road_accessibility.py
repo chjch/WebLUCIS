@@ -7,7 +7,7 @@ db_url = "postgresql://postgres:151010@db:5432/template_postgis"
 
 def distance_to_road(input_gdf, road_class, cell_size, method, rescale_min, rescale_max):
     db_connect = create_engine(db_url)
-    if road_class == 'primary and secondary':
+    if road_class == 'primary_secondary':
         road_sql = 'SELECT * FROM ghanaroads'
     else:
         road_sql = f"SELECT * FROM ghanaroads WHERE fclass = '{road_class}'"  # Drop down list
