@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .script import *
 from LUCISModels.urb_proximity_road_accessibility import distance_to_road
-
-# from django.http import JsonResponse
 from .models import GhanaMmda
 from .forms import MmdaForm, BufferForm, SuitabilityTestForm
 
@@ -12,14 +10,17 @@ def home(request):
     form = MmdaForm()
     form_buffer = BufferForm()
     suitability_form = SuitabilityTestForm()
-    context = {"title": "Map", "is_map": True, "form": form, "form_buffer": form_buffer, "suitability_form":suitability_form}
+    context = {"title": "Map", "is_map": True, "form": form, "form_buffer": form_buffer,
+               "suitability_form": suitability_form}
     return render(request, "home.html", context)
 
 
 def load_districts(request):
     region = request.GET.get("region")
     districts = GhanaMmda.objects.filter(region=region)
-    context = {"districts": districts}
+    all_districts = [{'gid': '0', 'district': 'All Districts'}] + [{'gid': d.gid, 'district': d.district} for d in
+                                                                   districts]
+    context = {'districts': all_districts}
     return render(request, "partials/load_districts.html", context)
 
 
@@ -28,7 +29,7 @@ def submit(request):
     form = MmdaForm()
     form_buffer = BufferForm()
     context = {"title": "Map", "is_map": True, "form": form, "form_buffer": form_buffer}
-    return render(request, "home.html", context) 
+    return render(request, "home.html", context)
 
 
 def submit_form(request):

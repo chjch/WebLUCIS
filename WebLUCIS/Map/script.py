@@ -12,7 +12,7 @@ def select_study_area(region, district_id):
     mgrs_sql = 'SELECT * FROM ghanamgrs'
     mgrs_gdf = gpd.read_postgis(sql=mgrs_sql, con=db_connect)
     region_mgrs_gdf = gpd.sjoin(mgrs_gdf, region_gdf, how='inner', predicate='intersects', rsuffix='mmda')
-    if district_id == "All Districts":
+    if int(district_id) == 0:
         district_mgrs_gdf = region_mgrs_gdf
     else:
         district_mgrs_gdf = region_mgrs_gdf.loc[region_mgrs_gdf['gid_mmda'] == int(district_id), :]
