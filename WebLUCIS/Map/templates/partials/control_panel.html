@@ -14,16 +14,15 @@
   </div>
 
   <div class="tab">
-    <button class="tablinks" onclick="clickHandle(event, 'Region')" id="defaultOpen"><i
+    <button class="tablinks" data-tab="Region" onclick="clickHandle(event, 'Region')" id="defaultOpen"><i
         class="bi bi-globe-europe-africa"></i>
       <span class="hover-text">Region</span></button>
-    <button class="tablinks" onclick="clickHandle(event, 'Buffer')"><i class="bi bi-stack"></i>
-      <span class="hover-text">Buffer</span></button>
-    <button class="tablinks" onclick="clickHandle(event, 'Basemap')"><i class="bi bi-sliders"></i>
+
+    <button class="tablinks" data-tab="Basemap" onclick="clickHandle(event, 'Basemap')"><i class="bi bi-sliders"></i>
       <span class="hover-text">Settings</span></button>
-    <button id='road_accessibility_form' class="tablinks hidden" onclick="clickHandle(event, 'NextForm')"><i
-        class="bi bi-arrow-bar-right"></i>
-      <span class="hover-text">NextForm</span></button>
+
+    <button class="tablinks" data-tab="Buffer" onclick="clickHandle(event, 'Buffer')"><i class="bi bi-stack"></i>
+      <span class="hover-text">Buffer</span></button>
   </div>
 
   <div id="Region" class="tabcontent">
@@ -53,11 +52,8 @@
         {% endif %}
         {% endfor %}
       </select>
-      <select id="intervalMethod" class="form-control mb-2">
-        <option value="quantify">Quantify (Equal Interval)</option>
-        <option value="quantile">Quantile</option>
-      </select>
-      <div id="mapcontroldiv" style="display:none;">
+
+      <!-- <div id="mapcontroldiv" style="display:none;">
         <div>Fill Color</div>
         <div id="selectedcolorpalette" class="palette-container">
           <div class="color" style="background-color: rgb(36, 86, 104);"></div>
@@ -97,16 +93,16 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Empty row for initial display -->
-              <tr>
-                <td><input class="form-control" type="number" name="start[]" /></td>
-                <td><input class="form-control" type="number" name="end[]" /></td>
-                <td><input class="form-control" type="number" name="new[]" /></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+              
+      <tr>
+        <td><input class="form-control" type="number" name="start[]" /></td>
+        <td><input class="form-control" type="number" name="end[]" /></td>
+        <td><input class="form-control" type="number" name="new[]" /></td>
+      </tr>
+      </tbody>
+      </table>
+  </div>
+</div> -->
       <br />
       <div class="align-self-end">
         <button id="show-suitability-btn" class="btn btn-primary" type="button">Submit</button>
@@ -115,10 +111,10 @@
           <img
             src="https://3.bp.blogspot.com/-McqgscdbKQQ/Vq3jmL1geRI/AAAAAAAAAZU/uXtD1KfQ6pM/s200/loader%2B%25281%2529.gif">Loading....
         </div> -->
-        <div class="progress-container"
+        <!-- <div class="progress-container"
           style="width: 100%; background-color: #f3f3f3; border: 1px solid #ccc; margin-top: 20px;">
           <div id="progress-bar" style="width: 0%; height: 15px; background-color: #4caf50;"></div>
-        </div>
+        </div> -->
       </div>
     </form>
     <form id="district_form" style="display:none">
@@ -128,8 +124,11 @@
 
       <label for="{{ form.district.id_for_label }}">{{ form.district.label }}</label>
       {% render_field form.district class="form-control mb-3" %}
-      <div class="align-self-end">
+      <!-- <div class="align-self-end">
         <button id="show-mmda-btn" class="btn btn-primary" type="submit">Submit</button>
+      </div> -->
+      <div class="align-self-end">
+        <button id="tab1" class="btn btn-primary next" type="button" onclick="">Next</button>
       </div>
 
     </form>
@@ -138,18 +137,38 @@
 
 
   <div id="Buffer" class="tabcontent">
-    <form id="buffer_form">
-      {% csrf_token %}
-      <label for="{{ form_buffer.distance.id_for_label }}">{{ form_buffer.distance.label }}</label>
-      {% render_field form_buffer.distance class="form-control mb-2" %}
-
-      <label for="{{ form_buffer.unit.id_for_label }}">{{ form_buffer.unit.label }}</label>
-      {% render_field form_buffer.unit class="form-control mb-3" %}
-
-      <div class="align-self-end">
-        <button id="show-buffer-btn" class="btn btn-primary" type="submit">Run</button>
+    <select id="intervalMethod" class="form-control mb-2">
+      <option value="quantify">Quantify (Equal Interval)</option>
+      <option value="quantile">Quantile</option>
+    </select>
+    <div id="mapcontroldiv">
+      <div>Fill Color</div>
+      <div id="selectedcolorpalette" class="palette-container">
+        <div class="color" style="background-color: rgb(36, 86, 104);"></div>
+        <div class="color" style="background-color: rgb(15, 114, 121);"></div>
+        <div class="color" style="background-color: rgb(13, 143, 129);"></div>
+        <div class="color" style="background-color: rgb(57, 171, 126);"></div>
+        <div class="color" style="background-color: rgb(110, 197, 116);"></div>
+        <div class="color" style="background-color: rgb(169, 220, 103);"></div>
       </div>
-    </form>
+      <div class="colorpalettediv">
+        <div>
+          <label for="step-input">Steps</label>
+          <input class="form-control" type="number" id="step-input" value="6" max="7" placeholder="Step">
+        </div>
+        <div>
+          <label for="color-type-select">Color Type</label>
+          <select class="form-control mb-3" id="color-type-select">
+            <option value="diverging">Diverging</option>
+            <option value="sequential">Sequential</option>
+            <option value="qualitative">Qualitative</option>
+            <option value="singlehue">Single Hue</option>
+            <option value="all" selected>All</option>
+          </select>
+        </div>
+        <div id="color-palette-container" class="palette-container"></div>
+      </div>
+    </div>
   </div>
 
   <div id="Basemap" class="tabcontent">
@@ -161,7 +180,7 @@
       <option value="Conservation">Conservation</option>
     </select>
 
-    <label for="subcategory" class="hidden">Subcategory:</label>
+    <label for="subcategory" class="hidden">Sub-category:</label>
     <select id="subcategory" class="form-control mb-3 hidden" onchange="updateObjective()">
       <option value="">Select...</option>
     </select>
@@ -171,44 +190,13 @@
       <option value="">Select...</option>
     </select>
 
-    <label for="details" class="hidden">Details:</label>
+    <label for="details" class="hidden">Sub-objective:</label>
     <select id="details" class="form-control mb-3 hidden" onchange="checkNextButton()">
       <option value="">Select...</option>
     </select>
-    <div class="d-flex justify-content-end">
-      <button id="next-button" class="btn btn-primary hidden" onclick="showNextForm(event)">Next</button>
+    <div class="d-flex align-self-end">
+      <button id="tab2" class="btn btn-primary hidden next">Next</button>
     </div>
-  </div>
-
-  <div id="NextForm" class="tabcontent">
-    <form id="road_form">
-      <label for="road_class">Road Class:</label>
-      <select id="road_class" class="form-control mb-3">
-        <option value="primary">Primary</option>
-        <option value="secondary">Secondary</option>
-        <option value="primary_secondary">Primary and Secondary</option>
-      </select>
-
-      <label for="cell_size">Rasterize Cell Size:</label>
-      <input type="number" id="cell_size" class="form-control mb-3" value="30" />
-
-      <label for="method">Distance Method:</label>
-      <select id="method" class="form-control mb-3">
-        <option value="euclidean">Euclidean</option>
-        <option value="manhattan">Manhattan</option>
-      </select>
-
-      <label for="rescale_min">Rescale Min:</label>
-      <input type="number" id="rescale_min" class="form-control mb-3" value="1" />
-
-      <label for="rescale_max">Rescale Max:</label>
-      <input type="number" id="rescale_max" class="form-control mb-3" value="9" />
-
-      <div class="d-flex justify-content-between w-100">
-        <button id="back-button" class="btn btn-primary" onclick="showBasemap(event)">Back</button>
-        <button id="submit-form-btn" class="btn btn-primary" type="submit">Submit</button>
-      </div>
-    </form>
   </div>
 
 </div>
