@@ -516,60 +516,63 @@ $("#show-suitability-btn").click(function () {
     //     }
     // });
 });
+// commenting to implement the next button 
+// $('#district_form,#buffer_form').submit(function (e) {
+//     e.preventDefault();
+//     debugger
 
-$('#district_form,#buffer_form').submit(function (e) {
-    e.preventDefault();
+//     // Create FormData object for district_form
+//     const formDataDistrict = new FormData(document.getElementById('district_form'));
 
-    // Create FormData object for district_form
-    const formDataDistrict = new FormData(document.getElementById('district_form'));
+//     // Get the buffer_form and append its data to formDataDistrict
+//     const bufferForm = document.getElementById('buffer_form');
 
-    // Get the buffer_form and append its data to formDataDistrict
-    const bufferForm = document.getElementById('buffer_form');
+//     const formDataBuffer = new FormData(bufferForm);
+//     // Append formDataBuffer to formDataDistrict
+//     for (const [key, value] of formDataBuffer.entries()) {
+//         formDataDistrict.append(key, value);
+//     }
 
-    const formDataBuffer = new FormData(bufferForm);
-    // Append formDataBuffer to formDataDistrict
-    for (const [key, value] of formDataBuffer.entries()) {
-        formDataDistrict.append(key, value);
-    }
+//     fetch('/submit_form/', {
+//         method: 'POST',
+//         body: formDataDistrict,
+//         headers: {
+//             'X-CSRFToken': getCookie('csrftoken'),
+//             'X-Requested-With': 'XMLHttpRequest'
+//         },
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             // Handle the response data
+//             $(".color-range-palette").css("display", "flex");
 
-    fetch('/submit_form/', {
-        method: 'POST',
-        body: formDataDistrict,
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'),
-            'X-Requested-With': 'XMLHttpRequest'
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response data
-            $(".color-range-palette").css("display", "flex");
+//             geojsonData = JSON.parse(data.result);
+//             const geojsonLayer = new GeoJsonLayer({
+//                 data: geojsonData,
+//                 opacity: 0.8,
+//                 stroked: true,
+//                 filled: true,
+//                 extruded: false,
+//                 wireframe: false,
+//                 lineWidthMinPixels: 1, // Minimum width of stroke lines
+//                 // getLineColor: [255, 0, 0], // Set stroke color to red
+//                 getFillColor: [0, 255, 0], // Set fill color to green
+//                 getLineWidth: 1, // Set stroke width
+//                 pickable: true
+//             });
+//             deckgl.setProps({ layers: [geojsonLayer] });
 
-            geojsonData = JSON.parse(data.result);
-            const geojsonLayer = new GeoJsonLayer({
-                data: geojsonData,
-                opacity: 0.8,
-                stroked: true,
-                filled: true,
-                extruded: false,
-                wireframe: false,
-                lineWidthMinPixels: 1, // Minimum width of stroke lines
-                // getLineColor: [255, 0, 0], // Set stroke color to red
-                getFillColor: [0, 255, 0], // Set fill color to green
-                getLineWidth: 1, // Set stroke width
-                pickable: true
-            });
-            deckgl.setProps({ layers: [geojsonLayer] });
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+// });
 
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-});
+
 
 const data = {
     "Urban": {
-        "Objective": {
+        "General": {
             "Physical": [
                 "Existing Land Use",
                 "Development Constraints",
@@ -644,7 +647,7 @@ function updateSubcategory() {
     const subcategoryLabel = document.querySelector('label[for="subcategory"]');
     const objectiveLabel = document.querySelector('label[for="objective"]');
     const detailsLabel = document.querySelector('label[for="details"]');
-    const nextButton = document.getElementById("next-button");
+    const nextButton = document.getElementById("tab2");
 
     subcategory.innerHTML = '<option value="">Select...</option>';
     objective.innerHTML = '<option value="">Select...</option>';
@@ -681,7 +684,7 @@ function updateObjective() {
     const details = document.getElementById("details");
     const objectiveLabel = document.querySelector('label[for="objective"]');
     const detailsLabel = document.querySelector('label[for="details"]');
-    const nextButton = document.getElementById("next-button");
+    const nextButton = document.getElementById("tab2");
 
     objective.innerHTML = '<option value="">Select...</option>';
     details.innerHTML = '<option value="">Select...</option>';
@@ -719,7 +722,7 @@ function updateDetails() {
     const objective = document.getElementById("objective").value;
     const details = document.getElementById("details");
     const detailsLabel = document.querySelector('label[for="details"]');
-    const nextButton = document.getElementById("next-button");
+    const nextButton = document.getElementById("tab2");
 
     details.innerHTML = '<option value="">Select...</option>';
 
@@ -767,7 +770,7 @@ function checkNextButton() {
     const subcategory = document.getElementById("subcategory").value;
     const objective = document.getElementById("objective").value;
     const details = document.getElementById("details").value;
-    const nextButton = document.getElementById("next-button");
+    const nextButton = document.getElementById("tab2");
 
     if (category && subcategory && objective && details) {
         nextButton.classList.remove("hidden");
@@ -784,40 +787,10 @@ window.onload = () => {
     const subcategoryLabel = document.querySelector('label[for="subcategory"]');
     const objectiveLabel = document.querySelector('label[for="objective"]');
     const detailsLabel = document.querySelector('label[for="details"]');
-    const nextButton = document.getElementById("next-button");
+    const nextButton = document.getElementById("tab2");
     subcategoryLabel.classList.add("hidden");
     objectiveLabel.classList.add("hidden");
     detailsLabel.classList.add("hidden");
     nextButton.classList.add("hidden");
 };
 
-function showNextForm(event) {
-    event.preventDefault();
-    openTab('NextForm');
-    $("#road_accessibility_form").removeClass("hidden");
-}
-
-function showBasemap(event) {
-    event.preventDefault();
-    openTab('Basemap');
-    $("#road_accessibility_form").addClass("hidden");
-}
-
-function openTab(tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabName).style.display = "block";
-    document.querySelector(`button[onclick="clickHandle(event, '${tabName}')"]`).className += " active";
-}
-
-// Initial setup to show the default tab
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("defaultOpen").click();
-});
