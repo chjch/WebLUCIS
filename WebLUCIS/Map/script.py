@@ -21,16 +21,14 @@ def select_study_area(region, district_id):
 
 # Buffer test for Ghana selected district
 def data_buffer(gdf, distance, unit):
-    gdf_project = gdf.to_crs(epsg=32630)
-
     if int(unit) == 2:
-        gdf_buffer = gdf_project.buffer(float(distance)*1609.34)
+        gdf_buffer = gdf.buffer(float(distance)*1609.34)
         return gdf_buffer.to_crs(epsg=4326)
     elif int(unit) == 3:
-        gdf_buffer = gdf_project.buffer(float(distance)*1000)
+        gdf_buffer = gdf.buffer(float(distance)*1000)
         return gdf_buffer.to_crs(epsg=4326)
     else:
-        return 'The unit is not define.'
+        raise ValueError('The unit is not defined.')
 
 
 def fetch_data(suitabilityvalue):

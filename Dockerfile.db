@@ -1,1 +1,25 @@
 FROM postgis/postgis:16-3.4
+
+# Install GDAL, PostGIS, and PostgreSQL utilities for loading shapefiles and rasters
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    postgis \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# Environment variables
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=151010
+ENV POSTGRES_DB=template_postgis
+
+# Copy the database initialization script and necessary data files
+COPY ./data /data
+COPY ./db/init_db.sh /docker-entrypoint-initdb.d/init_db.sh
+
+# Delete the default 10_postgis.sh script
+RUN rm -f /docker-entrypoint-initdb.d/10_postgis.sh
+
+# Expose PostgreSQL port
+EXPOSE 5432
+
+# Default command to run PostgreSQL
+CMD ["postgres"]
