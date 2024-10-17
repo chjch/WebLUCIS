@@ -1,41 +1,35 @@
-version: '3.8'
-
 services:
   webapp:
-    build: .
-    command: python /app/WebLUCIS/manage.py runserver 0.0.0.0:8000
+    container_name: weblucis_app_container
+    build:
+      context: .
+      dockerfile: Dockerfile.app
     ports:
       - "8000:8000"
     depends_on:
       - db
     links:
       - db:db
-    volumes:
-      - .:/app
-    image: weblucis
-    container_name: weblucis_container
 
-  # db:
-  #   image: postgis/postgis:16-3.4
-  #   container_name: postgis_container
-  #   restart: always
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: 151010
-  #     POSTGRES_DB: template_postgis
-  #     POSTGRES_HOST_AUTH_METHOD: trust
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - ./db:/docker-entrypoint-initdb.d/
-  #     - weblucis_db_volume:/var/lib/postgresql/data/
   db:
     container_name: weblucis_db_container
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.db
     image: ronnieosx/weblucis_db:beta
     platform: linux/amd64
     restart: always
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: 151010
+#      POSTGRES_DB: template_postgis
     ports:
       - "5432:5432"
+#    volumes:
+#      - ./db:/docker-entrypoint-initdb.d/
+#      - ./data:/data
+#      - weblucis_db_volume:/var/lib/postgresql/data/
 
-volumes:
-  weblucis_db_volume:
+
+#volumes:
+#  weblucis_db_volume:
