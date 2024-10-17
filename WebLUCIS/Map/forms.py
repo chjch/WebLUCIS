@@ -33,6 +33,8 @@ class BufferForm(forms.Form):
         label="Unit",
     )
 
+
+
 class SuitabilityTestForm(forms.ModelForm):
     class Meta:
         model = SuitabilityTest

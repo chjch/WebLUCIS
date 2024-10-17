@@ -4,13 +4,19 @@ from sqlalchemy import create_engine
 db_url = "postgresql://postgres:151010@db:5432/template_postgis"
 
 
-# Select analysis district
-def select_district(district_id):
-    district_sql = f'SELECT * FROM "Map_ghanammda" WHERE id={district_id}'
+# Select study area 1km MGRS
+def select_study_area(region, district_id):
     db_connect = create_engine(db_url)
-    district_gdf = gpd.read_postgis(sql=district_sql, con=db_connect)
-    district_reproject = district_gdf.to_crs(epsg=3857)  # Later move projection setting into models geom(srid=3857)
-    return district_reproject
+    region_sql = f"SELECT * FROM ghanammda WHERE region = '{region}'"
+    region_gdf = gpd.read_postgis(sql=region_sql, con=db_connect)
+    mgrs_sql = 'SELECT * FROM ghanamgrs'
+    mgrs_gdf = gpd.read_postgis(sql=mgrs_sql, con=db_connect)
+    region_mgrs_gdf = gpd.sjoin(mgrs_gdf, region_gdf, how='inner', predicate='intersects', rsuffix='mmda')
+    if int(district_id) == 0:
+        district_mgrs_gdf = region_mgrs_gdf
+    else:
+        district_mgrs_gdf = region_mgrs_gdf.loc[region_mgrs_gdf['gid_mmda'] == int(district_id), :]
+    return district_mgrs_gdf
 
 
 # Buffer test for Ghana selected district
@@ -32,4 +38,3 @@ def fetch_data(suitabilityvalue):
     # Execute the query and fetch data, assuming db_fetch_data is a method to execute SQL queries and return results
     db_connect = create_engine(db_url)
     return gpd.read_postgis(sql=query, con=db_connect)
-

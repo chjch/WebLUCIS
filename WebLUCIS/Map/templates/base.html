@@ -36,6 +36,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.1/chroma.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script src="{% static 'Map/header_tab.js' %}"></script>
+  <script src="{% static 'Map/colorPalette.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 
@@ -69,9 +70,12 @@
     </div>
 
     <div id="form-tab-container" class="form-tab-container">
-      <button class="add-tab-btn">+</button>
+      <button id="add-tab">+</button>
+      <div id="tabs"></div>
+
 
     </div>
+    <div id="popup-content"></div>
     <!-- <div class="toggle-arrow">
       <button class="arrow_button" onclick="toggleTabPopup()">
         ▼
@@ -81,18 +85,18 @@
 
 
 
-    <!-- Right Toggler -->
+    <!-- Right Toggler
     <button id="right-sidebar-toggler" class="btn no-rightsidebar" data-bs-toggle="collapse"
       data-bs-target="#right-sidebar-wrapper" aria-expanded="false" aria-controls="collapseWidthExampleRight"
       role="button">
       <i id="right-sidebar-toggler-icon" class="bi bi-chevron-left"></i>
-    </button>
+    </button> -->
 
 
 
   </div>
 
-
+  <div id="legend" style="display:none;"></div>
   <!-- Page Content -->
   <main class="container-fluid min-vh-100 p-4">
     <!-- Rest of your page content goes here -->

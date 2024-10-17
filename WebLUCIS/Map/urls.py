@@ -7,6 +7,9 @@ urlpatterns = [
     path('submit_form/', views.submit_form, name='submit_form'),
     path('submit/', views.submit, name='submit'),
     path('fetch_suitability/', views.fetch_suitability, name='fetch_suitability'),
+    path('submit_road_form/', views.submit_road_form, name='submit_road_form'),
+    path('get-form-content/<str:form_name>/', views.get_form_content, name='get_form_content'),
+    
     # path('map/about/', views.about, name='map-about'),
     # path('mmdas/', views.mmdas, name='mmdas'),
     # path('api/', views.MmdaListAPIView.as_view(), name='mmdas-api'),

@@ -4,6 +4,8 @@ from django.views.decorators.http import require_POST
 from django.contrib.gis.db.models.functions import AsGeoJSON
 from .script import *
 import json
+from LUCISModels.urb_proximity_road_accessibility import distance_to_road
+
 # from django.http import JsonResponse
 from .models import GhanaMmda, SuitabilityTest
 # from .forms import MmdaForm, BufferForm, SuitabilityTestForm
@@ -35,7 +37,7 @@ def home(request):
 def load_districts(request):
     region = request.GET.get("region")
     districts = GhanaMmda.objects.filter(region=region)
-    all_districts = [{'id': '0', 'district': 'All Districts'}] + [{'id': d.id, 'district': d.district} for d in districts]
+    all_districts = [{'gid': '0', 'district': 'All Districts'}] + [{'gid': d.gid, 'district': d.district} for d in districts]
 
     context = {'districts': all_districts}
     return render(request, "partials/load_districts.html", context)
@@ -55,22 +57,21 @@ def submit_form(request):
     unit = request.POST.get('unit')
 
     # Do something with the data, call your script, etc.
-    gdf = select_district(region,district)
+    gdf = select_study_area(region,district)
     buffer_gdf = data_buffer(gdf, distance, unit)
     # Return a response
     return JsonResponse({'result': buffer_gdf.to_json()})
 
 def submit_road_form(request):
-    print("test")
+    region = request.POST.get('region')
+    district_id = request.POST.get('district')
     road_class = request.POST.get('road_class')
     cell_size = request.POST.get('cell_size')
     method = request.POST.get('method')
     rescale_min = request.POST.get('rescale_min')
     rescale_max = request.POST.get('rescale_max')
-    region = request.POST.get('region')
-    district = request.POST.get('district')
-    gdf = select_district(region,district)
-    dist_road = distance_to_road(gdf, road_class, cell_size, method,rescale_min,rescale_max )
+    study_gdf = select_study_area(region, district_id)
+    dist_road = distance_to_road(study_gdf, road_class, cell_size, method, rescale_min, rescale_max)
 
     return JsonResponse({'result': dist_road.to_json()})
 

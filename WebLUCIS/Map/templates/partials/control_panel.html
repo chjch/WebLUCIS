@@ -26,16 +26,16 @@
   </div>
 
   <div id="Region" class="tabcontent">
-    <form id="choose_form">
+    <!-- <form id="choose_form">
       <label for="choose">Select Ghanammdas/Suitability</label>
       <select id="choose" class="form-control mb-3">
         <option value="" selected disabled>Select Ghanammdas/Suitability</option>
         <option value="district_form">Ghana mmdas</option>
         <option value="suitability_form">Suitability</option>
       </select>
-    </form>
+    </form> -->
 
-    <form id="suitability_form" style="display:none">
+    <!-- <form id="suitability_form" style="display:none"> -->
       <!-- {% for field in suitability_form %}
       {% if field.name != "geom" %} {# Exclude the geom field #}
       <div>
@@ -44,14 +44,14 @@
       </div>
       {% endif %}
       {% endfor %} -->
-      <select name="field_select" id="field_select" class="form-control mb-2">
+      <!-- <select name="field_select" id="field_select" class="form-control mb-2">
         <option value="">Select Suitability</option>
         {% for field in suitability_form %}
         {% if field.name != "geom" %}
         <option value="{{ field.label }}">{{ field.label }}</option>
         {% endif %}
         {% endfor %}
-      </select>
+      </select> -->
 
       <!-- <div id="mapcontroldiv" style="display:none;">
         <div>Fill Color</div>
@@ -103,9 +103,9 @@
       </table>
   </div>
 </div> -->
-      <br />
+      <!-- <br />
       <div class="align-self-end">
-        <button id="show-suitability-btn" class="btn btn-primary" type="button">Submit</button>
+        <button id="show-suitability-btn" class="btn btn-primary" type="button">Submit</button> -->
         <!-- <div id="loading"
           style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
           <img
@@ -115,20 +115,20 @@
           style="width: 100%; background-color: #f3f3f3; border: 1px solid #ccc; margin-top: 20px;">
           <div id="progress-bar" style="width: 0%; height: 15px; background-color: #4caf50;"></div>
         </div> -->
-      </div>
-    </form>
-    <form id="district_form" style="display:none">
+      <!-- </div>
+    </form> -->
+    <form id="district_form">
       {% csrf_token %}
       <label for="{{ form.region.id_for_label }}">{{ form.region.label }}</label>
-      {% render_field form.region class="form-control mb-2" hx-get="/load_districts/" hx-target="#id_district" %}
+      {% render_field form.region class="form-control mb-2" hx-get="/load_districts/" hx-target="#id_district" onchange="zoomToRegion(this.value)" %}
 
       <label for="{{ form.district.id_for_label }}">{{ form.district.label }}</label>
-      {% render_field form.district class="form-control mb-3" %}
+      {% render_field form.district class="form-control mb-3" onchange="zoomToRegion(this.options[this.selectedIndex].text)" %}
       <!-- <div class="align-self-end">
         <button id="show-mmda-btn" class="btn btn-primary" type="submit">Submit</button>
       </div> -->
       <div class="align-self-end">
-        <button id="tab1" class="btn btn-primary next" type="button" onclick="">Next</button>
+        <button class="btn btn-primary next-btn" type="button" onclick="">Next</button>
       </div>
 
     </form>
@@ -195,7 +195,7 @@
       <option value="">Select...</option>
     </select>
     <div class="d-flex align-self-end">
-      <button id="tab2" class="btn btn-primary hidden next">Next</button>
+      <button id="category-next-btn" class="btn btn-primary hidden next-btn">Next</button>
     </div>
   </div>
 

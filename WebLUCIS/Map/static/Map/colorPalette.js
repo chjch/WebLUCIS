@@ -1,16 +1,4 @@
-var deckgl = new DeckGL({
-    mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-    initialViewState: {
-        latitude: 8.020501,
-        longitude: -2.206687,
-        zoom: 5.85,
-        maxZoom: 16,
-        pitch: 0
-    },
-    controller: true,
-    // getTooltip
-    layers: []
-});
+
 var initialColors = [
     "rgb(36, 86, 104)",
     "rgb(15, 114, 121)",
@@ -20,8 +8,11 @@ var initialColors = [
     "rgb(169, 220, 103)"
 ];
 
-$("#selectedcolorpalette").on("click", function () {
+$(document).on("click", "#selectedcolorpalette", function () {
     $(".colorpalettediv").toggle();
+});
+$(document).on("change", "#intervalMethod", function () {
+    updatemap(geojsonData);
 });
 
 function generateColorPalettes() {
@@ -139,15 +130,15 @@ function generateColorPalettes() {
 }
 
 
-$("#step-input").change(function () {
+$(document).on("change", "#step-input", function () {
     generateColorPalettes();
 })
-$("#color-type-select").change(function () {
+$(document).on("change", "#color-type-select", function () {
     generateColorPalettes();
 })
 
 function calculateIntervals(data, steps) {
-    let values = data.map(f => f.properties[selectedWord.toLowerCase()]);
+    let values = data.features.map(f => f.properties[selectedWord.toLowerCase()]);
     let max = values[0];
     let min = values[0];
 
@@ -169,7 +160,7 @@ function calculateIntervals(data, steps) {
     return intervals;
 }
 function calculateQuantileIntervals(data, steps) {
-    let values = data.map(f => f.properties[selectedWord.toLowerCase()]);
+    let values = data.features.map(f => f.properties[selectedWord.toLowerCase()]);
 
     // Sort the values
     values.sort((a, b) => a - b);
@@ -193,7 +184,7 @@ function updateMapColors(intervals, colors) {
     }));
 
     // Add a color property to each feature based on its interval
-    geojsonData.forEach(feature => {
+    geojsonData.features.forEach(feature => {
         let value = feature.properties[selectedWord.toLowerCase()];
         let intervalColor = intervalColors.find(ic => value >= ic[0] && value < ic[1]);
         if (intervalColor) {
@@ -247,9 +238,14 @@ function updateMapColors(intervals, colors) {
 
     // Updating the DeckGL instance with the new layer
     deckgl.setProps({ layers: [geojsonLayer] });
+    updateLegend(intervals, colors);
 }
 function updatemap(response) {
-    $("#mapcontroldiv").css("display", "block");
+    var bufferButton = document.querySelector('button[data-tab="Buffer"]');
+    selectedWord = 'distance_road_rescale';
+    // Trigger the click event on the "Buffer" button
+    bufferButton.click();
+    $(`.tablinks[data-tab="Buffer"]`).addClass('active');
     geojsonData = response;
     generateColorPalettes();
     let intervalmethod = $("#intervalMethod").val();
@@ -263,4 +259,27 @@ function updatemap(response) {
         updateMapColors(intervals, initialColors);
     else
         updateMapColors(intervals, selectedcolors);
+}
+
+function updateLegend(intervals, colors) {
+    const legendContainer = $('#legend');
+    legendContainer.css('display', 'block');
+    legendContainer.empty(); // Clear existing legend items
+
+    if (intervals && colors) {
+        intervals.forEach((interval, index) => {
+            const legendItem = $('<div>').addClass('legend-item');
+
+            const colorBox = $('<div>')
+                .addClass('legend-color')
+                .css('background-color', colors[index % colors.length]); // Cycle through colors if not enough
+            legendItem.append(colorBox);
+
+            // Create a label that displays the interval range
+            const label = $('<span>').text(`${interval[0].toFixed(2)} - ${interval[1].toFixed(2)}`); // Displaying intervals as a string
+            legendItem.append(label);
+
+            legendContainer.append(legendItem);
+        });
+    }
 }

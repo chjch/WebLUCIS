@@ -7,7 +7,7 @@ sidebarToggler.addEventListener("click", () => {
     sidebarToggler.classList.toggle("no-sidebar");
     sidebarIcon.classList.toggle("bi-chevron-right");
 });
-rightsidebarToggler.addEventListener("click", () => {
-    rightsidebarToggler.classList.toggle("no-rightsidebar");
-    rightsidebarIcon.classList.toggle("bi-chevron-right");
-});
+// rightsidebarToggler.addEventListener("click", () => {
+//     rightsidebarToggler.classList.toggle("no-rightsidebar");
+//     rightsidebarIcon.classList.toggle("bi-chevron-right");
+// });
