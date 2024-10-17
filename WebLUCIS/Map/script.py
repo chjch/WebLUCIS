@@ -1,16 +1,25 @@
 import geopandas as gpd
 from sqlalchemy import create_engine
 
-
 db_url = "postgresql://postgres:151010@db:5432/template_postgis"
 
 
-def read_data(district_id):
-    sql = f'SELECT * FROM "Map_ghanammda" WHERE id={district_id}'
+# Select study area 1km MGRS
+def select_study_area(region, district_id):
     db_connect = create_engine(db_url)
-    return gpd.read_postgis(sql=sql, con=db_connect)
+    region_sql = f"SELECT * FROM ghanammda WHERE region = '{region}'"
+    region_gdf = gpd.read_postgis(sql=region_sql, con=db_connect)
+    mgrs_sql = 'SELECT * FROM ghanamgrs'
+    mgrs_gdf = gpd.read_postgis(sql=mgrs_sql, con=db_connect)
+    region_mgrs_gdf = gpd.sjoin(mgrs_gdf, region_gdf, how='inner', predicate='intersects', rsuffix='mmda')
+    if int(district_id) == 0:
+        district_mgrs_gdf = region_mgrs_gdf
+    else:
+        district_mgrs_gdf = region_mgrs_gdf.loc[region_mgrs_gdf['gid_mmda'] == int(district_id), :]
+    return district_mgrs_gdf
 
 
+# Buffer test for Ghana selected district
 def data_buffer(gdf, distance, unit):
     gdf_project = gdf.to_crs(epsg=32630)
 
@@ -22,6 +31,7 @@ def data_buffer(gdf, distance, unit):
         return gdf_buffer.to_crs(epsg=4326)
     else:
         return 'The unit is not define.'
+
 
 def fetch_data(suitabilityvalue):
     query = f'SELECT {suitabilityvalue},"geom" FROM "Map_suitabilitytest" '
