@@ -10,6 +10,9 @@ services:
       - db
     links:
       - db:db
+    volumes:
+      - ./WebLUCIS/:/app/WebLUCIS/
+
 
   db:
     container_name: weblucis_db_container

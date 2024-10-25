@@ -1,4 +1,6 @@
 const { DeckGL, GeoJsonLayer } = deck;
+const PolygonLayer = deck.PolygonLayer;
+
 var suitabilityvalue = "";
 
 const regionCoordinates = {
@@ -32,6 +34,44 @@ var deckgl = new DeckGL({
     // getTooltip
     layers: []
 });
+// Function to update the layers based on the selected region
+function updateLayers(region) {
+    const layers = [];
+
+    // Add a polygon layer for the selected region
+    if (region) {
+        const coords = regionCoordinates[region];
+        const borderColor = [0, 0, 0]; // Dark border color
+        const fillColor = [255, 255, 255, 0]; // Transparent fill color
+
+        // dummy coordinates as of now we need to chnage this with actual coordinates
+        const polygonCoordinates = getPolygonCoordinates(region);
+
+        layers.push(new PolygonLayer({
+            id: 'border-layer',
+            data: [{ polygon: polygonCoordinates }],
+            getPolygon: d => d.polygon,
+            getFillColor: fillColor,
+            getLineColor: borderColor,
+            getLineWidth: 2, // Set the border width
+            lineWidthMinPixels: 2,
+            pickable: true,
+            stroked: true, // Enable border stroke
+            filled: true, // Fill the polygon
+        }));
+    }
+
+    // Update deckgl with the new layers
+    deckgl.setProps({ layers });
+}
+function getPolygonCoordinates(region) {
+
+    return [
+        [
+            ////according to the selected region
+        ]
+    ];
+}
 
 function getCookie(name) {
     var cookieValue = null;
@@ -72,6 +112,7 @@ async function zoomToRegion(region) {
                 transitionDuration: 500 // Smooth transition
             }
         });
+        updateLayers(region);
     }
 }
 
@@ -96,7 +137,7 @@ const data = {
             ],
             "Proximity": [
                 "Road Accessibility",
-                "Distance to City/Settlement"
+                "Distance to City or Settlement"
             ]
         }
     },
