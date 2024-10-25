@@ -4,6 +4,11 @@ var words;
 var selectedcolors;
 var selectedWord;
 
+const formUrls = {
+    'Road Accessibility': '/submit_road_form/',
+    'Population Density': '/submit_popdensity_form/',
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const tabsContainer = document.getElementById('tabs');
     const tabsContentContainer = document.getElementById('popup-content');
@@ -441,44 +446,50 @@ document.addEventListener('DOMContentLoaded', function () {
         tabData[currentTabId] = { ...tabData[currentTabId], ...formValues };
 
         spinner.classList.add('loading'); // Add loading animation
+        const url = formUrls[tabData[currentTabId].details];
+        if (url) {
 
-        $.ajax({
-            url: '/submit_road_form/',
-            type: 'POST',
-            data: tabData[currentTabId],
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            success: function (response) {
-                geojsonData = JSON.parse(response.result);
-                const compressedData = LZString.compress(JSON.stringify(geojsonData));
-                sessionStorage.setItem(currentTabId, compressedData);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: tabData[currentTabId],
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function (response) {
+                    geojsonData = JSON.parse(response.result);
+                    const compressedData = LZString.compress(JSON.stringify(geojsonData));
+                    sessionStorage.setItem(currentTabId, compressedData);
 
-                // Hide the current tab's popup content
-                $('.popup-content.active').toggle();
+                    // Hide the current tab's popup content
+                    $('.popup-content.active').toggle();
 
-                // Update map with geojson data
-                updatemap(geojsonData);
-                currentTabContent.style.display = 'none'
+                    // Update map with geojson data
+                    updatemap(geojsonData);
+                    currentTabContent.style.display = 'none'
 
-                // Remove loading animation from circle 3
-                step3.classList.add('done');
-                step3.classList.remove('active');
-                spinner.classList.remove('loading');
+                    // Remove loading animation from circle 3
+                    step3.classList.add('done');
+                    step3.classList.remove('active');
+                    spinner.classList.remove('loading');
 
-                //circle3.classList.add('done'); // Mark circle 3 as done
-            },
-            error: function (xhr, status, error) {
-                console.log(error);
-                alert('Form submission failed: ' + error);
+                    //circle3.classList.add('done'); // Mark circle 3 as done
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                    alert('Form submission failed: ' + error);
 
-                // Remove loading animation from circle 3
-                step3.classList.add('error');
-                step3.classList.remove('active');
-                spinner.classList.remove('loading');
-            }
-        });
+                    // Remove loading animation from circle 3
+                    step3.classList.add('error');
+                    step3.classList.remove('active');
+                    spinner.classList.remove('loading');
+                }
+            });
+        }
+        else {
+            alert("URL not found");
+        }
     }
 
 

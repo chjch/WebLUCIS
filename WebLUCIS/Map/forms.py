@@ -81,3 +81,28 @@ class RoadForm(forms.Form):
         widget=forms.NumberInput(attrs={'class': 'form-control mb-3'}),
         label='Rescale Max:'
     )
+
+class PopulationDensityForm(forms.Form):
+    STATS_CHOICES = [
+        ('mean', 'Mean'),
+        ('min', 'Minimum'),
+        ('max', 'Maximum'),
+        ('majority', 'Majority'),
+    ]
+    stats_type = forms.ChoiceField(
+        choices=STATS_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control mb-3'}),
+        label='Aggregation Method:'
+    )
+
+    rescale_min = forms.IntegerField(
+        initial=1,
+        widget=forms.NumberInput(attrs={'class': 'form-control mb-3'}),
+        label='Rescale Min:'
+    )
+
+    rescale_max = forms.IntegerField(
+        initial=9,
+        widget=forms.NumberInput(attrs={'class': 'form-control mb-3'}),
+        label='Rescale Max:'
+    )

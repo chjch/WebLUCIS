@@ -5,6 +5,7 @@ from django.contrib.gis.db.models.functions import AsGeoJSON
 from .script import *
 import json
 from LUCISModels.urb_proximity_road_accessibility import distance_to_road
+from LUCISModels.hs_pop_density import popdens_zonal_statistics
 
 # from django.http import JsonResponse
 from .models import GhanaMmda, SuitabilityTest
@@ -75,6 +76,17 @@ def submit_road_form(request):
 
     return JsonResponse({'result': dist_road.to_json()})
 
+def submit_popdensity_form(request):
+    region = request.POST.get('region')
+    district_id = request.POST.get('district')
+    stats_type = request.POST.get('stats_type')
+    rescale_min = request.POST.get('rescale_min')
+    rescale_max = request.POST.get('rescale_max')
+    study_gdf = select_study_area(region, district_id)
+    pop_density = popdens_zonal_statistics(study_gdf, stats_type, rescale_min, rescale_max)
+
+    return JsonResponse({'result': pop_density.to_json()})
+
 def fetch_suitability(request):
     suitabilityvalue = request.POST.get('suitabilityvalue')
     # # Get the queryset
@@ -87,6 +99,7 @@ def fetch_suitability(request):
 def get_form_class(form_name):
     forms_dict = {
         'Road Accessibility': RoadForm,
+        'Population Density': PopulationDensityForm,
     }
     return forms_dict.get(form_name, None)
 
