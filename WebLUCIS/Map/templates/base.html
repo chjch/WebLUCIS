@@ -29,16 +29,20 @@
 
   {% if is_map %}
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'flowchart_utils.css' %}">
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
   <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
-  <script src="{% static 'Map/AJAX_multiple.js' %}" defer></script>
+  <script type="module" src="{% static 'Map/AJAX_multiple.js' %}" defer></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.1/chroma.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-  <script src="{% static 'Map/header_tab.js' %}"></script>
-  <script src="{% static 'Map/colorPalette.js' %}"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script type="module" src="{% static 'Map/header_tab.js' %}"></script>
+  <script type="module" src="{% static 'Map/colorPalette.js' %}"></script>
+  <script type="module" src="{% static 'Map/d3_flowchart.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+
 
   {% endif %}
   {% if title %}
@@ -76,43 +80,47 @@
 
     </div>
     <div id="popup-content"></div>
-    <!-- <div class="toggle-arrow">
-      <button class="arrow_button" onclick="toggleTabPopup()">
-        ▼
-      </button>
-    </div> -->
-
-
-
-
-    <!-- Right Toggler
-    <button id="right-sidebar-toggler" class="btn no-rightsidebar" data-bs-toggle="collapse"
-      data-bs-target="#right-sidebar-wrapper" aria-expanded="false" aria-controls="collapseWidthExampleRight"
-      role="button">
-      <i id="right-sidebar-toggler-icon" class="bi bi-chevron-left"></i>
-    </button> -->
-
-
-
   </div>
   <div id="controls" style="position: absolute; bottom: 20px; right: 20px; z-index: 10;">
-    <i id="legend-icon" class="bi bi-bricks" style="width: 50px; height: 50px; cursor: pointer;"></i>
+    <div id="legend-flowchart" class="legend-icon" data-legend="Legend 1">
+      <i class="bi bi-star" style="width: 50px; height: 50px; cursor: pointer;"></i>
+      
+      
+    </div>
+    <div class="legend-icon" data-legend="Legend 2">
+      <i class="bi bi-bricks" style="width: 50px; height: 50px; cursor: pointer;"></i>
+    </div>
   </div>
   <div id="legend"
     style="position: absolute; bottom: 20px; right: 60px; z-index: 10; background: white; padding: 10px; border: 1px solid black; display: none;">
   </div>
-  <script>
-    document.getElementById('legend-icon').addEventListener('click', function () {
-      const legend = document.getElementById('legend');
-
-      // Toggle visibility
-      if (legend.style.display === 'none') {
-        legend.style.display = 'block';
-      } else {
-        legend.style.display = 'none';
-      }
-    });
-  </script>
+  <!-- Modal Structure -->
+  <div class="modal fade" id="legendModal" tabindex="-1" aria-labelledby="legendModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="legendModalLabel">Flowchart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-content-body">
+          <!-- Content from d3_flowchart.html will be loaded here -->
+          <div id="tree-container"></div>
+           <!-- Overlay-like dynamic content -->
+        <div id="modal-overlay-content" class="modal-overlay hidden">
+          <div class="overlay-content">
+            <button id="modal-overlay-close" class="close-btn">&times;</button>
+            <div id="modal-overlay-items">
+              <!-- Dynamic content will be inserted here -->
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Page Content -->
   <main class="container-fluid min-vh-100 p-4">

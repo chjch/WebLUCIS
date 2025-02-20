@@ -14,8 +14,7 @@
   </div>
 
   <div class="tab">
-    <button class="tablinks" data-tab="Region" onclick="clickHandle(event, 'Region')" id="defaultOpen"><i
-        class="bi bi-globe-europe-africa"></i>
+    <button class="tablinks" data-tab="Region" onclick="clickHandle(event, 'Region')" id="defaultOpen"><i class="bi bi-globe-europe-africa"></i>
       <span class="hover-text">Region</span></button>
 
     <button class="tablinks" data-tab="Basemap" onclick="clickHandle(event, 'Basemap')"><i class="bi bi-sliders"></i>
@@ -23,6 +22,9 @@
 
     <button class="tablinks" data-tab="Buffer" onclick="clickHandle(event, 'Buffer')"><i class="bi bi-stack"></i>
       <span class="hover-text">Buffer</span></button>
+    
+      <button class="tablinks" data-tab="FlowchartPopup" onclick="clickHandle(event, 'FlowchartPopup')"><i class="bi bi-star"></i>
+      <span class="hover-text">FlowchartPopup</span></button>
   </div>
 
   <div id="Region" class="tabcontent">
@@ -36,7 +38,7 @@
     </form> -->
 
     <!-- <form id="suitability_form" style="display:none"> -->
-      <!-- {% for field in suitability_form %}
+    <!-- {% for field in suitability_form %}
       {% if field.name != "geom" %} {# Exclude the geom field #}
       <div>
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -44,7 +46,7 @@
       </div>
       {% endif %}
       {% endfor %} -->
-      <!-- <select name="field_select" id="field_select" class="form-control mb-2">
+    <!-- <select name="field_select" id="field_select" class="form-control mb-2">
         <option value="">Select Suitability</option>
         {% for field in suitability_form %}
         {% if field.name != "geom" %}
@@ -53,7 +55,7 @@
         {% endfor %}
       </select> -->
 
-      <!-- <div id="mapcontroldiv" style="display:none;">
+    <!-- <div id="mapcontroldiv" style="display:none;">
         <div>Fill Color</div>
         <div id="selectedcolorpalette" class="palette-container">
           <div class="color" style="background-color: rgb(36, 86, 104);"></div>
@@ -84,38 +86,22 @@
             <input class="form-control" type="number" id="rowcount" placeholder="Number of rows">
           </div>
 
-          <table class="table-sm form-control" id="dataTable">
-            <thead>
-              <tr>
-                <th>Start</th>
-                <th>End</th>
-                <th>New</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-      <tr>
-        <td><input class="form-control" type="number" name="start[]" /></td>
-        <td><input class="form-control" type="number" name="end[]" /></td>
-        <td><input class="form-control" type="number" name="new[]" /></td>
-      </tr>
-      </tbody>
-      </table>
+          
   </div>
 </div> -->
-      <!-- <br />
+    <!-- <br />
       <div class="align-self-end">
         <button id="show-suitability-btn" class="btn btn-primary" type="button">Submit</button> -->
-        <!-- <div id="loading"
+    <!-- <div id="loading"
           style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
           <img
             src="https://3.bp.blogspot.com/-McqgscdbKQQ/Vq3jmL1geRI/AAAAAAAAAZU/uXtD1KfQ6pM/s200/loader%2B%25281%2529.gif">Loading....
         </div> -->
-        <!-- <div class="progress-container"
+    <!-- <div class="progress-container"
           style="width: 100%; background-color: #f3f3f3; border: 1px solid #ccc; margin-top: 20px;">
           <div id="progress-bar" style="width: 0%; height: 15px; background-color: #4caf50;"></div>
         </div> -->
-      <!-- </div>
+    <!-- </div>
     </form> -->
     <form id="district_form">
       {% csrf_token %}
@@ -141,6 +127,7 @@
       <option value="quantify">Quantify (Equal Interval)</option>
       <option value="quantile">Quantile</option>
     </select>
+   
     <div id="mapcontroldiv">
       <div>Fill Color</div>
       <div id="selectedcolorpalette" class="palette-container">
@@ -167,13 +154,15 @@
           </select>
         </div>
         <div id="color-palette-container" class="palette-container"></div>
+        
       </div>
     </div>
+    
   </div>
 
   <div id="Basemap" class="tabcontent">
     <label for="category">Category:</label>
-    <select id="category" class="form-control mb-3" onchange="updateSubcategory()">
+    <select id="category" class="form-control mb-3">
       <option value="">Select...</option>
       <option value="Urban">Urban</option>
       <option value="Agriculture">Agriculture</option>
@@ -181,12 +170,12 @@
     </select>
 
     <label for="subcategory" class="hidden">Sub-category:</label>
-    <select id="subcategory" class="form-control mb-3 hidden" onchange="updateObjective()">
+    <select id="subcategory" class="form-control mb-3 hidden">
       <option value="">Select...</option>
     </select>
 
     <label for="objective" class="hidden">Objective:</label>
-    <select id="objective" class="form-control mb-3 hidden" onchange="updateDetails()">
+    <select id="objective" class="form-control mb-3 hidden">
       <option value="">Select...</option>
     </select>
 

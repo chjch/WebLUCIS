@@ -1,0 +1,98 @@
+/* 
+.node {
+  stroke: #000;
+  stroke-width: 2px;
+} */
+
+.yellow {
+  fill: #f9cd52;
+}
+
+.blue {
+  fill: #3f97c9;
+}
+
+.green {
+  fill: #7fc771;
+}
+
+.yellow-dark {
+  fill: #d1a73e;  
+}
+
+.blue-dark {
+  fill: #316b94;  
+}
+
+.green-dark {
+  fill: #5d9d55;  
+}
+
+.link {
+  stroke: black;
+  stroke-width: 2px;
+  fill: none;
+}
+text {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  fill: black;
+}
+
+
+.node:hover {
+  cursor: pointer;
+}
+
+svg {
+  cursor: move;  
+}
+
+svg:active {
+  cursor: grabbing;  
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed; /* Fixed positioning to overlay the entire screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(83, 82, 82); /* Semi-transparent background */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  z-index: 1055; /* Higher than Bootstrap's modal backdrop */
+}
+
+/* Hidden by default */
+.hidden {
+  display: none;
+}
+
+/* Overlay content styling */
+.overlay-content {
+  background: rgba(226, 218, 218, 0);
+  padding: 20px;
+  border-radius: 8px;
+  width: 1000px;
+  height: 300px;;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0);
+  position: relative;
+  text-align: center;
+}
+
+/* Close button styling */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  /* color: #333; */
+  color:rgb(27, 33, 39);
+}
+

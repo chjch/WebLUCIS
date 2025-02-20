@@ -59,6 +59,15 @@ class GhanaPopDens(models.Model):
         managed = False  # Django won't manage the table
         db_table = 'ghanapopdens'
 
+class GhanaBuiltSettlement(models.Model):
+    rid = models.AutoField(primary_key=True)
+    rast = models.RasterField()
+    filename = models.TextField()
+ 
+    class Meta:
+        managed = False
+        db_table = 'ghanabs'
+
 
 class GhanaRoads(models.Model):
     gid = models.AutoField(primary_key=True)
