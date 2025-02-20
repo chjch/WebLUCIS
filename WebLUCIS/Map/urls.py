@@ -4,13 +4,13 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('submit_form/', views.submit_form, name='submit_form'),
-    path('submit/', views.submit, name='submit'),
-    path('fetch_suitability/', views.fetch_suitability, name='fetch_suitability'),
-    path('submit_road_accessibility/', views.submit_road_accessibility, name='submit_road_accessibility'),
-    # path('map/about/', views.about, name='map-about'),
-    # path('mmdas/', views.mmdas, name='mmdas'),
-    # path('api/', views.MmdaListAPIView.as_view(), name='mmdas-api'),
+    path('submit_road_form/', views.submit_road_form, name='submit_road_form'),
+    path('submit_popdensity_form/', views.submit_popdensity_form, name='submit_popdensity_form'),
+    path('submit_citydist_form/', views.submit_citydist_form, name='submit_citydist_form'),
+    path('submit_urbanproximity_form/', views.submit_urbanproximity_form, name='submit_urbanproximity_form'),
+    path('submit_landusage_form/', views.submit_landusage_form, name='submit_landusage_form'),
+    path('get-form-content/<str:form_name>/', views.get_form_content, name='get_form_content'),
+    path('map-test/', views.map_test, name='map_test'),
 ]
 
 htmx_urlpatterns = [

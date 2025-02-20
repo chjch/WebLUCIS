@@ -12,6 +12,8 @@ def select_study_area(region, district_id):
     mgrs_sql = 'SELECT * FROM ghanamgrs'
     mgrs_gdf = gpd.read_postgis(sql=mgrs_sql, con=db_connect)
     region_mgrs_gdf = gpd.sjoin(mgrs_gdf, region_gdf, how='inner', predicate='intersects', rsuffix='mmda')
+    region_mgrs_gdf = region_mgrs_gdf.drop_duplicates(subset='geom')
+    
     if int(district_id) == 0:
         district_mgrs_gdf = region_mgrs_gdf
     else:
@@ -29,11 +31,4 @@ def data_buffer(gdf, distance, unit):
         return gdf_buffer.to_crs(epsg=4326)
     else:
         raise ValueError('The unit is not defined.')
-
-
-def fetch_data(suitabilityvalue):
-    query = f'SELECT {suitabilityvalue},"geom" FROM "Map_suitabilitytest" '
-    # Execute the query and fetch data, assuming db_fetch_data is a method to execute SQL queries and return results
-    db_connect = create_engine(db_url)
-    return gpd.read_postgis(sql=query, con=db_connect)
 
