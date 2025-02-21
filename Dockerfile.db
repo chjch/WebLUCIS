@@ -13,7 +13,17 @@ ENV POSTGRES_DB=template_postgis
 
 # Copy the database initialization script and necessary data files
 COPY ./data /data
-COPY ./db/init_db.sh /docker-entrypoint-initdb.d/init_db.sh
+COPY ./db/init_db.sh /init_db.sh
+
+# Preload the data into the database during the build process
+RUN mkdir -p /var/lib/postgresql/data && \
+    chown -R postgres:postgres /var/lib/postgresql && \
+    su postgres -c "/usr/lib/postgresql/16/bin/initdb -D /var/lib/postgresql/data" && \
+    su postgres -c "postgres -D /var/lib/postgresql/data &" && \
+    sleep 5 && \
+    bash /init_db.sh && \
+    su postgres -c "pg_ctl -D /var/lib/postgresql/data stop" && \
+    rm /init_db.sh
 
 # Delete the default 10_postgis.sh script
 RUN rm -f /docker-entrypoint-initdb.d/10_postgis.sh

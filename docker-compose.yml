@@ -8,28 +8,41 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - output_db
     links:
       - db:db
+      - output_db:output_db
+    volumes:
+      - ./WebLUCIS/:/app/WebLUCIS/
 
   db:
     container_name: weblucis_db_container
-    build:
-      context: .
-      dockerfile: Dockerfile.db
-#    image: ronnieosx/weblucis_db:beta
+    #     build:
+    #       context: .
+    #       dockerfile: Dockerfile.db
+    image: ronnieosx/weblucis_db:beta1.31.25
     platform: linux/amd64
     restart: always
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: 151010
-#      POSTGRES_DB: template_postgis
+    #    environment:
+    #      POSTGRES_USER: postgres
+    #      POSTGRES_PASSWORD: 151010
+    #      POSTGRES_DB: template_postgis
     ports:
       - "5432:5432"
-#    volumes:
-#      - ./db:/docker-entrypoint-initdb.d/
-#      - ./data:/data
-#      - weblucis_db_volume:/var/lib/postgresql/data/
+  #    volumes:
+  #      - ./db:/docker-entrypoint-initdb.d/
+  #      - ./data:/data
+  #      - weblucis_db_volume:/var/lib/postgresql/data/
 
+  #volumes:
+  #  weblucis_db_volume:
 
-#volumes:
-#  weblucis_db_volume:
+  output_db:
+    container_name: weblucis_output_db_container
+    build:
+      context: .
+      dockerfile: Dockerfile.op
+    platform: linux/amd64
+    restart: always
+    ports:
+      - "5433:5432"

@@ -1,0 +1,19 @@
+# Use the PostGIS-enabled Postgres image
+FROM postgis/postgis:16-3.4
+
+# Set environment variables for Postgres
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=output151010
+ENV POSTGRES_DB=output_db
+
+# Copy the initialization script to the appropriate directory
+COPY ./db/output_db.sh /docker-entrypoint-initdb.d/
+
+# Ensure the script has execution permissions
+RUN chmod +x /docker-entrypoint-initdb.d/output_db.sh
+
+# Optional: Remove default PostGIS initialization script to avoid conflicts
+RUN rm -f /docker-entrypoint-initdb.d/10_postgis.sh
+
+# Expose the Postgres port
+EXPOSE 5432

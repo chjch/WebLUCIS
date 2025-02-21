@@ -87,7 +87,15 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "151010",
         "HOST": "db",
-    }
+    },
+    'output_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'output_db',
+        'USER': 'postgres',
+        'PASSWORD': 'output151010',
+        'HOST': 'output_db',
+        'PORT': '5432',
+    }    
 }
 
 

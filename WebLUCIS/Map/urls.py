@@ -10,7 +10,6 @@ urlpatterns = [
     path('submit_urbanproximity_form/', views.submit_urbanproximity_form, name='submit_urbanproximity_form'),
     path('submit_landusage_form/', views.submit_landusage_form, name='submit_landusage_form'),
     path('get-form-content/<str:form_name>/', views.get_form_content, name='get_form_content'),
-    path('map-test/', views.map_test, name='map_test'),
 ]
 
 htmx_urlpatterns = [

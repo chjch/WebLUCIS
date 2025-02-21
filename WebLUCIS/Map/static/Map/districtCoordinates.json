@@ -1,0 +1,1302 @@
+{
+    "KUMASI METROPOLITAN ASSEMBLY": {
+        "latitude": 6.691420082970524,
+        "longitude": -1.6318484815221836,
+        "zoom": 9.579514305
+    },
+    "OLD TAFO MUNICIPAL ASSEMBLY": {
+        "latitude": 6.740357520383327,
+        "longitude": -1.6099282746700965,
+        "zoom": 9.579514305
+    },
+    "KWADASO MUNICIPAL ASSEMBLY": {
+        "latitude": 6.68831952902309,
+        "longitude": -1.676474789379995,
+        "zoom": 9.579514305
+    },
+    "ASOKWA MUNICIPAL ASSEMBLY": {
+        "latitude": 6.647359309284752,
+        "longitude": -1.5887243211704458,
+        "zoom": 9.579514305
+    },
+    "AFIGYA-KWABRE NORTH DISTRICT ASSEMBLY": {
+        "latitude": 7.004318455032717,
+        "longitude": -1.625725356539931,
+        "zoom": 9.579514305
+    },
+    "ATWIMA KWANWOMA DISTRICT ASSEMBLY": {
+        "latitude": 6.59207667369958,
+        "longitude": -1.7078628563856455,
+        "zoom": 9.579514305
+    },
+    "SEKYERE SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.98664757002939,
+        "longitude": -1.5171047424898347,
+        "zoom": 9.579514305
+    },
+    "SEKYERE EAST DISTRICT ASSEMBLY": {
+        "latitude": 6.786487251885205,
+        "longitude": -1.3214610058207086,
+        "zoom": 9.579514305
+    },
+    "SEKYERE CENTRAL DISTRICT ASSEMBLY": {
+        "latitude": 7.217906626189915,
+        "longitude": -1.1466959297732728,
+        "zoom": 9.579514305
+    },
+    "OFFINSO NORTH DISTRICT ASSEMBLY": {
+        "latitude": 7.303619691095889,
+        "longitude": -1.8899322251920125,
+        "zoom": 9.579514305
+    },
+    "OFFINSO SOUTH MUNICIPAL ASSEMBLY": {
+        "latitude": 7.068194778266445,
+        "longitude": -1.7276050635227875,
+        "zoom": 9.579514305
+    },
+    "OBUASI MUNICIPAL ASSEMBLY": {
+        "latitude": 6.182722517430307,
+        "longitude": -1.6240022303186379,
+        "zoom": 9.579514305
+    },
+    "KWABRE EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 6.790651842308705,
+        "longitude": -1.5278626873131316,
+        "zoom": 9.579514305
+    },
+    "EJURA SEKYEDUMASE DISTRICT ASSEMBLY": {
+        "latitude": 7.389822373004165,
+        "longitude": -1.410940930579443,
+        "zoom": 9.579514305
+    },
+    "ATWIMA NWABIAGYA MUNICIPAL ASSEMBLY": {
+        "latitude": 6.7027900973851615,
+        "longitude": -1.804560749778716,
+        "zoom": 9.579514305
+    },
+    "ATWIMA MPONUA DISTRICT ASSEMBLY": {
+        "latitude": 6.584639025870388,
+        "longitude": -2.148516164589296,
+        "zoom": 9.579514305
+    },
+    "ADANSI SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.008547716803719,
+        "longitude": -1.3668716933739233,
+        "zoom": 9.579514305
+    },
+    "ADANSI ASOKWA DISTRICT ASSEMBLY": {
+        "latitude": 6.180976727394125,
+        "longitude": -1.4393715419630553,
+        "zoom": 9.579514305
+    },
+    "BOSOME FREHO DISTRICT ASSEMBLY": {
+        "latitude": 6.316763737156805,
+        "longitude": -1.3371065878986883,
+        "zoom": 9.579514305
+    },
+    "AHAFO ANO SOUTH-WEST DISTRICT ASSEMBLY": {
+        "latitude": 6.8572075813648325,
+        "longitude": -2.027491581970878,
+        "zoom": 9.579514305
+    },
+    "BEKWAI ASANTE MUNICIPAL ASSEMBLY": {
+        "latitude": 6.440321450074919,
+        "longitude": -1.5914959894483331,
+        "zoom": 9.579514305
+    },
+    "BOSOMTWE /ATWIMA / KWANWOMA": {
+        "latitude": 6.561425094792355,
+        "longitude": -1.4570830583364227,
+        "zoom": 9.579514305
+    },
+    "MAMPONG MUNICIPAL ASSEMBLY": {
+        "latitude": 7.159431219275405,
+        "longitude": -1.4230037997854765,
+        "zoom": 9.579514305
+    },
+    "AMANSIE CENTRAL DISTRICT ASSEMBLY": {
+        "latitude": 6.216208328651476,
+        "longitude": -1.8011794769512335,
+        "zoom": 9.579514305
+    },
+    "AMANSIE SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.31546115281003,
+        "longitude": -1.9747390477687645,
+        "zoom": 9.579514305
+    },
+    "ASANTE AKIM SOUTH MUNICIPAL ASSEMBLY": {
+        "latitude": 6.478824178792877,
+        "longitude": -1.1187675276992195,
+        "zoom": 9.579514305
+    },
+    "AHAFO ANO NORTH MUNICIPAL ASSEMBLY": {
+        "latitude": 6.905770779397983,
+        "longitude": -2.2175051210644483,
+        "zoom": 9.579514305
+    },
+    "SEKYERE KUMAWU DISTRICT ASSEMBLY": {
+        "latitude": 6.903437392121987,
+        "longitude": -1.2218538325882378,
+        "zoom": 9.579514305
+    },
+    "SEKYERE AFRAM PLAINS DISTRICT ASSEMBLY": {
+        "latitude": 7.216733708793697,
+        "longitude": -0.7408270331410449,
+        "zoom": 9.579514305
+    },
+    "ASANTE AKIM NORTH DISTRICT ASSEMBLY": {
+        "latitude": 6.844828758740277,
+        "longitude": -0.9905875072076356,
+        "zoom": 9.579514305
+    },
+    "ASANTE AKIM CENTRAL MUNICIPAL ASSEMBLY": {
+        "latitude": 6.5869128033832,
+        "longitude": -1.2302616006922449,
+        "zoom": 9.579514305
+    },
+    "ASOKORE MAMPONG MUNICIPAL ASSEMBLY": {
+        "latitude": 6.71148058086419,
+        "longitude": -1.5729009925867103,
+        "zoom": 9.579514305
+    },
+    "JUABEN MUNICIPAL ASSEMBLY": {
+        "latitude": 6.673366489671821,
+        "longitude": -1.3536907114571477,
+        "zoom": 9.579514305
+    },
+    "AHAFO ANO SOUTH EAST DISTRICT ASSEMBLY": {
+        "latitude": 6.974847625717416,
+        "longitude": -1.8810299558677457,
+        "zoom": 9.579514305
+    },
+    "EJISU MUNICIPAL ASSEMBLY": {
+        "latitude": 6.691320808608452,
+        "longitude": -1.4570058542367406,
+        "zoom": 9.579514305
+    },
+    "ADANSI NORTH DISTRICT ASSEMBLY": {
+        "latitude": 6.296924415829153,
+        "longitude": -1.57495927275221,
+        "zoom": 9.579514305
+    },
+    "AFIGYA KWABRE SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.833789468209432,
+        "longitude": -1.60465257455661,
+        "zoom": 9.579514305
+    },
+    "AMANSIE WEST DISTRICT ASSEMBLY": {
+        "latitude": 6.494004520891963,
+        "longitude": -1.8503699341251263,
+        "zoom": 9.579514305
+    },
+    "ATWIMA NWABIAGYA NORTH DISTRICT ASSEMBLY": {
+        "latitude": 6.843115713019813,
+        "longitude": -1.7433393700158604,
+        "zoom": 9.579514305
+    },
+    "OBUASI EAST DISTRICT ASSEMBLY": {
+        "latitude": 6.203511126237515,
+        "longitude": -1.7035211885519743,
+        "zoom": 9.579514305
+    },
+    "SUAME MUNICIPAL ASSEMBLY": {
+        "latitude": 6.7414402034027034,
+        "longitude": -1.6369362323212044,
+        "zoom": 9.579514305
+    },
+    "OFORIKROM MUNICIPAL ASSEMBLY": {
+        "latitude": 6.675132303113344,
+        "longitude": -1.5475703020277933,
+        "zoom": 9.579514305
+    },
+    "AKROFUOM DISTRICT ASSEMBLY": {
+        "latitude": 6.031022576031091,
+        "longitude": -1.6628781983700947,
+        "zoom": 9.579514305
+    },
+    "ADENTAN MUNICIPAL ASSEMBLY": {
+        "latitude": 5.698776926913695,
+        "longitude": -0.130415154935406,
+        "zoom": 10.67563214
+    },
+    "LEDZEKUKU MUNICIPAL ASSEMBLY": {
+        "latitude": 5.602708006769149,
+        "longitude": -0.11677130724996232,
+        "zoom": 10.67563214
+    },
+    "ADA EAST DISTRICT ASSEMBLY": {
+        "latitude": 5.848651075486771,
+        "longitude": 0.5572492937199627,
+        "zoom": 10.67563214
+    },
+    "SHAI-OSUDOKU DISTRICT ASSEMBLY": {
+        "latitude": 5.962581726665405,
+        "longitude": 0.12868388915023843,
+        "zoom": 10.67563214
+    },
+    "ADA WEST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.889102894083351,
+        "longitude": 0.4209615243549365,
+        "zoom": 10.67563214
+    },
+    "NINGO-PRAMPRAM DISTRICT ASSEMBLY": {
+        "latitude": 5.812623331401653,
+        "longitude": 0.171356847940217,
+        "zoom": 10.67563214
+    },
+    "LA DADE-KOTOPON MUNICIPAL ASSEMBLY": {
+        "latitude": 5.586823564755775,
+        "longitude": -0.15915560794491057,
+        "zoom": 10.67563214
+    },
+    "LA NKWANTANANG-MADINA MUNICIPAL ASSEMBLY": {
+        "latitude": 5.745084442692928,
+        "longitude": -0.16625129845863285,
+        "zoom": 10.67563214
+    },
+    "GA EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.699382069926628,
+        "longitude": -0.22120767619327353,
+        "zoom": 10.67563214
+    },
+    "GA SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 5.5468228838690266,
+        "longitude": -0.37155679540973097,
+        "zoom": 10.67563214
+    },
+    "GA WEST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.721473969947795,
+        "longitude": -0.331948045365948,
+        "zoom": 10.67563214
+    },
+    "GA CENTRAL MUNICIPAL ASSEMBLY": {
+        "latitude": 5.616530948144771,
+        "longitude": -0.308330024610882,
+        "zoom": 10.67563214
+    },
+    "TEMA WEST DISTRICT ASSEMBLY": {
+        "latitude": 5.645325070895353,
+        "longitude": -0.05322009882843304,
+        "zoom": 10.67563214
+    },
+    "ASHAIMAN MUNICIPAL ASSEMBLY": {
+        "latitude": 5.701240946112819,
+        "longitude": -0.034441011643309594,
+        "zoom": 10.67563214
+    },
+    "KPONE-KATAMANSO MUNICIPAL ASSEMBLY": {
+        "latitude": 5.756796158116231,
+        "longitude": -0.05936560164116145,
+        "zoom": 10.67563214
+    },
+    "GA NORTH MUNICIPAL ASSEMBLY": {
+        "latitude": 5.677174213119486,
+        "longitude": -0.43911212102750596,
+        "zoom": 10.67563214
+    },
+    "TEMA METROPOLITAN ASSEMBLY": {
+        "latitude": 5.660623990404872,
+        "longitude": -0.007135075323446927,
+        "zoom": 10.67563214
+    },
+    "AYAWASO WEST DISTRICT ASSEMBLY": {
+        "latitude": 5.631218620942661,
+        "longitude": -0.18122660862104567,
+        "zoom": 10.67563214
+    },
+    "OKAIKWEI NORTH DISTRICT ASSEMBLY": {
+        "latitude": 5.600869024485917,
+        "longitude": -0.23327811049637148,
+        "zoom": 10.67563214
+    },
+    "AYAWASO EAST DISTRICT ASSEMBLY": {
+        "latitude": 5.582583974470879,
+        "longitude": -0.19343928959148116,
+        "zoom": 10.67563214
+    },
+    "AYAWASO NORTH MUNICIPAL ASSEMBLY": {
+        "latitude": 5.59095104825235,
+        "longitude": -0.19938894614290348,
+        "zoom": 10.67563214
+    },
+    "AYAWASO CENTRAL MUNICIPAL ASSEMBLY": {
+        "latitude": 5.590166300734268,
+        "longitude": -0.21067544681437766,
+        "zoom": 10.67563214
+    },
+    "KORLE-KLOTTEY MUNICIPAL ASSEMBLY": {
+        "latitude": 5.555676195000444,
+        "longitude": -0.20335270086638957,
+        "zoom": 10.67563214
+    },
+    "ABLEKUMA WEST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.5396674549891145,
+        "longitude": -0.2551728044812762,
+        "zoom": 10.67563214
+    },
+    "ABLEKUMA CENTRAL DISTRICT ASSEMBLY": {
+        "latitude": 5.556223804784793,
+        "longitude": -0.24195330010468297,
+        "zoom": 10.67563214
+    },
+    "ABLEKUMA NORTH DISTRICT ASSEMBLY": {
+        "latitude": 5.583086405912923,
+        "longitude": -0.26504516530206956,
+        "zoom": 10.67563214
+    },
+    "WEIJA-GBAWE MUNICIPAL ASSEMBLY": {
+        "latitude": 5.564019873818154,
+        "longitude": -0.3177893196213404,
+        "zoom": 10.67563214
+    },
+    "KROWOR DISTRICT ASSEMBLY": {
+        "latitude": 5.6129418653748075,
+        "longitude": -0.08634994129670304,
+        "zoom": 10.67563214
+    },
+    "ACCRA METROPOLITAN ASSEMBLY": {
+        "latitude": 5.551486968548829,
+        "longitude": -0.20076480455202272,
+        "zoom": 10.67563214
+    },
+    "CHEREPONI DISTRICT ASSEMBLY": {
+        "latitude": 10.170420727234841,
+        "longitude": 0.23209016472935673,
+        "zoom": 9.579514305
+    },
+    "KPANDAI DISTRICT ASSEMBLY": {
+        "latitude": 8.402937554024959,
+        "longitude": -0.02515642522877215,
+        "zoom": 9.579514305
+    },
+    "SAVELUGU DISTRICT ASSEMBLY": {
+        "latitude": 9.870323086641179,
+        "longitude": -0.8376312605741418,
+        "zoom": 9.579514305
+    },
+    "KARAGA DISTRICT ASSEMBLY": {
+        "latitude": 9.983464376779636,
+        "longitude": -0.4805586365718,
+        "zoom": 9.579514305
+    },
+    "SABOBA DISTRICT ASSEMBLY": {
+        "latitude": 9.748705522541854,
+        "longitude": 0.1863821604084137,
+        "zoom": 9.579514305
+    },
+    "GUSHIEGU MUNICIPAL  ASSEMBLY": {
+        "latitude": 9.92119688402903,
+        "longitude": -0.17704359738405628,
+        "zoom": 9.579514305
+    },
+    "NANUMBA NORTH MUNICIPAL  ASSEMBLY": {
+        "latitude": 8.918260964671845,
+        "longitude": -0.0954180294184539,
+        "zoom": 9.579514305
+    },
+    "NANUMBA SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 8.73109317371103,
+        "longitude": 0.05217610124611838,
+        "zoom": 9.579514305
+    },
+    "MION DISTRICT ASSEMBLY": {
+        "latitude": 9.392534421226628,
+        "longitude": -0.24967396188378643,
+        "zoom": 9.579514305
+    },
+    "YENDI MUNICIPAL ASSEMBLY": {
+        "latitude": 9.455975196498173,
+        "longitude": 0.04400431974363528,
+        "zoom": 9.579514305
+    },
+    "TOLON DISTRICT ASSEMBLY": {
+        "latitude": 9.537804429430935,
+        "longitude": -1.1840426798257795,
+        "zoom": 9.579514305
+    },
+    "KUMBUNGU DISTRICT ASSEMBLY": {
+        "latitude": 9.789971705130142,
+        "longitude": -1.0584539451933779,
+        "zoom": 9.579514305
+    },
+    "ZABZUGU DISTRICT ASSEMBLY": {
+        "latitude": 9.12841533270148,
+        "longitude": 0.32074672418201544,
+        "zoom": 9.579514305
+    },
+    "TATALE-SANGULI DISTRICT ASSEMBLY": {
+        "latitude": 9.216969965691419,
+        "longitude": 0.43152369396335644,
+        "zoom": 9.579514305
+    },
+    "TAMALE METROPOLITAN ASSEMBLY": {
+        "latitude": 9.37377904736519,
+        "longitude": -0.7430464574280222,
+        "zoom": 9.579514305
+    },
+    "SAGNERIGU MUNICIPAL ASSEMBLY": {
+        "latitude": 9.468722743859587,
+        "longitude": -0.8654385383578074,
+        "zoom": 9.579514305
+    },
+    "NANTON DISTRICT ASSEMBLY": {
+        "latitude": 9.58204137041298,
+        "longitude": -0.7027577434750469,
+        "zoom": 9.579514305
+    },
+    "WA MUNICIPAL ASSEMBLY": {
+        "latitude": 10.032112733415943,
+        "longitude": -2.4644057150516687,
+        "zoom": 9.579514305
+    },
+    "JIRAPA MUNICIPAL ASSEMBLY": {
+        "latitude": 10.586856008597977,
+        "longitude": -2.5843970054174292,
+        "zoom": 9.579514305
+    },
+    "SISSALA WEST DISTRICT ASSEMBLY": {
+        "latitude": 10.835490070110723,
+        "longitude": -2.270266730325318,
+        "zoom": 9.579514305
+    },
+    "LAMBUSSIE DISTRICT ASSEMBLY": {
+        "latitude": 10.846083053190398,
+        "longitude": -2.6100995692397078,
+        "zoom": 9.579514305
+    },
+    "WA WEST DISTRICT ASSEMBLY": {
+        "latitude": 9.892668506446455,
+        "longitude": -2.648734358903482,
+        "zoom": 9.579514305
+    },
+    "SISSALA EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 10.657317978142203,
+        "longitude": -1.7943322223541145,
+        "zoom": 9.579514305
+    },
+    "WA EAST DISTRICT ASSEMBLY": {
+        "latitude": 10.04947741724908,
+        "longitude": -2.036250354570143,
+        "zoom": 9.579514305
+    },
+    "NADOWLI-KALEO DISTRICT ASSEMBLY": {
+        "latitude": 10.288782211330044,
+        "longitude": -2.630911066692306,
+        "zoom": 9.579514305
+    },
+    "DAFFIAMA-BUSSIE-ISSA DISTRICT ASSEMBLY": {
+        "latitude": 10.388233552736324,
+        "longitude": -2.3310148517539346,
+        "zoom": 9.579514305
+    },
+    "LAWRA MUNICIPAL ASSEMBLY": {
+        "latitude": 10.650027752578751,
+        "longitude": -2.824127459414683,
+        "zoom": 9.579514305
+    },
+    "NANDOM DISTRICT ASSEMBLY": {
+        "latitude": 10.85302221040672,
+        "longitude": -2.792082264085195,
+        "zoom": 9.579514305
+    },
+    "BOLGATANGA MUNICIPAL ASSEMBLY": {
+        "latitude": 10.768774918128031,
+        "longitude": -0.9238226398029497,
+        "zoom": 10.12757322
+    },
+    "BONGO DISTRICT ASSEMBLY": {
+        "latitude": 10.922979677370279,
+        "longitude": -0.7937234228975854,
+        "zoom": 10.12757322
+    },
+    "KASSENA NANKANA WEST DISTRICT ASSEMBLY": {
+        "latitude": 10.899715047911172,
+        "longitude": -1.2652819017383194,
+        "zoom": 10.12757322
+    },
+    "KASSENA NANKANA MUNICIPAL ASSEMBLY": {
+        "latitude": 10.759913152470062,
+        "longitude": -1.0436581505031768,
+        "zoom": 10.12757322
+    },
+    "GARU DISTRICT ASSEMBLY": {
+        "latitude": 10.759014719853496,
+        "longitude": -0.23614094844595002,
+        "zoom": 10.12757322
+    },
+    "BAWKU WEST DISTRICT ASSEMBLY": {
+        "latitude": 10.829849014120782,
+        "longitude": -0.46548510695208734,
+        "zoom": 10.12757322
+    },
+    "TALENSI DISTRICT ASSEMBLY": {
+        "latitude": 10.664229649378854,
+        "longitude": -0.7250173778496674,
+        "zoom": 10.12757322
+    },
+    "NABDAM DISTRICT ASSEMBLY": {
+        "latitude": 10.836065336745946,
+        "longitude": -0.6520662710415195,
+        "zoom": 10.12757322
+    },
+    "BUILSA SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 10.538153844624276,
+        "longitude": -1.3344515149254335,
+        "zoom": 10.12757322
+    },
+    "BUILSA NORTH DISTRICT ASSEMBLY": {
+        "latitude": 10.706449234744412,
+        "longitude": -1.2463921421835948,
+        "zoom": 10.12757322
+    },
+    "BINDURI DISTRICT ASSEMBLY": {
+        "latitude": 10.954873107607852,
+        "longitude": -0.315061426743398,
+        "zoom": 10.12757322
+    },
+    "PUSIGA DISTRICT ASSEMBLY": {
+        "latitude": 11.069946026388038,
+        "longitude": -0.10743833910800049,
+        "zoom": 10.12757322
+    },
+    "BAWKU MUNICIPAL ASSEMBLY": {
+        "latitude": 11.046297032082407,
+        "longitude": -0.2276845198246633,
+        "zoom": 10.12757322
+    },
+    "BOLGATANGA EAST DISTRICT ASSEMBLY": {
+        "latitude": 10.80184967802029,
+        "longitude": -0.7969614211326075,
+        "zoom": 10.12757322
+    },
+    "TEMPANE DISTRICT ASSEMBLY": {
+        "latitude": 10.906378110561377,
+        "longitude": -0.08309382172245705,
+        "zoom": 10.12757322
+    },
+    "SAWLA-TUNA-KALBA DISTRICT ASSEMBLY": {
+        "latitude": 9.513284483092491,
+        "longitude": -2.357807195145881,
+        "zoom": 9.031455388
+    },
+    "BOLE DISTRICT ASSEMBLY": {
+        "latitude": 8.709418081579258,
+        "longitude": -2.2521736145206432,
+        "zoom": 9.031455388
+    },
+    "CENTRAL GONJA DISTRICT ASSEMBLY": {
+        "latitude": 8.921163324228075,
+        "longitude": -1.2667521700765292,
+        "zoom": 9.031455388
+    },
+    "EAST GONJA MUNICIPAL  ASSEMBLY": {
+        "latitude": 8.420377617233271,
+        "longitude": -0.743772305647326,
+        "zoom": 9.031455388
+    },
+    "NORTH GONJA DISTRICT ASSEMBLY": {
+        "latitude": 9.705545088934741,
+        "longitude": -1.5377720516387967,
+        "zoom": 9.031455388
+    },
+    "WEST GONJA DISTRICT ASSEMBLY": {
+        "latitude": 9.225305218760866,
+        "longitude": -1.810142372272594,
+        "zoom": 9.031455388
+    },
+    "NORTH-EAST GONJA DISTRICT ASSEMBLY": {
+        "latitude": 9.042317286913317,
+        "longitude": -0.5110555680599873,
+        "zoom": 9.031455388
+    },
+    "YUNYOO-NANSUAN DISTRICT ASSEMBLY": {
+        "latitude": 10.430956211659861,
+        "longitude": -0.0378846731391036,
+        "zoom": 9.579514305
+    },
+    "EAST MAMPRUSI MUNICIPAL  ASSEMBLY": {
+        "latitude": 10.44227302488025,
+        "longitude": -0.37615891590121464,
+        "zoom": 9.579514305
+    },
+    "WEST MAMPRUSI MUNICIPAL  ASSEMBLY": {
+        "latitude": 10.325982982528672,
+        "longitude": -0.8330781900064039,
+        "zoom": 9.579514305
+    },
+    "MAMPRUGU-MOAGDURI DISTRICT ASSEMBLY": {
+        "latitude": 10.247945822841473,
+        "longitude": -1.3354584525454811,
+        "zoom": 9.579514305
+    },
+    "BUNKPRUGU DISTRICT ASSEMBLY": {
+        "latitude": 10.56870970149157,
+        "longitude": -0.04314307569234188,
+        "zoom": 9.579514305
+    },
+    "DORMAA EAST DISTRICT ASSEMBLY": {
+        "latitude": 7.269108240852688,
+        "longitude": -2.665434414966228,
+        "zoom": 10.12757322
+    },
+    "BEREKUM EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 7.482837185587698,
+        "longitude": -2.56577306837238,
+        "zoom": 10.12757322
+    },
+    "JAMAN SOUTH MUNICIPAL ASSEMBLY": {
+        "latitude": 7.616482235067167,
+        "longitude": -2.81268193792107,
+        "zoom": 10.12757322
+    },
+    "SUNYANI WEST DISTRICT ASSEMBLY": {
+        "latitude": 7.43766820792149,
+        "longitude": -2.3509337145192717,
+        "zoom": 10.12757322
+    },
+    "WENCHI MUNICIPAL ASSEMBLY": {
+        "latitude": 7.785853271011717,
+        "longitude": -2.1026503966983796,
+        "zoom": 10.12757322
+    },
+    "SUNYANI MUNICIPAL ASSEMBLY": {
+        "latitude": 7.23475131662002,
+        "longitude": -2.3642640360563973,
+        "zoom": 10.12757322
+    },
+    "DORMAA CENTRAL MUNICIPAL ASSEMBLY": {
+        "latitude": 7.217726136751878,
+        "longitude": -2.864022500537942,
+        "zoom": 10.12757322
+    },
+    "DORMAA WEST DISTRICT ASSEMBLY": {
+        "latitude": 6.984652824268494,
+        "longitude": -2.9632895474745737,
+        "zoom": 10.12757322
+    },
+    "BANDA DISTRICT ASSEMBLY": {
+        "latitude": 8.261414948840866,
+        "longitude": -2.381096559558557,
+        "zoom": 10.12757322
+    },
+    "JAMAN NORTH DISTRICT ASSEMBLY": {
+        "latitude": 7.902326473787809,
+        "longitude": -2.6660101366584286,
+        "zoom": 10.12757322
+    },
+    "TAIN DISTRICT ASSEMBLY": {
+        "latitude": 7.794010301834021,
+        "longitude": -2.376655489659072,
+        "zoom": 10.12757322
+    },
+    "BEREKUM WEST DISTRICT ASSEMBLY": {
+        "latitude": 7.509523943175509,
+        "longitude": -2.6788595511273456,
+        "zoom": 10.12757322
+    },
+    "ASUNAFO NORTH MUNICIPAL ASSEMBLY": {
+        "latitude": 6.822617959351419,
+        "longitude": -2.684935217985867,
+        "zoom": 9.579514305
+    },
+    "TANO NORTH MUNICIPAL ASSEMBLY": {
+        "latitude": 7.176860228916496,
+        "longitude": -2.1854310359135525,
+        "zoom": 9.579514305
+    },
+    "ASUNAFO SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.5816819569568,
+        "longitude": -2.5436769856043497,
+        "zoom": 9.579514305
+    },
+    "TANO SOUTH MUNICIPAL ASSEMBLY": {
+        "latitude": 7.181998015296244,
+        "longitude": -1.9952333255574786,
+        "zoom": 9.579514305
+    },
+    "ASUTIFI NORTH DISTRICT ASSEMBLY": {
+        "latitude": 7.063965382696324,
+        "longitude": -2.517697339760389,
+        "zoom": 9.579514305
+    },
+    "ASUTIFI SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.837164238039179,
+        "longitude": -2.3904201064027575,
+        "zoom": 9.579514305
+    },
+    "NKORANZA NORTH DISTRICT ASSEMBLY": {
+        "latitude": 7.700752624633992,
+        "longitude": -1.5951572131348257,
+        "zoom": 10.12757322
+    },
+    "KINTAMPO SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 7.943238591487841,
+        "longitude": -1.7919250403083424,
+        "zoom": 10.12757322
+    },
+    "NKORANZA SOUTH MUNICIPAL ASSEMBLY": {
+        "latitude": 7.465080022325196,
+        "longitude": -1.666498176449636,
+        "zoom": 10.12757322
+    },
+    "KINTAMPO NORTH MUNICIPAL ASSEMBLY": {
+        "latitude": 8.394927400479219,
+        "longitude": -1.5685092217231613,
+        "zoom": 10.12757322
+    },
+    "ATEBUBU-AMANTIN MUNICIPAL ASSEMBLY": {
+        "latitude": 7.709307888748128,
+        "longitude": -1.0555567279606066,
+        "zoom": 10.12757322
+    },
+    "PRU WEST DISTRICT ASSEMBLY": {
+        "latitude": 8.000345516232642,
+        "longitude": -1.2802075603306093,
+        "zoom": 10.12757322
+    },
+    "SENE EAST DISTRICT ASSEMBLY": {
+        "latitude": 7.589760350859535,
+        "longitude": -0.17857138276303886,
+        "zoom": 10.12757322
+    },
+    "SENE WEST DISTRICT ASSEMBLY": {
+        "latitude": 7.739961940790977,
+        "longitude": -0.5829839451528755,
+        "zoom": 10.12757322
+    },
+    "TECHIMAN MUNICIPAL ASSEMBLY": {
+        "latitude": 7.534159563013475,
+        "longitude": -1.9638656129076821,
+        "zoom": 10.12757322
+    },
+    "TECHIMAN NORTH DISTRICT ASSEMBLY": {
+        "latitude": 7.6953621521416835,
+        "longitude": -1.9672615437851846,
+        "zoom": 10.12757322
+    },
+    "PRU EAST DISTRICT ASSEMBLY": {
+        "latitude": 8.152572734644025,
+        "longitude": -0.8121504093139151,
+        "zoom": 10.12757322
+    },
+    "KETU NORTH MUNICIPAL ASSEMBLY": {
+        "latitude": 6.182083237951133,
+        "longitude": 0.9619521941385187,
+        "zoom": 10.12757322
+    },
+    "KETU SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.101793583207325,
+        "longitude": 1.081470510355814,
+        "zoom": 10.12757322
+    },
+    "ANLOGA DISTRICT ASSEMBLY": {
+        "latitude": 5.842720424308197,
+        "longitude": 0.838686602604696,
+        "zoom": 10.12757322
+    },
+    "SOUTH TONGU DISTRICT ASSEMBLY": {
+        "latitude": 5.9713647090141535,
+        "longitude": 0.6567873693416573,
+        "zoom": 10.12757322
+    },
+    "SOUTH DAYI DISTRICT ASSEMBLY": {
+        "latitude": 6.597526508641522,
+        "longitude": 0.21966691559572382,
+        "zoom": 10.12757322
+    },
+    "AGORTIME ZIOPE DISTRICT ASSEMBLY": {
+        "latitude": 6.484824804421237,
+        "longitude": 0.6937183169468426,
+        "zoom": 10.12757322
+    },
+    "ADAKLU DISTRICT ASSEMBLY": {
+        "latitude": 6.428813141513331,
+        "longitude": 0.545916486057024,
+        "zoom": 10.12757322
+    },
+    "AKATSI DISTRICT ASSEMBLY": {
+        "latitude": 6.1473887082223655,
+        "longitude": 0.7815404305464995,
+        "zoom": 10.12757322
+    },
+    "AKATSI NORTH DISTRICT ASSEMBLY": {
+        "latitude": 6.30217921120169,
+        "longitude": 0.8451284635078196,
+        "zoom": 10.12757322
+    },
+    "HO MUNICIPAL ASSEMBLY": {
+        "latitude": 6.67264828119329,
+        "longitude": 0.5140282817798152,
+        "zoom": 10.12757322
+    },
+    "HOHOE MUNICIPAL ASSEMBLY": {
+        "latitude": 7.161797559509807,
+        "longitude": 0.49689590632107183,
+        "zoom": 10.12757322
+    },
+    "HO WEST DISTRICT ASSEMBLY": {
+        "latitude": 6.559512072224379,
+        "longitude": 0.3661373091895257,
+        "zoom": 10.12757322
+    },
+    "AFADJATO SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.90811568698939,
+        "longitude": 0.41345562517699364,
+        "zoom": 10.12757322
+    },
+    "NORTH DAYI DISTRICT ASSEMBLY": {
+        "latitude": 6.827886162716311,
+        "longitude": 0.2340390027977719,
+        "zoom": 10.12757322
+    },
+    "KPANDO MUNICIPAL ASSEMBLY": {
+        "latitude": 7.011026350685597,
+        "longitude": 0.2957418184302014,
+        "zoom": 10.12757322
+    },
+    "NORTH TONGU DISTRICT ASSEMBLY": {
+        "latitude": 6.170158137687963,
+        "longitude": 0.3112066628572734,
+        "zoom": 10.12757322
+    },
+    "CENTRAL TONGU DISTRICT ASSEMBLY": {
+        "latitude": 6.18041747858382,
+        "longitude": 0.5733579960747193,
+        "zoom": 10.12757322
+    },
+    "KETA MUNICIPAL ASSEMBLY": {
+        "latitude": 5.974749076408784,
+        "longitude": 0.915036343652389,
+        "zoom": 10.12757322
+    },
+    "KADJEBI DISTRICT ASSEMBLY": {
+        "latitude": 7.7227824174746615,
+        "longitude": 0.5205258062210305,
+        "zoom": 9.579514305
+    },
+    "JASIKAN DISTRICT ASSEMBLY": {
+        "latitude": 7.3887502938910075,
+        "longitude": 0.5025901158412012,
+        "zoom": 9.579514305
+    },
+    "KRACHI EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 7.789493466750116,
+        "longitude": 0.22680389038725934,
+        "zoom": 9.579514305
+    },
+    "NKWANTA SOUTH MUNICIPAL ASSEMBLY": {
+        "latitude": 8.26264995093453,
+        "longitude": 0.45922801376190137,
+        "zoom": 9.579514305
+    },
+    "NKWANTA NORTH DISTRICT ASSEMBLY": {
+        "latitude": 8.569655580940378,
+        "longitude": 0.25225219788069353,
+        "zoom": 9.579514305
+    },
+    "BIAKOYE NKONYA DISTRICT ASSEMBLY": {
+        "latitude": 7.354511080122279,
+        "longitude": 0.3174643147264078,
+        "zoom": 9.579514305
+    },
+    "KRACHI WEST DISTRICT ASSEMBLY": {
+        "latitude": 7.92050068865592,
+        "longitude": -0.025913319843766658,
+        "zoom": 9.579514305
+    },
+    "KRACHI NCHUMURU DISTRICT ASSEMBLY": {
+        "latitude": 8.175305474468132,
+        "longitude": -0.08519307769830675,
+        "zoom": 9.579514305
+    },
+    "AJUMAKO/ENYAN/ESSIAM DISTRICT ASSEMBLY": {
+        "latitude": 5.423036763835626,
+        "longitude": -0.9871101499134625,
+        "zoom": 10.12757322
+    },
+    "GOMOA WEST DISTRICT ASSEMBLY": {
+        "latitude": 5.383537738276061,
+        "longitude": -0.7939977871681094,
+        "zoom": 10.12757322
+    },
+    "AGONA WEST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.619438126268562,
+        "longitude": -0.7965516711226996,
+        "zoom": 10.12757322
+    },
+    "AGONA EAST DISTRICT ASSEMBLY": {
+        "latitude": 5.636600873631437,
+        "longitude": -0.6612037994157731,
+        "zoom": 10.12757322
+    },
+    "ASSIN NORTH MUNICIPAL ASSEMBLY": {
+        "latitude": 5.837050599005977,
+        "longitude": -1.3785638305562884,
+        "zoom": 10.12757322
+    },
+    "ASSIN SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 5.527850524282314,
+        "longitude": -1.2787383477964909,
+        "zoom": 10.12757322
+    },
+    "ASIKUMA/ODOBEN/BRAKWA DISTRICT ASSEMBLY": {
+        "latitude": 5.631089865005322,
+        "longitude": -1.010668744367024,
+        "zoom": 10.12757322
+    },
+    "EFFUTU MUNICIPAL ASSEMBLY": {
+        "latitude": 5.3792081060693135,
+        "longitude": -0.6056494975262581,
+        "zoom": 10.12757322
+    },
+    "GOMOA EAST DISTRICT ASSEMBLY": {
+        "latitude": 5.483178767386278,
+        "longitude": -0.5516553961795694,
+        "zoom": 10.12757322
+    },
+    "ABURA/ASEBU/KWAMANKESE DISTRICT ASSEMBLY": {
+        "latitude": 5.280751557838187,
+        "longitude": -1.2030751276150227,
+        "zoom": 10.12757322
+    },
+    "UPPER DEKYIRA EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.862709350556145,
+        "longitude": -1.7422274077686097,
+        "zoom": 10.12757322
+    },
+    "UPPER DENKYIRA WEST DISTRICT ASSEMBLY": {
+        "latitude": 6.107514827247542,
+        "longitude": -2.0229455108266166,
+        "zoom": 10.12757322
+    },
+    "CAPE COAST METROPOLITAN ASSEMBLY": {
+        "latitude": 5.169472760959195,
+        "longitude": -1.2946980100051064,
+        "zoom": 10.12757322
+    },
+    "KOMENDA/EDINA/EGUAFO/ ABIREM MUNICIPAL ASSEMBLY": {
+        "latitude": 5.130437274760482,
+        "longitude": -1.4514605850379212,
+        "zoom": 10.12757322
+    },
+    "MFANTSIMAN MUNICIPAL ASSEMBLY": {
+        "latitude": 5.25294214056737,
+        "longitude": -1.1108786207516914,
+        "zoom": 10.12757322
+    },
+    "EKUMFI DISTRICT ASSEMBLY": {
+        "latitude": 5.261699414896157,
+        "longitude": -0.9086888205325749,
+        "zoom": 10.12757322
+    },
+    "TWIFO HEMAN LOWER DENKYIRA  DISTRICT ASSEMBLY": {
+        "latitude": 5.38960350989413,
+        "longitude": -1.4427190389524185,
+        "zoom": 10.12757322
+    },
+    "TWIFO ATTI-MORKWA DISTRICT ASSEMBLY": {
+        "latitude": 5.675322361537781,
+        "longitude": -1.59846787928916,
+        "zoom": 10.12757322
+    },
+    "AWUTU SENYA DISTRICT ASSEMBLY": {
+        "latitude": 5.633922278890111,
+        "longitude": -0.5331744729235197,
+        "zoom": 10.12757322
+    },
+    "AWUTU SENYA EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.491695019809356,
+        "longitude": -0.47937185162959395,
+        "zoom": 10.12757322
+    },
+    "ASSIN CENTRAL MUNICIPAL ASSEMBLY": {
+        "latitude": 5.732937753974227,
+        "longitude": -1.2695616251688193,
+        "zoom": 10.12757322
+    },
+    "GOMOA CENTRAL MUNICIPAL ASSEMBLY": {
+        "latitude": 5.453981017210197,
+        "longitude": -0.7184820567015322,
+        "zoom": 10.12757322
+    },
+    "JOMORO MUNICIPAL ASSEMBLY": {
+        "latitude": 5.173513326778675,
+        "longitude": -2.664735269417122,
+        "zoom": 9.579514305
+    },
+    "ELLEMBELE DISTRICT ASSEMBLY": {
+        "latitude": 5.122189545511162,
+        "longitude": -2.392594853269827,
+        "zoom": 9.579514305
+    },
+    "PRESTEA-HUNI VALLEY MUNICIPAL ASSEMBLY": {
+        "latitude": 5.455250126092494,
+        "longitude": -2.000428390657646,
+        "zoom": 9.579514305
+    },
+    "AHANTA WEST MUNICIPAL ASSEMBLY": {
+        "latitude": 4.854016674729792,
+        "longitude": -1.9862326802939378,
+        "zoom": 9.579514305
+    },
+    "NZEMA EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.1066474007569695,
+        "longitude": -2.2159366764363995,
+        "zoom": 9.579514305
+    },
+    "TARKWA-NSUAEM MUNICIPAL ASSEMBLY": {
+        "latitude": 5.153776524566979,
+        "longitude": -2.022748953201585,
+        "zoom": 9.579514305
+    },
+    "SEKONDI-TAKORADI METROPOLITAN ASSEMBLY": {
+        "latitude": 4.972795052149991,
+        "longitude": -1.7421606214155076,
+        "zoom": 9.579514305
+    },
+    "SHAMA DISTRICT ASSEMBLY": {
+        "latitude": 5.059273181112474,
+        "longitude": -1.6435441053761224,
+        "zoom": 9.579514305
+    },
+    "WASSA EAST DISTRICT ASSEMBLY": {
+        "latitude": 5.348374222892119,
+        "longitude": -1.6602825579935825,
+        "zoom": 9.579514305
+    },
+    "MPOHOR DISTRICT ASSEMBLY": {
+        "latitude": 5.06142491522769,
+        "longitude": -1.853927492060052,
+        "zoom": 9.579514305
+    },
+    "WASSA AMENFI WEST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.716695468121429,
+        "longitude": -2.469709342711951,
+        "zoom": 9.579514305
+    },
+    "AMENFI CENTRAL DISTRICT ASSEMBLY": {
+        "latitude": 5.742047097595503,
+        "longitude": -2.286415190808384,
+        "zoom": 9.579514305
+    },
+    "WASSA AMENFI EAST MUNICIPAL ASSEMBLY": {
+        "latitude": 5.839778860605975,
+        "longitude": -2.0215439264110273,
+        "zoom": 9.579514305
+    },
+    "EFFIA/KWESIMINTSIM MUNICIPAL ASSEMBLY": {
+        "latitude": 4.948738757587648,
+        "longitude": -1.796177657273006,
+        "zoom": 9.579514305
+    },
+    "SEFWI AKONTOMBRA DISTRICT ASSEMBLY": {
+        "latitude": 6.090856638223329,
+        "longitude": -2.69648268392865,
+        "zoom": 10.12757322
+    },
+    "BIBIANI-AHWIASO-BEKWAI MUNICIPAL ASSEMBLY": {
+        "latitude": 6.293205982670031,
+        "longitude": -2.265488192525993,
+        "zoom": 10.12757322
+    },
+    "SEFWI-WIAWSO MUNICIPAL ASSEMBLY": {
+        "latitude": 6.31000633112734,
+        "longitude": -2.5307529292042545,
+        "zoom": 10.12757322
+    },
+    "AOWIN MUNICIPAL ASSEMBLY": {
+        "latitude": 5.760627914846452,
+        "longitude": -2.7629992718988206,
+        "zoom": 10.12757322
+    },
+    "SUAMAN DISTRICT ASSEMBLY": {
+        "latitude": 6.115701211941428,
+        "longitude": -3.0248376320510033,
+        "zoom": 10.12757322
+    },
+    "BIA EAST DISTRICT ASSEMBLY": {
+        "latitude": 6.8353680383043525,
+        "longitude": -3.007716487325979,
+        "zoom": 10.12757322
+    },
+    "BIA WEST DISTRICT ASSEMBLY": {
+        "latitude": 6.607434975443823,
+        "longitude": -3.0949076051018665,
+        "zoom": 10.12757322
+    },
+    "BODI DISTRICT ASSEMBLY": {
+        "latitude": 6.251093397742181,
+        "longitude": -2.820352616280161,
+        "zoom": 10.12757322
+    },
+    "JUABOSO DISTRICT ASSEMBLY": {
+        "latitude": 6.422121663883729,
+        "longitude": -2.9219578870468013,
+        "zoom": 10.12757322
+    },
+    "KWAHU SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.632283501682309,
+        "longitude": -0.5712203226597126,
+        "zoom": 10.12757322
+    },
+    "ASENE-MANSO-AKROSO DISTRICT ASSEMBLY": {
+        "latitude": 5.8476396664374874,
+        "longitude": -0.8180690941133548,
+        "zoom": 10.12757322
+    },
+    "UPPER MANYA KROBO DISTRICT ASSEMBLY": {
+        "latitude": 6.388568594165349,
+        "longitude": -0.13481672121469046,
+        "zoom": 10.12757322
+    },
+    "ACHIASE DISTRICT ASSEMBLY": {
+        "latitude": 5.795830822334608,
+        "longitude": -1.0087591886855876,
+        "zoom": 10.12757322
+    },
+    "OKERE DISTRICT ASSEMBLY": {
+        "latitude": 6.052544782515724,
+        "longitude": -0.12454301814574364,
+        "zoom": 10.12757322
+    },
+    "YILO KROBO MUNICIPAL ASSEMBLY": {
+        "latitude": 6.1700332218557605,
+        "longitude": -0.15121233428175174,
+        "zoom": 10.12757322
+    },
+    "ATIWA WEST DISTRICT ASSEMBLY": {
+        "latitude": 6.247974885232793,
+        "longitude": -0.6344916494700215,
+        "zoom": 10.12757322
+    },
+    "NEW JUABEN NORTH MUNICIPAL DISTRICT ASSEMBLY": {
+        "latitude": 6.140837212767224,
+        "longitude": -0.3095375452214739,
+        "zoom": 10.12757322
+    },
+    "FANTEAKWA DISTRICT ASSEMBLY": {
+        "latitude": 6.512218071207087,
+        "longitude": -0.3560107071284051,
+        "zoom": 10.12757322
+    },
+    "BIRIM NORTH DISTRICT ASSEMBLY": {
+        "latitude": 6.3719503404358875,
+        "longitude": -0.9938355508699033,
+        "zoom": 10.12757322
+    },
+    "ASUOGYAMAN DISTRICT ASSEMBLY": {
+        "latitude": 6.3928202101845955,
+        "longitude": 0.09181876112694454,
+        "zoom": 10.12757322
+    },
+    "KWAHU EAST DISTRICT ASSEMBLY": {
+        "latitude": 6.710554505785865,
+        "longitude": -0.8135839178634683,
+        "zoom": 10.12757322
+    },
+    "KWAHU WEST MUNICIPAL ASSEMBLY": {
+        "latitude": 6.5200320655274595,
+        "longitude": -0.7773729360121138,
+        "zoom": 10.12757322
+    },
+    "LOWER MANYA KROBO DISTRICT ASSEMBLY": {
+        "latitude": 6.190905252675293,
+        "longitude": 0.007623865149298581,
+        "zoom": 10.12757322
+    },
+    "NSAWAM ADOAGYIRI MUNICIPAL ASSEMBLY": {
+        "latitude": 5.827363360031086,
+        "longitude": -0.3468455722652948,
+        "zoom": 10.12757322
+    },
+    "AKUAPIM SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 5.857149409817453,
+        "longitude": -0.23506716152024865,
+        "zoom": 10.12757322
+    },
+    "DENKYEMBOUR DISTRICT ASSEMBLY": {
+        "latitude": 6.0542441756282415,
+        "longitude": -0.8444427806097679,
+        "zoom": 10.12757322
+    },
+    "KWAEBIBIREM MUNICIPAL ASSEMBLY": {
+        "latitude": 6.2108990523494185,
+        "longitude": -0.8522344681461504,
+        "zoom": 10.12757322
+    },
+    "KWAHU AFRAM PLAINS SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.895566839438118,
+        "longitude": -0.36527895555929035,
+        "zoom": 10.12757322
+    },
+    "KWAHU AFRAM PLAINS NORTH DISTRICT ASSEMBLY": {
+        "latitude": 6.901026119060191,
+        "longitude": 0.02688070727884906,
+        "zoom": 10.12757322
+    },
+    "SUHUM MUNICIPAL ASSEMBLY": {
+        "latitude": 6.044220652261345,
+        "longitude": -0.4000481155280795,
+        "zoom": 10.12757322
+    },
+    "AYENSUANO DISTRICT ASSEMBLY": {
+        "latitude": 5.9445372021302205,
+        "longitude": -0.47515599355421045,
+        "zoom": 10.12757322
+    },
+    "ABUAKWA SOUTH MUNICIPAL ASSEMBLY": {
+        "latitude": 6.160881752191187,
+        "longitude": -0.4927084297501665,
+        "zoom": 10.12757322
+    },
+    "UPPER WEST AKIM DISTRICT ASSEMBLY": {
+        "latitude": 5.800287062897667,
+        "longitude": -0.559979572299369,
+        "zoom": 10.12757322
+    },
+    "WEST AKIM MUNICIPAL ASSEMBLY": {
+        "latitude": 5.917207588459462,
+        "longitude": -0.6933269614700635,
+        "zoom": 10.12757322
+    },
+    "AKYEMANSA DISTRICT ASSEMBLY": {
+        "latitude": 6.078000790903843,
+        "longitude": -1.1053130547536512,
+        "zoom": 10.12757322
+    },
+    "ATIWA EAST DISTRICT ASSEMBLY": {
+        "latitude": 6.408300216281987,
+        "longitude": -0.6853394384642684,
+        "zoom": 10.12757322
+    },
+    "NEW JUABEN SOUTH MUNICIPAL ASSEMBLY": {
+        "latitude": 6.078491499683025,
+        "longitude": -0.26119998798901634,
+        "zoom": 10.12757322
+    },
+    "BIRIM SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 5.896032448338872,
+        "longitude": -1.0724129063304986,
+        "zoom": 10.12757322
+    },
+    "ABUAKWA NORTH DISTRICT ASSEMBLY": {
+        "latitude": 6.238378694521202,
+        "longitude": -0.38969186998377836,
+        "zoom": 10.12757322
+    },
+    "AKUAPIM NORTH MUNICIPAL DISTRICT ASSEMBLY": {
+        "latitude": 5.95591082282624,
+        "longitude": -0.16313410255673944,
+        "zoom": 10.12757322
+    },
+    "FANTEAKWA SOUTH DISTRICT ASSEMBLY": {
+        "latitude": 6.345212828709123,
+        "longitude": -0.3890935537244786,
+        "zoom": 10.12757322
+    },
+    "BIRIM CENTRAL MUNICIPAL ASSEMBLY": {
+        "latitude": 5.963819465396057,
+        "longitude": -1.002305957653789,
+        "zoom": 10.12757322
+    }
+}

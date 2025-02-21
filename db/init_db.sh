@@ -1,6 +1,20 @@
 #!/bin/bash
 set -e  # stop on error
 
+# Ensure the user has a password set
+psql -U $POSTGRES_USER -d postgres -c "ALTER USER $POSTGRES_USER WITH PASSWORD '$POSTGRES_PASSWORD';"
+
+# Allow all hosts to connect for development purposes (adjust for production!)
+echo "host all all 0.0.0.0/0 md5" >> /var/lib/postgresql/data/pg_hba.conf
+echo "host all all ::/0 md5" >> /var/lib/postgresql/data/pg_hba.conf
+
+# Listen on all interfaces
+sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/postgresql/data/postgresql.conf
+
+# Check if the database exists; if not, create it
+psql -U $POSTGRES_USER -tc "SELECT 1 FROM pg_database WHERE datname = '$POSTGRES_DB'" | grep -q 1 || \
+    psql -U $POSTGRES_USER -c "CREATE DATABASE $POSTGRES_DB;"
+
 # The sql of create necessary extension for database
 sql_extensions=$(cat <<-EOSQL
     CREATE EXTENSION IF NOT EXISTS postgis;

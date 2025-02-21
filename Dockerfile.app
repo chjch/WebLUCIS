@@ -24,6 +24,7 @@ RUN pip install -r requirements.txt
 # Copy only the necessary source files, configurations, and scripts
 COPY WebLUCIS/ /app/WebLUCIS
 COPY migrations_db.sh /app/migrations_db.sh
+RUN chmod +x /app/migrations_db.sh
 
 EXPOSE 8000
 ENTRYPOINT ["/app/migrations_db.sh"]

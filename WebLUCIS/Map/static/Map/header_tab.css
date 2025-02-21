@@ -1,0 +1,231 @@
+.form-tab-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* 
+.toggle-arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: row-reverse;
+} */
+
+.close-tab-btn {
+    padding-right: 20px;
+    margin-left: auto;
+    border: none;
+    background: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 20px;
+    background-color: #d3d3d3;
+}
+
+.close-tab-btn:hover {
+    color: #f00;
+}
+
+.tab-text {
+    width: 140px;
+}
+
+#tabs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 0px;
+}
+
+.form-tab {
+    font-size: 12px;
+    width: 160px;
+    border-radius: 10px;
+    background-color: #d3d3d3;
+    border: 1px solid #ccc;
+    padding: 5px 10px 10px 10px;
+    margin: 7px;
+    margin-left: 0px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-tab.active {
+    background-color: #f3f3f3;
+    font-weight: bold;
+    border-bottom: none;
+    border-radius: 10px 10px 1px 1px;
+}
+
+.form-tab.active .close-tab-btn {
+    padding-right: 20px;
+    background-color: #f3f3f3;
+}
+
+#add-tab {
+    font-size: 18px;
+    width: 40px;
+    height: 48px;
+    border-radius: 10px 10px 1px 1px;
+    background-color: #d3d3d3;
+    color: #888;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 7px 7px 0px 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+
+.tab-content {
+    border-radius: 5px;
+    position: fixed;
+    top: 4.9%;
+    right: 0px;
+    margin: 0px 5px;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    width: 300px;
+    max-height: 80%;
+    overflow-y: auto;
+    display: none;
+    padding: 30px;
+    transition: background-color 0.3s ease;
+}
+
+
+.popup-content.active {
+    display: block;
+}
+
+
+.step .circle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin: 0 auto;
+
+
+
+    border: 3px solid #ddd;
+
+}
+
+.step.done .circle {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.step.active .circle {
+    border: 2px solid #007bff;
+    color: #007bff;
+    background-color: #fff;
+}
+
+.step {
+    text-align: center;
+    flex: 1;
+}
+
+.step .label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.step .description {
+    color: #888;
+}
+
+.content-step {
+    display: none;
+}
+
+.content-step.active {
+    display: block;
+}
+
+/* 
+.toggle-arrow {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+} */
+/* 
+.toggle-arrow.rotated {
+    transform: rotate(180deg);
+} */
+
+.circle-container {
+    position: relative;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    position: absolute;
+    top: -6px;
+    /* Move spinner slightly outside the circle */
+    width: 52px;
+    /* Larger than the circle to appear outside */
+    height: 52px;
+    border: 3px solid transparent;
+    border-top-color: green;
+    border-radius: 50%;
+    display: none;
+}
+
+.spinner.loading {
+    display: block;
+    animation: spin 1s linear infinite;
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* When loading is complete, the spinner becomes fully green */
+.flowchart .step.done .circle {
+    border-color: green;
+    color: white;
+    background-color: green;
+}
+
+.flowchart .step.error .circle {
+    border-color: red;
+    color: white;
+    background-color: red;
+}

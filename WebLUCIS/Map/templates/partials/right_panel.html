@@ -1,0 +1,53 @@
+{% load widget_tweaks %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<div class="container-fluid">
+    <div class="hover-flowchart row collapse collapse-vertical show h-25">
+        <div>
+            hello
+        </div>
+        <div class="mermaid">
+            flowchart LR;
+            A[<div id="stepA" style="color: red;">Step A</div>] --> C{<div id="stepC" style="color: red;">Step C</div>};
+            B[<div id="stepB" style="color: red;">Step B</div>] --> C;
+        </div>
+    </div>
+</div>
+<style>
+    .mermaid {
+        max-width: 100%;
+    }
+</style>
+
+
+
+<script>
+    $(document).ready(function () {
+        let stepA = 0; // initialize the variable
+        let stepB = 0;
+        $("#choose").change(function () {
+            var selectedOption = $(this).val(); // Get the value of the selected option
+            console.log("aaaa");
+            if (selectedOption === "suitability_form") {
+                stepA = 1; // Set the variable to 1
+
+                $("#stepA").css("color", "green");
+            }
+        });
+        $("#field_select").change(function () {
+            var selectedField = $(this).val(); // Get the value of the selected field
+            if (selectedField === "Road") {
+                stepB = 1; // Set the variable to 1
+                $("#stepB").css("color", "green"); // Change the color of element with id "stepB" to green
+            }
+        });
+
+        $("#show-suitability-btn").click(function () {
+            if (stepA == 1 && stepB == 1) // set the variable to 1 on click
+            {
+                $("#stepC").css("color", "#ffffff");
+            }
+        });
+    });
+
+</script>

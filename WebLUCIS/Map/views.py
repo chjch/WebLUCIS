@@ -1,9 +1,7 @@
 import geopandas as gpd
 from sqlalchemy import create_engine
-from sqlalchemy.sql import text
 from django.shortcuts import render
 from django.http import JsonResponse
-from .script import *
 import json
 from LUCISModels import(
     urb1o11so111,
@@ -39,7 +37,7 @@ def submit_road_form(request):
     method = request.POST.get('method')
     rescale_min = request.POST.get('rescale_min')
     rescale_max = request.POST.get('rescale_max')
-    study_gdf = select_study_area(region, district_id)
+    study_gdf = utilities.select_study_area(region, district_id)
     road_result, road_col = urb1o12so121.URB1O12SO121(study_gdf, road_class, cell_size, method, rescale_min, rescale_max)
     utilities.save_to_output_db(road_result, road_col)
 
@@ -51,7 +49,7 @@ def submit_popdensity_form(request):
     stats_type = request.POST.get('stats_type')
     rescale_min = request.POST.get('rescale_min')
     rescale_max = request.POST.get('rescale_max')
-    study_gdf = select_study_area(region, district_id)
+    study_gdf = utilities.select_study_area(region, district_id)
     pop_density, pd_col = urb1o11so113.URB1O11SO113(study_gdf, stats_type, rescale_min, rescale_max)
     utilities.save_to_output_db(pop_density, pd_col)
 
@@ -64,7 +62,7 @@ def submit_citydist_form(request):
     stats_type = request.POST.get('stats_type')
     rescale_min = request.POST.get('rescale_min')
     rescale_max = request.POST.get('rescale_max')
-    study_gdf = select_study_area(region, district_id)
+    study_gdf = utilities.select_study_area(region, district_id)
     city_dist, city_col = urb1o12so122.URB1O12SO122(study_gdf, stats_type, rescale_min, rescale_max)
     utilities.save_to_output_db(city_dist, city_col)
 
@@ -87,7 +85,7 @@ def submit_landusage_form(request):
            reclassify_dict[(start, end)] = new
     print(reclassify_dict)
     # return JsonResponse({'result': 'land usage form'})
-    study_gdf = select_study_area(region, district_id)
+    study_gdf = utilities.select_study_area(region, district_id)
     land_cover, lc_out_col = urb1o11so111.URB1O11SO111(study_gdf, stats_type, reclassify_dict)
     utilities.save_to_output_db(land_cover, lc_out_col)
 
