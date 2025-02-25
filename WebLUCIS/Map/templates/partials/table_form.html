@@ -1,0 +1,196 @@
+{% comment %} 
+<div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+    {% load static %}  <!-- Load Django static files -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .form-control {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</div>
+<div>
+
+    <h2>Dynamic Table</h2>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>New Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="start" class="form-control"></td>
+                    <td><input type="text" name="end" class="form-control"></td>
+                    <td><input type="text" name="new_value" class="form-control"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button id="" type="button" class="btn btn-primary mb-3 next-btn">Run</button>
+    </form>
+</div>
+
+ {% endcomment %}
+
+
+
+ {% comment %} <div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+    {% load static %}  <!-- Load Django static files -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .form-control {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</div>
+<div>
+    <h2>Dynamic Table</h2>
+
+    <form method="post" id="landUsageForm" action="{% url 'submit_landusage_form' %}">
+        {% csrf_token %}
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>New Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="start" class="form-control"></td>
+                    <td><input type="text" name="end" class="form-control"></td>
+                    <td><input type="text" name="new_value" class="form-control"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% comment %} <button type="submit" class="btn btn-primary mb-3">Run</button> {% endcomment %}
+        {% comment %} <button id="" type="sunmit" class="btn btn-primary mb-3 next-btn">Run</button>
+    </form>
+
+    {% comment %} <script src="{% static 'js/dynamic_table.js' %}"></script> <!-- External JS --> {% endcomment %}
+{% comment %} </div>  {% endcomment %}
+
+
+<div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+    {% load static %}  <!-- Load Django static files -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .form-control {
+            width: 100%;
+            padding: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</div>
+
+<div>
+    <h2>Dynamic Table</h2>
+
+    <button id="toggleButton" class="btn btn-secondary mb-3">Toggle Table</button>
+
+    <!-- First Table -->
+    <form method="post" id="landUsageForm" action="{% url 'submit_landusage_form' %}">
+        {% csrf_token %}
+        <label for="stats_type">Aggregation Method:</label>
+        <select name="stats_type" id="stats_type" class="form-control mb-3">
+            <option value="mean">Mean</option>
+            <option value="median">Median</option>
+            <option value="max">Max</option>
+            <option value="min">Min</option>
+            <option value="majority">Majority</option>
+        </select>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>New Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="start" class="form-control"></td>
+                    <td><input type="text" name="end" class="form-control"></td>
+                    <td><input type="text" name="new_value" class="form-control"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary mb-3 next-btn">Run</button>
+    </form>
+
+    <!-- Second Table (Initially Hidden) -->
+    <table id="alternateTable" class="hidden">
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" class="form-control"></td>
+                <td><input type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control"></td>
+                <td><input type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control"></td>
+                <td><input type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control"></td>
+                <td><input type="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control"></td>
+                <td><input type="text" class="form-control"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

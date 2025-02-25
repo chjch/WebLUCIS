@@ -12,3 +12,4 @@ django-widget-tweaks~=1.4.8
 celery
 plotly
 pylusat
+GeoAlchemy2==0.16.0
