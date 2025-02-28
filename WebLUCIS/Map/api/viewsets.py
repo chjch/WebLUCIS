@@ -6,6 +6,8 @@ from ..models import GhanaMmda
 from .serializers import GhanaMmdaSerializer
 from .serializers import create_study_area_serializer
 from ..filters import GhanaMmdaFilter
+from rest_framework.decorators import action
+from django.core.exceptions import FieldError
 
 class MmdaViewSet(viewsets.ViewSet):
     # filter_backends = (DjangoFilterBackend,)

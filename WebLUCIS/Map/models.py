@@ -1,4 +1,6 @@
 from django.contrib.gis.db import models
+from django.utils import timezone
+from datetime import timedelta
 
 
 class GhanaMmda(models.Model):

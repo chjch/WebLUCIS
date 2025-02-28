@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D3.js Flowchart with Arrows</title>
+  <link rel="stylesheet" type="text/css" href="/static/flowchart_utils.css">
+</head>
+<body>
+
+<h2>Road Accessibility Flowchart with Arrows</h2>
+
+
+<svg viewBox="0 0 600 600" width="100%" height="100%" preserveAspectRatio="xMidYMid meet"></svg>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script type="module">
+  import { defineArrowhead, drawNodes, drawLinks, addLabels } from '/Map/utils.js';
+
+  // Define node IDs as constants (A, B, C, ...)
+  const NODE_IDS = {
+    A: 'Primary Roads',
+    B: 'Land Units',
+    C: 'Secondary Roads',
+    D: 'Calculate Distance',
+    E: 'Calculate Distance for Secondary',
+    F: 'Distance to Primary Roads',
+    G: 'Distance to Secondary Roads',
+    H: 'Rescale as Suitability',
+    I: 'Rescale Secondary Suitability',
+    J: 'Rescaled Distance to Primary Roads',
+    K: 'Rescaled Distance to Secondary Roads',
+    L: 'Weighted Sum of Distances',
+    M: 'Road Accessibility Index'
+  };
+
+  // Define the nodes with relative positions
+  const nodes = [
+    { id: NODE_IDS.A, xPercent: 0.07, yPercent: 0.17, type: 'blue' },
+    { id: NODE_IDS.B, xPercent: 0.07, yPercent: 0.34, type: 'blue' },
+    { id: NODE_IDS.C, xPercent: 0.07, yPercent: 0.5, type: 'blue' },
+    { id: NODE_IDS.D, xPercent: 0.21, yPercent: 0.17, type: 'yellow' },
+    { id: NODE_IDS.E, xPercent: 0.21, yPercent: 0.5, type: 'yellow' },
+    { id: NODE_IDS.F, xPercent: 0.36, yPercent: 0.17, type: 'green' },
+    { id: NODE_IDS.G, xPercent: 0.36, yPercent: 0.5, type: 'green' },
+    { id: NODE_IDS.H, xPercent: 0.5, yPercent: 0.17, type: 'yellow' },
+    { id: NODE_IDS.I, xPercent: 0.5, yPercent: 0.5, type: 'yellow' },
+    { id: NODE_IDS.J, xPercent: 0.64, yPercent: 0.17, type: 'green' },
+    { id: NODE_IDS.K, xPercent: 0.64, yPercent: 0.5, type: 'green' },
+    { id: NODE_IDS.L, xPercent: 0.79, yPercent: 0.34, type: 'yellow' },
+    { id: NODE_IDS.M, xPercent: 0.93, yPercent: 0.34, type: 'green' }
+  ];
+
+  // Store original colors for nodes
+  const originalColors = {};
+  nodes.forEach(d => {
+    originalColors[d.id] = d.type; // Store the type (color class) as the original color
+  });
+
+  // Define the links between nodes
+  const links = [
+    { source: NODE_IDS.A, target: NODE_IDS.D },
+    { source: NODE_IDS.B, target: NODE_IDS.D },
+    { source: NODE_IDS.B, target: NODE_IDS.E },
+    { source: NODE_IDS.C, target: NODE_IDS.E },
+    { source: NODE_IDS.D, target: NODE_IDS.F },
+    { source: NODE_IDS.E, target: NODE_IDS.G },
+    { source: NODE_IDS.F, target: NODE_IDS.H },
+    { source: NODE_IDS.G, target: NODE_IDS.I },
+    { source: NODE_IDS.H, target: NODE_IDS.J },
+    { source: NODE_IDS.I, target: NODE_IDS.K },
+    { source: NODE_IDS.J, target: NODE_IDS.L },
+    { source: NODE_IDS.K, target: NODE_IDS.L },
+    { source: NODE_IDS.L, target: NODE_IDS.M }
+  ];
+
+  // Create the SVG container
+  // Create your SVG with the viewBox attribute
+const svg = d3.select("svg")
+.attr("viewBox", "0 0 1400 400")  // Set the initial viewBox values
+.attr("preserveAspectRatio", "xMidYMid meet");
+
+// Create a group to hold the flowchart elements (nodes, links, etc.)
+const g = svg.append("g");
+
+// Example: Add your flowchart elements to the `g` group
+
+  // Get SVG dimensions from viewBox
+  const svgWidth = 1400; // Width from viewBox
+  const svgHeight = 600;  // Height from viewBox
+
+  // Define arrowhead marker
+  defineArrowhead(svg);
+
+  // Draw the nodes
+  drawNodes(svg, nodes, svgWidth, svgHeight);
+
+  // Draw the links
+  drawLinks(svg, links, nodes, svgWidth, svgHeight);
+
+  // Add labels to the nodes
+  addLabels(svg, nodes, svgWidth, svgHeight);
+  
+  // Click event for nodes to turn them green
+  
+
+  // Assuming you already have your nodes defined
+const colorNodes = svg.selectAll(".node") // Select your nodes (ensure proper selection)
+
+colorNodes.on('click', function(event, d) {
+  const node = d3.select(this);
+
+  // Check for each color and toggle between light and dark versions
+  if (node.classed('yellow')) {
+    node.classed('yellow', false).classed('yellow-dark', true);
+  } else if (node.classed('yellow-dark')) {
+    node.classed('yellow-dark', false).classed('yellow', true);
+  } else if (node.classed('blue')) {
+    node.classed('blue', false).classed('blue-dark', true);
+  } else if (node.classed('blue-dark')) {
+    node.classed('blue-dark', false).classed('blue', true);
+  } else if (node.classed('green')) {
+    node.classed('green', false).classed('green-dark', true);
+  } else if (node.classed('green-dark')) {
+    node.classed('green-dark', false).classed('green', true);
+  }
+});
+
+
+</script>
+
+</body>
+</html>

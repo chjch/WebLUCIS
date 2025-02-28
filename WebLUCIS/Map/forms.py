@@ -95,19 +95,16 @@ class CityDistForm(forms.Form):
         ('min', 'Min'),
         ('majority', 'Majority')
     ]
-
     stats_type = forms.ChoiceField(
         choices=STATS_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control mb-3'}),
         label='Aggregation Method:'
     )
-
     rescale_min = forms.IntegerField(
         initial=1,
         widget=forms.NumberInput(attrs={'class': 'form-control mb-3'}),
         label='Rescale Min:'
     )
-
     rescale_max = forms.IntegerField(
         initial=9,
         widget=forms.NumberInput(attrs={'class': 'form-control mb-3'}),
@@ -139,9 +136,8 @@ class ReclassifyForm(forms.Form):
     stats_type = forms.ChoiceField(
         choices=STATS_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control mb-3'}),
-        label='Aggregation Method:'
+        label='Aggregation Method'
     )
-
-    start_value = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control start_value'}))
-    end_value = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control end_value'}))
+    start = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control start'}))
+    end = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control end'}))
     new_value = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control new_value'}))

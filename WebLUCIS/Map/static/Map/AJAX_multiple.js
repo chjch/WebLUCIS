@@ -1,4 +1,4 @@
-const { DeckGL, GeoJsonLayer } = deck;
+export const { DeckGL, GeoJsonLayer } = deck;
 const PolygonLayer = deck.PolygonLayer;
 
 var suitabilityvalue = "";
@@ -20,117 +20,9 @@ const regionCoordinates = {
     'WESTERN': { 'latitude': 5.400015967562922, 'longitude': -2.1489985015795128, 'zoom': 8.483396472 },
     'WESTERN NORTH': { 'latitude': 6.2246562155119705, 'longitude': -2.788317647141639, 'zoom': 8.483396472 }
 };
-
-var deckgl = new DeckGL({
-    mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-    data: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf-zipcodes.json',
-    initialViewState: {
-        latitude: 8.020501,
-        longitude: -2.206687,
-        zoom: 5.85,
-        maxZoom: 16,
-        pitch: 0
-    },
-    controller: true,
-    // getTooltip: ({object}) => object && `${object.distance_city_rescale}`,
-    // layers: []
-});
-// Function to update the layers based on the selected region
-function updateLayers(region) {
-    const layers = [];
-
-    // Add a polygon layer for the selected region
-    if (region) {
-        const coords = regionCoordinates[region];
-        const borderColor = [0, 0, 0]; // Dark border color
-        const fillColor = [255, 255, 255, 0]; // Transparent fill color
-
-        // dummy coordinates as of now we need to chnage this with actual coordinates
-        const polygonCoordinates = getPolygonCoordinates(region);
-
-        layers.push(new PolygonLayer({
-            id: 'border-layer',
-            data: [{ polygon: polygonCoordinates }],
-            getPolygon: d => d.polygon,
-            getFillColor: fillColor,
-            getLineColor: borderColor,
-            getLineWidth: 2, // Set the border width
-            lineWidthMinPixels: 2,
-            pickable: true,
-            stroked: true, // Enable border stroke
-            filled: true, // Fill the polygon
-        }));
-    }
-
-    // Update deckgl with the new layers
-    deckgl.setProps({ layers });
-}
-function getPolygonCoordinates(region) {
-
-    return [
-        [
-            ////according to the selected region
-        ]
-    ];
-}
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-async function zoomToRegion(region) {
-    let coords = regionCoordinates[region];
-    if (coords == undefined) {
-        try {
-            const res = await fetch('/static/Map/districtCoordinates.json');
-            const districtCoordinates = await res.json();
-            coords = districtCoordinates[region];
-        }
-        catch (error) {
-            console.log("Error fetching district coordinates:", error);
-            return;
-        }
-
-        // coords = districtCoordinates[region];
-    }
-    if (coords) {
-        deckgl.setProps({
-            initialViewState: {
-                latitude: coords.latitude,
-                longitude: coords.longitude,
-                zoom: coords.zoom,
-                transitionDuration: 500 // Smooth transition
-            }
-        });
-        updateLayers(region);
-    }
-}
-
-function transformToGeoJSON(data) {
-    return data.map((item, index) => ({
-        id: index.toString(),
-        type: "Feature",
-        properties: {
-            [selectedWord.toLowerCase()]: item[selectedWord.toLowerCase()]
-        },
-        geometry: JSON.parse(item.geomm)
-    }));
-}
-
-const data = {
+export const heirarchydata = {
     "Urban": {
-        "Growth Potential": {
+        "General": {
             "Physical": [
                 "Existing Land Use",
                 "Development Constraints",
@@ -197,8 +89,153 @@ const data = {
         }
     }
 };
+function generateUniqueIds(data, parentId = 'a0') {
+    let ids = {};
 
-function updateSubcategory() {
+    // Iterate over the data
+    Object.entries(data).forEach(([key, value], index) => {
+        const currentId = parentId ? `${parentId}-${index}` : `${index}`;
+        ids[currentId] = key; // Store the key with the generated ID
+
+        // If the value is an object or array, recurse deeper
+        if (typeof value === 'object' && !Array.isArray(value)) {
+            const nestedIds = generateUniqueIds(value, currentId);
+            ids = { ...ids, ...nestedIds }; // Merge the nested IDs
+        } else if (Array.isArray(value)) {
+            value.forEach((subItem, subIndex) => {
+                const itemId = `${currentId}-${subIndex}`;
+                ids[itemId] = subItem; // Store array elements with unique IDs
+            });
+        }
+    });
+
+    return ids;
+}
+
+// Example usage with your data:
+const uniqueIds = generateUniqueIds(heirarchydata);
+
+function getIdFromUniqueIds(...keys) {
+    let id = '';
+    keys.forEach(key => {
+        const keyId = Object.keys(uniqueIds).find(id => uniqueIds[id] === key);
+        if (keyId) {
+            id = id ? `${id}-${keyId.split('-').pop()}` : keyId;
+        }
+    });
+    return id;
+}
+
+export var deckgl = new DeckGL({
+    mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+    initialViewState: {
+        latitude: 8.020501,
+        longitude: -2.206687,
+        zoom: 5.85,
+        maxZoom: 16,
+        pitch: 0
+    },
+    controller: true,
+    // getTooltip
+    layers: []
+});
+// Function to update the layers based on the selected region
+function updateLayers(region) {
+    const layers = [];
+
+    // Add a polygon layer for the selected region
+    if (region) {
+        const coords = regionCoordinates[region];
+        const borderColor = [0, 0, 0]; // Dark border color
+        const fillColor = [255, 255, 255, 0]; // Transparent fill color
+
+        // dummy coordinates as of now we need to chnage this with actual coordinates
+        const polygonCoordinates = getPolygonCoordinates(region);
+
+        layers.push(new PolygonLayer({
+            id: 'border-layer',
+            data: [{ polygon: polygonCoordinates }],
+            getPolygon: d => d.polygon,
+            getFillColor: fillColor,
+            getLineColor: borderColor,
+            getLineWidth: 2, // Set the border width
+            lineWidthMinPixels: 2,
+            pickable: true,
+            stroked: true, // Enable border stroke
+            filled: true, // Fill the polygon
+        }));
+    }
+
+    // Update deckgl with the new layers
+    deckgl.setProps({ layers });
+}
+function getPolygonCoordinates(region) {
+
+    return [
+        [
+            ////according to the selected region
+        ]
+    ];
+}
+
+export function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+export async function zoomToRegion(region) {
+    let coords = regionCoordinates[region];
+    if (coords == undefined) {
+        try {
+            const res = await fetch('/static/Map/districtCoordinates.json');
+            const districtCoordinates = await res.json();
+            coords = districtCoordinates[region];
+        }
+        catch (error) {
+            console.log("Error fetching district coordinates:", error);
+            return;
+        }
+
+        // coords = districtCoordinates[region];
+    }
+    if (coords) {
+        deckgl.setProps({
+            initialViewState: {
+                latitude: coords.latitude,
+                longitude: coords.longitude,
+                zoom: coords.zoom,
+                transitionDuration: 500 // Smooth transition
+            }
+        });
+        updateLayers(region);
+    }
+}
+window.zoomToRegion = zoomToRegion;
+export function transformToGeoJSON(data) {
+    return data.map((item, index) => ({
+        id: index.toString(),
+        type: "Feature",
+        properties: {
+            [selectedWord.toLowerCase()]: item[selectedWord.toLowerCase()]
+        },
+        geometry: JSON.parse(item.geomm)
+    }));
+}
+
+
+
+
+export function updateSubcategory() {
     const category = document.getElementById("category").value;
     const subcategory = document.getElementById("subcategory");
     const objective = document.getElementById("objective");
@@ -221,9 +258,10 @@ function updateSubcategory() {
         details.classList.add("hidden");
         nextButton.classList.add("hidden");
 
-        const subcategories = Object.keys(data[category]);
+        const subcategories = Object.keys(heirarchydata[category]);
         subcategories.forEach(subcat => {
-            subcategory.innerHTML += `<option value="${subcat}">${subcat}</option>`;
+            const subcatId = getIdFromUniqueIds(category, subcat);
+            subcategory.innerHTML += `<option value="${subcat}" data-id="${subcatId}">${subcat}</option>`;
         });
     } else {
         subcategoryLabel.classList.add("hidden");
@@ -236,7 +274,7 @@ function updateSubcategory() {
     }
 }
 
-function updateObjective() {
+export function updateObjective() {
     const category = document.getElementById("category").value;
     const subcategory = document.getElementById("subcategory").value;
     const objective = document.getElementById("objective");
@@ -255,15 +293,17 @@ function updateObjective() {
         details.classList.add("hidden");
         nextButton.classList.add("hidden");
 
-        const objData = data[category][subcategory];
+        const objData = heirarchydata[category][subcategory];
         if (Array.isArray(objData)) {
-            objData.forEach(obj => {
-                objective.innerHTML += `<option value="${obj}">${obj}</option>`;
+            objData.forEach((obj, index) => {
+                const objId = getIdFromUniqueIds(category, subcategory, obj);
+                objective.innerHTML += `<option value="${obj}" data-id="${objId}">${obj}</option>`;
             });
         } else if (typeof objData === 'object') {
             const objectives = Object.keys(objData);
-            objectives.forEach(obj => {
-                objective.innerHTML += `<option value="${obj}">${obj}</option>`;
+            objectives.forEach((obj, index) => {
+                const objId = getIdFromUniqueIds(category, subcategory, obj);
+                objective.innerHTML += `<option value="${obj}" data-id="${objId}">${obj}</option>`;
             });
         }
     } else {
@@ -275,7 +315,7 @@ function updateObjective() {
     }
 }
 
-function updateDetails() {
+export   function updateDetails() {
     const category = document.getElementById("category").value;
     const subcategory = document.getElementById("subcategory").value;
     const objective = document.getElementById("objective").value;
@@ -286,45 +326,44 @@ function updateDetails() {
     details.innerHTML = '<option value="">Select...</option>';
 
     if (category && subcategory && objective) {
-        const objData = data[category][subcategory][objective];
+        const objData = heirarchydata[category][subcategory][objective];
         if (objData !== undefined) {
             if (objData.length !== 0) {
                 detailsLabel.classList.remove("hidden");
                 details.classList.remove("hidden");
 
                 if (Array.isArray(objData)) {
-                    objData.forEach(detail => {
-                        details.innerHTML += `<option value="${detail}">${detail}</option>`;
+                    objData.forEach((detail, index) => {
+                        const detailId = getIdFromUniqueIds(category, subcategory, objective, detail);
+                        details.innerHTML += `<option value="${detail}" data-id="${detailId}">${detail}</option>`;
                     });
                 } else if (typeof objData === 'object') {
                     const nestedDetails = Object.keys(objData);
-                    nestedDetails.forEach(detail => {
-                        details.innerHTML += `<option value="${detail}">${detail}</option>`;
+                    nestedDetails.forEach((detail, index) => {
+                        const detailId = getIdFromUniqueIds(category, subcategory, objective, detail);
+                        details.innerHTML += `<option value="${detail}" data-id="${detailId}">${detail}</option>`;
                     });
                     nextButton.classList.add("hidden");
                 } else {
                     detailsLabel.classList.add("hidden");
                     details.classList.add("hidden");
                 }
-            }
-            else {
+            } else {
                 detailsLabel.classList.add("hidden");
                 details.classList.add("hidden");
                 nextButton.classList.remove("hidden");
             }
-        }
-        else {
+        } else {
             detailsLabel.classList.add("hidden");
             details.classList.add("hidden");
             nextButton.classList.remove("hidden");
         }
-
     } else {
         detailsLabel.classList.add("hidden");
         details.classList.add("hidden");
     }
 }
-function checkNextButton() {
+export function checkNextButton() {
     const category = document.getElementById("category").value;
     const subcategory = document.getElementById("subcategory").value;
     const objective = document.getElementById("objective").value;
@@ -337,6 +376,7 @@ function checkNextButton() {
         nextButton.classList.add("hidden");
     }
 }
+window.checkNextButton = checkNextButton;
 
 document.getElementById("category").addEventListener("change", updateSubcategory);
 document.getElementById("subcategory").addEventListener("change", updateObjective);
